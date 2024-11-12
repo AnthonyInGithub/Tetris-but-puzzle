@@ -53,7 +53,7 @@ public class NormalGivenInteractor {
 
         // TODO: pass to DAO new x, y value, the updated shape.(rotated or a new one)
 
-        normalGivenPresenter.execute(new normalGivenOutputData(currentMap));
+        normalGivenPresenter.execute(new normalGivenOutputData(outputMap));
 
     }
     // Handles player input for piece movement and rotation based on WASD controls
@@ -144,26 +144,40 @@ public class NormalGivenInteractor {
             }
         }
     }
-    // removes a line at th specified row by shfting rows down
     private void removeLine(int row) {
+        // Shift all rows above the specified row down by one
         for (int i = row; i > 0; i--) {
             System.arraycopy(currentMap[i - 1], 0, currentMap[i], 0, currentMap[i].length);
         }
-        // Clear the top row
+        // Clear the top row "after shifting"
         for (int j = 0; j < currentMap[0].length; j++) {
             currentMap[0][j] = 0;
         }
     }
-    // generates a new piece, setting it to the initial position and checking for game over
+    private boolean isOutOfBounds() {
+        int[][] shapeMatrix = shapes[currentShape[0]][currentShape[1]];
+        for (int i = 0; i < shapeMatrix.length; i++) {
+            for (int j = 0; j < shapeMatrix[0].length; j++) {
+                if (shapeMatrix[i][j] != 0) {
+                    int mapX = x + j;
+                    int mapY = y + i;
+                    if (mapX < 0 || mapX >= 10 || mapY >= 22) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     private void generateNewPiece() {
         currentShape = normalGivenDataAccessObject.getNextShape();
-        x = 4; // Set initial x-position for new piece
-        y = 0; // Set initial y-position for new piece
-        if (!canMove(x, y)) {
-            // game over logic if the new piece cannot fit at the starting position
+        x = 4;
+        y = 0;
+        if (!canMove(x, y) || isOutOfBounds()) {
             normalGivenPresenter.gameOver();
         }
     }
+
     // Updates the y-coordinate to make the piece fall down one unit
     private void pieceFall() {
         if (canMove(x, y + 1)) {
