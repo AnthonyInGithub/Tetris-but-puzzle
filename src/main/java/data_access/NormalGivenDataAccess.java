@@ -1,13 +1,13 @@
-package java.data_access;
+package data_access;
 
-import java.entity.Entity;
+import entity.Entity;
 /**
  * Interface for accessing and modifying the game state and shapes.
  */
 public interface NormalGivenDataAccess {
     // Current piece information
-    int[] getCurrentPiece(); // [shapeType, rotationState]
-    void setCurrentPiece(int[] currentPiece);
+    int[] getCurrentShapeState(); // [shapeType, rotationState]
+    void setCurrentShapeState(int[] currentShapeState);
 
     // Piece position
     int getX();
@@ -18,9 +18,10 @@ public interface NormalGivenDataAccess {
     // Game board
     Entity getEntity();
     void setEntity(Entity entity);
+    void updateMap(int[][] currentMap);
 
     // Shape definitions
-    int[][][][] getShapes();
+    int[][] getShape(int shape, int rotationState);
 
     // Generate a new piece
     void generateNewPiece();

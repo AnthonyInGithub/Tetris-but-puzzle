@@ -1,4 +1,4 @@
-package java.use_case.NormalGiven;
+package use_case.NormalGiven;
 
 /**
  * Output Data for the Normal Given Use Case.

@@ -1,4 +1,4 @@
-package java.use_case.NormalGiven;
+package use_case.NormalGiven;
 
 /**
  * Input Data class for the Normal Given Use Case.

@@ -1,4 +1,4 @@
-package java.interface_adapter.NormalGiven;
+package interface_adapter.NormalGiven;
 
 /**
  * ViewModel holds the data that the View will read from.

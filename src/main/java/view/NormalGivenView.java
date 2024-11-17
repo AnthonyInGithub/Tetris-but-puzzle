@@ -3,11 +3,12 @@ package view;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import interface_adapter.NormalGiven.NormalGivenController;
-import interface_adapter.NormalGiven.NormalGivenViewModel;
+import interface_adapter.NormalGiven.ViewModel;
 
-public class NormalGivenView extends JFrame {
+public class NormalGivenView extends JPanel {
 
     private JPanel gameArea;
     private JPanel sideArea;
@@ -17,15 +18,16 @@ public class NormalGivenView extends JFrame {
     private final int gameAreaHeight = 600;
     private final int sideAreaWidth = 200;
     private final int sideAreaHeight = 400;
-    private final NormalGivenViewModel normalGivenViewModel;
+    private ViewModel normalGivenViewModel;
     private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
 
-    public NormalGivenView() {
+    public NormalGivenView(ViewModel normalGivenViewModel) {
         // Set the title and default close operation
-        setTitle("Game Screen Layout");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.normalGivenViewModel = normalGivenViewModel;
+        // setTitle("Game Screen Layout");
+        // setDefaultCloseOperation(JPanel.EXIT_ON_CLOSE);
         setSize(widowWidth, widowHeight);
 
         // Set the layout for the main frame
@@ -77,7 +79,8 @@ public class NormalGivenView extends JFrame {
                 // Action to perform when "B" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("W");
-
+                normalGivenController.execute(true, false, false, false);
+                draw();
             }
         });
 
@@ -88,6 +91,8 @@ public class NormalGivenView extends JFrame {
                 // Action to perform when "A" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("A");
+                normalGivenController.execute(false, true, false, false);
+                draw();
             }
         });
 
@@ -98,6 +103,8 @@ public class NormalGivenView extends JFrame {
                 // Action to perform when "S" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("S");
+                normalGivenController.execute(false, false, true, false);
+                draw();
             }
         });
 
@@ -108,11 +115,11 @@ public class NormalGivenView extends JFrame {
                 // Action to perform when "D" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("D");
-                drawTest();
+                normalGivenController.execute(false, false, false, true);
+                draw();
             }
         });
     }
-
     /*
     private void draw(ViewModel v) {
         currentMap = v.getMap();
@@ -127,8 +134,9 @@ public class NormalGivenView extends JFrame {
         gameArea.repaint();
     }
      */
-    private void draw(NormalGivenViewModel v) {
-        int[][] currentMap = v.getMap();
+    private void draw() {
+        int[][] currentMap = normalGivenViewModel.getMap();
+
         for (int i = 0; i < currentMap.length; i++) {
 
             for (int j = 0; j < currentMap[0].length; j++) {
@@ -141,10 +149,6 @@ public class NormalGivenView extends JFrame {
         gameArea.repaint();
     }
 
-    public void setNormalGivenController(NormalGivenController normalGivenController) {
-        this.normalGivenController = normalGivenController;
-    }
-
     private JLabel squareFactory(int xPosition, int yPosition, int size) {
         final JLabel square = new JLabel();
         square.setOpaque(true);
@@ -153,4 +157,14 @@ public class NormalGivenView extends JFrame {
         square.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         return square;
     }
+
+    public void setNormalGivenController(NormalGivenController normalGivenController) {
+        this.normalGivenController = normalGivenController;
+    }
+
+//    public static void main(String[] args) {
+//        // Run the game screen layout
+//        SwingUtilities.invokeLater(GameScreen::new);
+//    }
 }
+

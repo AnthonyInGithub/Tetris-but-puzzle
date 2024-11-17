@@ -1,4 +1,4 @@
-package java.entity;
+package entity;
 
 public class Entity {
     private final int width = 10;

@@ -1,12 +1,11 @@
-package java.data_access;
+package data_access;
 
-import java.entity.Entity;
-import java.data_access.NormalGivenDataAccess;
+import entity.Entity;
 
 
-public class InMemoryDataAccessObject implements NormalGivenDataAccess {
+public class InMemoryDataAccessObject implements data_access.NormalGivenDataAccess {
     // Current piece information: [shapeType, rotationState]
-    private int[] currentPiece;
+    private int[] currentShapeState;
 
     // Position of the current piece
     private int x;
@@ -61,13 +60,13 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccess {
     }
 
     @Override
-    public int[] getCurrentPiece() {
-        return currentPiece;
+    public int[] getCurrentShapeState() {
+        return currentShapeState;
     }
 
     @Override
-    public void setCurrentPiece(int[] currentPiece) {
-        this.currentPiece = currentPiece;
+    public void setCurrentShapeState(int[] currentShapeState) {
+        this.currentShapeState = currentShapeState;
     }
 
     @Override
@@ -101,15 +100,19 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccess {
     }
 
     @Override
-    public int[][][][] getShapes() {
-        return shapes;
+    public int[][] getShape(int shape, int rotationState) {
+        return shapes[shape][rotationState];
     }
+
 
     @Override
     public void generateNewPiece() {
         int shapeType = (int) (Math.random() * shapes.length);
-        currentPiece = new int[]{shapeType, 0}; // Start with rotation state 0
+        currentShapeState = new int[]{shapeType, 0}; // Start with rotation state 0
         x = 3; // Initial x position to center the piece
         y = 0; // Initial y position at the top of the board
+    }
+    public void updateMap(int[][] currentMap){
+        entity.setGameBoard(currentMap);
     }
 }

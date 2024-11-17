@@ -1,7 +1,7 @@
-package java.interface_adapter.NormalGiven;
+package interface_adapter.NormalGiven;
 
-import java.use_case.NormalGiven.NormalGivenInputBoundary;
-import java.use_case.NormalGiven.NormalGivenInputData;
+import use_case.NormalGiven.NormalGivenInputBoundary;
+import use_case.NormalGiven.NormalGivenInputData;
 
 /**
  * Controller for the Normal Given Use Case.
