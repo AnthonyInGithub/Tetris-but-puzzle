@@ -11,6 +11,7 @@ public class NormalGivenInteractor {
     private int[][] outputMap; //10*22 in size
 
     private int[] currentShape; //an array of length 2, where 0th position specify the type of shape, 1st specify the rotation state.
+
     //The shape is organized this way: for example, the I shape contains I and its rotated state. You need to get shape from DAO
     //private final int[][][][] shapes = {
     //        {{{0,0,0},{1,1,0},{1,1,0}}, {{0,0,0},{1,1,0},{1,1,0}}, {{0,0,0},{1,1,0},{1,1,0}}, {{0,0,0},{1,1,0},{1,1,0}}}, // O Shapes
@@ -20,6 +21,7 @@ public class NormalGivenInteractor {
     //        {{{1,1,0},{0,1,1},{0,0,0}}, {{0,0,1},{0,1,1},{0,1,0}}, {{1,1,0},{0,1,1},{0,0,0}}, {{0,0,1},{0,1,1},{0,1,0}}} //Z Shape
     //};
     private final int[][][][] shapes = {};
+
     int x, y; //(0,0) position is in left top corner for map. the position that corresponds to x, y is at the top left of the shape.
 
 
@@ -27,13 +29,16 @@ public class NormalGivenInteractor {
         this.normalGivenDataAccessObject = normalGivenDataAccessObject;
         this.normalGivenPresenter = normalGivenPresenter;
         currentMap = normalGivenDataAccessObject.getCurrentMap();
+
         generateNewPiece();
+
     }
 
     public void execute(NormalGivenInputData normalGivenInputData){
         currentMap = normalGivenDataAccessObject.getCurrentMap();
         x = normalGivenDataAccessObject.getX();
         y = normalGivenDataAccessObject.getY();
+
         handleInput(normalGivenInputData); // for process WASD input
         //TODO: check WASD pressed and update x, y.(when S pressed, double the falling speed.)
         pieceFall(); //calculate the new piece's position y change.
@@ -52,6 +57,7 @@ public class NormalGivenInteractor {
         // Also, don't forget to check if any of the line that is complete(which will then be deleted)
 
         // TODO: pass to DAO new x, y value, the updated shape.(rotated or a new one)
+
 
         normalGivenPresenter.execute(new normalGivenOutputData(outputMap));
         private void updateOutputMap() {
