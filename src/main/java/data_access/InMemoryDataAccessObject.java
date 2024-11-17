@@ -5,38 +5,59 @@ import java.data_access.NormalGivenDataAccess;
 
 
 public class InMemoryDataAccessObject implements NormalGivenDataAccess {
-    // Current falling piece information: [shapeType, rotationState]
+    // Current piece information: [shapeType, rotationState]
     private int[] currentPiece;
 
-    // Current position of the falling piece
+    // Position of the current piece
     private int x;
     private int y;
 
     // The game board entity
     private Entity entity;
 
-    // Shape definitions
+    // Shapes definitions
     private final int[][][][] shapes = {
             // O Shape
             {
-                    {{0,0,0},{1,1,0},{1,1,0}}, // Rotation state 0
-                    {{0,0,0},{1,1,0},{1,1,0}}, // Rotation state 1
-                    {{0,0,0},{1,1,0},{1,1,0}}, // Rotation state 2
-                    {{0,0,0},{1,1,0},{1,1,0}}  // Rotation state 3
+                    {{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}, // Rotation state 0
+                    {{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}, // Rotation state 1
+                    {{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}, // Rotation state 2
+                    {{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}  // Rotation state 3
             },
             // I Shape
             {
-                    {{0,1,0},{0,1,0},{0,1,0}}, // Rotation state 0
-                    {{0,0,0},{1,1,1},{0,0,0}}, // Rotation state 1
-                    {{0,1,0},{0,1,0},{0,1,0}}, // Rotation state 2
-                    {{0,0,0},{1,1,1},{0,0,0}}  // Rotation state 3
+                    {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, // Rotation state 0 (vertical)
+                    {{0, 0, 0}, {0, 0, 0}, {1, 1, 1}}, // Rotation state 1 (horizontal)
+                    {{1, 0, 0}, {1, 0, 0}, {1, 0, 0}}, // Rotation state 2 (vertical)
+                    {{0, 0, 0}, {0, 0, 0}, {1, 1, 1}}  // Rotation state 3 (horizontal)
+            },
+            // T Shape
+            {
+                    {{1, 1, 1}, {0, 1, 0}, {0, 0, 0}}, // Rotation state 0
+                    {{0, 1, 0}, {0, 1, 1}, {0, 1, 0}}, // Rotation state 1
+                    {{0, 1, 0}, {1, 1, 0}, {0, 1, 0}}, // Rotation state 2
+                    {{0, 1, 0}, {1, 1, 1}, {0, 0, 0}}  // Rotation state 3
+            },
+            // L Shape
+            {
+                    {{0, 1, 0}, {0, 1, 0}, {0, 1, 1}}, // Rotation state 0
+                    {{0, 0, 0}, {1, 1, 1}, {1, 0, 0}}, // Rotation state 1
+                    {{1, 1, 0}, {0, 1, 0}, {0, 1, 0}}, // Rotation state 2
+                    {{0, 0, 1}, {1, 1, 1}, {0, 0, 0}}  // Rotation state 3
+            },
+            // Z Shape
+            {
+                    {{1, 1, 0}, {0, 1, 1}, {0, 0, 0}}, // Rotation state 0
+                    {{0, 0, 1}, {0, 1, 1}, {0, 1, 0}}, // Rotation state 1
+                    {{1, 1, 0}, {0, 1, 1}, {0, 0, 0}}, // Rotation state 2
+                    {{0, 0, 1}, {0, 1, 1}, {0, 1, 0}}  // Rotation state 3
             }
     };
 
     // Constructor
     public InMemoryDataAccessObject() {
-        this.entity = new Entity(); // The game board with size 22x10
-        generateNewPiece(); // Generate the first piece
+        this.entity = new Entity();
+        generateNewPiece();
     }
 
     @Override
@@ -80,16 +101,15 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccess {
     }
 
     @Override
+    public int[][][][] getShapes() {
+        return shapes;
+    }
+
+    @Override
     public void generateNewPiece() {
-        // Randomly select a shape type
         int shapeType = (int) (Math.random() * shapes.length);
         currentPiece = new int[]{shapeType, 0}; // Start with rotation state 0
         x = 3; // Initial x position to center the piece
         y = 0; // Initial y position at the top of the board
-    }
-
-    @Override
-    public int[][][][] getShapes() {
-        return shapes;
     }
 }
