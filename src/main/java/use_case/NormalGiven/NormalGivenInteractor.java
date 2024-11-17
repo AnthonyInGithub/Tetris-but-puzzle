@@ -122,6 +122,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         if (!canMove(x, y)) { // revert rotation if there's a collision
             currentShapeState[1] = originalRotation;
         }
+        shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
     }
     // accelerates the piece's fall speed by attempting to move it down by two units
     private void accelerateFall() {
@@ -216,7 +217,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
         for(int i = 0; i < shapeMatrix.length; i++){
             for (int b = 0; b < shapeMatrix[0].length; b++){
-                tempMap[x+i][y+b] = shapeMatrix[i][b] | tempMap[x+i][y+b];
+                tempMap[y+b][x+i] = shapeMatrix[b][i] | tempMap[y+b][x+i];
             }
         }
         currentMap = tempMap;
