@@ -47,13 +47,12 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         y = normalGivenDataAccessObject.getY();
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
         handleInput(normalGivenInputData); // for process WASD input
-        System.out.println("handleInput: " + y);
         //TODO: check WASD pressed and update x, y.(when S pressed, double the falling speed.)
         pieceFall(); //calculate the new piece's position y change.
-        System.out.println("piecefall: " + y);
+        normalGivenDataAccessObject.setX(x);
+        normalGivenDataAccessObject.setY(y);
         if (!canMove(x, y + 1)) { // If piece can't fall further (I changed the code to use some helper functions instead)
             lockPieceInPlace();
-            System.out.println("lock: " + y);
             clearLines();
             generateNewPiece();
         }
@@ -77,8 +76,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             }
             System.out.print("\n");
         }
-        normalGivenDataAccessObject.setX(x);
-        normalGivenDataAccessObject.setY(y);
+
         normalGivenPresenter.execute(new NormalGivenOutputData(outputMap));
 
 
@@ -217,7 +215,9 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
         for(int i = 0; i < shapeMatrix.length; i++){
             for (int b = 0; b < shapeMatrix[0].length; b++){
-                tempMap[y+b][x+i] = shapeMatrix[b][i] | tempMap[y+b][x+i];
+                if(y+b < 22 && x+i < 10){
+                    tempMap[y+b][x+i] = shapeMatrix[b][i] | tempMap[y+b][x+i];
+                }
             }
         }
         currentMap = tempMap;
