@@ -149,14 +149,6 @@ public class NormalGivenInteractor {
         for (int i = row; i > 0; i--) {
             System.arraycopy(currentMap[i - 1], 0, currentMap[i], 0, currentMap[i].length);
         }
-        // Clear the top row "after shifting"
-        for (int j = 0; j < currentMap[0].length; j++) {
-            currentMap[0][j] = 0;
-            // After shifting all rows down by one, the topmost row
-            // (currentMap[0]) contains the data from the row that was
-            // originally just below it (currentMap[1]).
-            // This duplication would be incorrect because we need the top row to represent an empty state after the shift.
-        }
     }
     private boolean isOutOfBounds() {
         int[][] shapeMatrix = shapes[currentShape[0]][currentShape[1]];
