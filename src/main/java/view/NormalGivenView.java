@@ -112,6 +112,7 @@ public class NormalGivenView extends JFrame {
             }
         });
     }
+
     /*
     private void draw(ViewModel v) {
         currentMap = v.getMap();
@@ -152,3 +153,4 @@ public class NormalGivenView extends JFrame {
         square.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         return square;
     }
+}
