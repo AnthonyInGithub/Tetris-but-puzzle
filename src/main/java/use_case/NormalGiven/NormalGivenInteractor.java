@@ -54,24 +54,29 @@ public class NormalGivenInteractor {
         // TODO: pass to DAO new x, y value, the updated shape.(rotated or a new one)
 
         normalGivenPresenter.execute(new normalGivenOutputData(outputMap));
+        private void updateOutputMap() {
+            outputMap = new int[currentMap.length - 2][currentMap[0].length];
+            for (int i = 2; i < currentMap.length; i++) {
+                System.arraycopy(currentMap[i], 0, outputMap[i - 2], 0, currentMap[i].length);
+            }
+        }
+
+
 
     }
-    // Handles player input for piece movement and rotation based on WASD controls
     private void handleInput(NormalGivenInputData inputData) {
-        switch (inputData.getKeyPress()) {
-            case 'A':
-                moveLeft(); // Move left when 'A' is pressed
-                break;
-            case 'D':
-                moveRight();
-                break;
-            case 'W':
-                rotatePiece(); // rotate piece when 'W' is pressed
-                break;
-            case 'S':
-                accelerateFall(); // Double the fall speed when 'S' is pressed
-                break;
+        char keyPressed = inputData.getKeyPress();
+
+        if (keyPressed == 'A') {
+            moveLeft();
+        } else if (keyPressed == 'D') {
+            moveRight();
+        } else if (keyPressed == 'W') {
+            rotatePiece();
+        } else if (keyPressed == 'S') {
+            accelerateFall();
         }
+
     }
     private void moveLeft() {
         if (canMove(x - 1, y)) {
@@ -93,11 +98,7 @@ public class NormalGivenInteractor {
     }
     // accelerates the piece's fall speed by attempting to move it down by two units
     private void accelerateFall() {
-        if (canMove(x, y + 2)) {
-            y += 2;
-        } else if (canMove(x, y + 1)) {
-            y++;
-        }
+        //
     }
     // checks if the shape can be moved to the specified (newX, newY) position
     private boolean canMove(int newX, int newY) {
@@ -114,7 +115,6 @@ public class NormalGivenInteractor {
                 }
             }
         }
-        return true;
     }
     // locks the current shape in place by updating currentMap with the shape cells
     private void lockPieceInPlace() {
@@ -152,6 +152,10 @@ public class NormalGivenInteractor {
         // Clear the top row "after shifting"
         for (int j = 0; j < currentMap[0].length; j++) {
             currentMap[0][j] = 0;
+            // After shifting all rows down by one, the topmost row
+            // (currentMap[0]) contains the data from the row that was
+            // originally just below it (currentMap[1]).
+            // This duplication would be incorrect because we need the top row to represent an empty state after the shift.
         }
     }
     private boolean isOutOfBounds() {
@@ -173,7 +177,7 @@ public class NormalGivenInteractor {
         currentShape = normalGivenDataAccessObject.getNextShape();
         x = 4;
         y = 0;
-        if (!canMove(x, y) || isOutOfBounds()) {
+        if (isOutOfBounds()) {
             normalGivenPresenter.gameOver();
         }
     }
