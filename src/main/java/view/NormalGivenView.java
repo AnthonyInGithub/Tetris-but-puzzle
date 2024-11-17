@@ -3,7 +3,9 @@ package view;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
+import interface_adapter.NormalGiven.NormalGivenController;
+import interface_adapter.NormalGiven.NormalGivenViewModel;
 
 public class NormalGivenView extends JFrame {
 
@@ -15,7 +17,8 @@ public class NormalGivenView extends JFrame {
     private final int gameAreaHeight = 600;
     private final int sideAreaWidth = 200;
     private final int sideAreaHeight = 400;
-    // private final ViewModel viewModel;
+    private final NormalGivenViewModel normalGivenViewModel;
+    private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
 
@@ -74,6 +77,7 @@ public class NormalGivenView extends JFrame {
                 // Action to perform when "B" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("W");
+
             }
         });
 
@@ -122,7 +126,7 @@ public class NormalGivenView extends JFrame {
         gameArea.repaint();
     }
      */
-    private void draw() {
+    private void draw(NormalGivenViewModel v) {
         int[][] currentMap = v.getMap();
         for (int i = 0; i < currentMap.length; i++) {
 
@@ -134,6 +138,10 @@ public class NormalGivenView extends JFrame {
             }
         }
         gameArea.repaint();
+    }
+
+    public void setNormalGivenController(NormalGivenController normalGivenController) {
+        this.normalGivenController = normalGivenController;
     }
 
     private JLabel squareFactory(int xPosition, int yPosition, int size) {
