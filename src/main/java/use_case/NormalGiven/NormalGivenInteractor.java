@@ -53,8 +53,9 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         normalGivenDataAccessObject.setY(y);
         if (!canMove(x, y + 1)) { // If piece can't fall further (I changed the code to use some helper functions instead)
             lockPieceInPlace();
-            clearLines();
             generateNewPiece();
+            clearLines();
+
         }
         // TODO: using OR operation to correspond map and shape. For example, assume shape is O.
         // x, y = 0. Then currentMap[0][0] will be determine by (currentMap[0][0] or shape[0][0][0][0]),
@@ -82,13 +83,33 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
     }
     private void handleInput(NormalGivenInputData inputData) {
-
         if (inputData.isAPressed()) {
             moveLeft();
-            System.out.println("A pressed");
+            if(x < 0){
+                x = 0;
+                for(int i = 0; i<shapeMatrix.length; i++){
+                    for(int j = 0; j<shapeMatrix[0].length; j++){
+                        if(shapeMatrix[i][j] == 1){
+                            shapeMatrix[i][j] = 0;
+                            shapeMatrix[i][j-1] = 1;
+                        }
+                    }
+                }
+            }
         }
         if (inputData.isDPressed()) {
             moveRight();
+            if(x > 7){
+                x = 7;
+                for(int i = 2; i>=0; i--){
+                    for(int j = 2; j>=0; j--){
+                        if(shapeMatrix[i][j] == 1){
+                            shapeMatrix[i][j] = 0;
+                            shapeMatrix[i][j+1] = 1;
+                        }
+                    }
+                }
+            }
         }
         if (inputData.isWPressed()) {
             rotatePiece();
@@ -96,8 +117,6 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         // for testing, delete after
         if (inputData.isSPressed()) {
             y ++;
-            System.out.println("S pressed");
-
         }
 
     }
@@ -121,6 +140,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             currentShapeState[1] = originalRotation;
         }
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
+        System.out.println("x:" + x);
+        System.out.println("y:" + y);
     }
     // accelerates the piece's fall speed by attempting to move it down by two units
     private void accelerateFall() {
@@ -153,6 +174,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                 }
             }
         }
+
         normalGivenDataAccessObject.updateMap(currentMap); // Save to DAO
     }
     // clears any full lines in the currentMap and shifts rows down
@@ -198,6 +220,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         if (isOutOfBounds()) {
             normalGivenPresenter.gameOver();
         }
+        x = normalGivenDataAccessObject.getX();
+        y = normalGivenDataAccessObject.getY();
     }
 
     // Updates the y-coordinate to make the piece fall down one unit

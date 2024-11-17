@@ -135,6 +135,7 @@ public class NormalGivenView extends JPanel {
     }
      */
     private void draw() {
+        gameArea.removeAll();
         int[][] currentMap = normalGivenViewModel.getMap();
 
         for (int i = 0; i < currentMap.length; i++) {

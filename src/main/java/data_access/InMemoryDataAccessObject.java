@@ -33,9 +33,10 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
             // T Shape
             {
                     {{1, 1, 1}, {0, 1, 0}, {0, 0, 0}}, // Rotation state 0
-                    {{0, 1, 0}, {0, 1, 1}, {0, 1, 0}}, // Rotation state 1
-                    {{0, 1, 0}, {1, 1, 0}, {0, 1, 0}}, // Rotation state 2
-                    {{0, 1, 0}, {1, 1, 1}, {0, 0, 0}}  // Rotation state 3
+                    {{0, 1, 0}, {0, 1, 1}, {0, 1, 0}},// Rotation state 1
+                    {{0, 1, 0}, {1, 1, 1}, {0, 0, 0}}, // Rotation state 2
+                    {{0, 1, 0}, {1, 1, 0}, {0, 1, 0}}, // Rotation state 3
+
             },
             // L Shape
             {
