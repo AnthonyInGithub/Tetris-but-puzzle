@@ -7,6 +7,8 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
+    private int[][] targetMap;
+
     // Position of the current piece
     private int x;
     private int y;
@@ -115,5 +117,11 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     }
     public void updateMap(int[][] currentMap){
         entity.setGameBoard(currentMap);
+    }
+    public void setTargetMap(int[][] targetMap){
+        this.targetMap = targetMap;
+    }
+    public int[][] getTargetMap(){
+        return targetMap;
     }
 }
