@@ -221,6 +221,7 @@ private void handleInput(NormalGivenInputData inputData) {
         if (canMove(x, y + 1)) {
             y++;
         }
+        checkTargetMap();
     }
     // Updates the current game map to include the current piece's position.
     private void updateCurrentMap(){
@@ -237,5 +238,29 @@ private void handleInput(NormalGivenInputData inputData) {
             }
         }
         currentMap = tempMap; // Update the current map
+    }
+
+    private void checkTargetMap() {
+        int[][] targetMap = normalGivenDataAccessObject.getTargetMap();
+
+        if (outputMap == null || targetMap == null) {
+            System.out.println("one of the maps is null. Similarity: 0%");
+            return;
+        }
+        if (outputMap.length != targetMap.length || outputMap[0].length != targetMap[0].length) {
+            System.out.println("Similarity: 0%");
+            return;
+        }
+        int totalCells = 200;
+        int matchingCells = 0;
+        for (int i = 0; i < outputMap.length; i++) {
+            for (int j = 0; j < outputMap[i].length; j++) {
+                if (outputMap[i][j] == targetMap[i][j]) {
+                    matchingCells++;
+                }
+            }
+        }
+        double similarityPercentage = ((double) matchingCells / totalCells) * 100;
+        System.out.printf("The output map matches the target map by %.2f%%.%n", similarityPercentage);
     }
 }
