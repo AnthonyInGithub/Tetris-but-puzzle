@@ -135,8 +135,8 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             }
         });
 
-        inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "keyDPressed");
-        actionMap.put("keyDPressed", new AbstractAction() {
+        inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "keyESCPressed");
+        actionMap.put("keyESCPressed", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Action to perform when "esc" is pressed
@@ -146,6 +146,8 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
                 draw();
             }
         });
+
+
     }
 
     private void draw() {

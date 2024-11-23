@@ -9,6 +9,12 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
 
     private int[][] targetMap;
 
+    private String imageAddress;
+
+    private int current_level = 1; //testing, delete after
+
+    private int[][][] colorMap;
+
     // Position of the current piece
     private int x;
     private int y;
@@ -115,6 +121,31 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
         x = 3; // Initial x position to center the piece
         y = 0; // Initial y position at the top of the board
     }
+    @Override
+    public void setImageAddress() {
+        if(current_level == 1){
+            imageAddress = "images/level1.png";
+        }
+        if(current_level == 2){
+            imageAddress = "images/level2.png";
+        }
+        if(current_level == 3){
+            imageAddress = "images/level3.png";
+        }
+    }
+    @Override
+    public String getImageAddress() {
+        return imageAddress;
+    }
+
+    @Override
+    public void setCurrentGameLevel(int current_level) {
+        this.current_level = current_level;
+    }
+    @Override
+    public int[][]
+
+
     public void updateMap(int[][] currentMap){
         entity.setGameBoard(currentMap);
     }
@@ -124,4 +155,6 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     public int[][] getTargetMap(){
         return targetMap;
     }
+
+
 }

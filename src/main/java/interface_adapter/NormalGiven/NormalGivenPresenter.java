@@ -9,18 +9,18 @@ import use_case.NormalGiven.NormalGivenOutputData;
  */
 public class NormalGivenPresenter implements NormalGivenOutputBoundary {
 
-    private final interface_adapter.NormalGiven.NormalGivenViewModel viewModel;
-    private final GameOverView gameOverView;
-    private final GameSucceededView gameSucceededView;
-    private final ViewManagerModel viewManagerModel;
+    private final interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel;
+    //private final GameOverView gameOverView;
+    //private final GameSucceededView gameSucceededView;
+    //private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for the Presenter.
      *
-     * @param viewModel the ViewModel instance to update
+     * @param normalGivenViewModel the ViewModel instance to update
      */
-    public NormalGivenPresenter(interface_adapter.NormalGiven.NormalGivenViewModel viewModel) {
-        this.viewModel = viewModel;
+    public NormalGivenPresenter(interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel) {
+        this.normalGivenViewModel = normalGivenViewModel;
     }
 
     /**
@@ -35,18 +35,20 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         }
 
         // Update the ViewModel with the map from the output data
-        viewModel.setMap(outputData.getMap());
+        normalGivenViewModel.setMap(outputData.getMap());
+        normalGivenViewModel.setSolutionMap(outputData.getSolutionMap());
+        normalGivenViewModel.setColorMap(outputData.getColorMap());
     }
 
     @Override
     public void gameOver() {
-        viewManagerModel.setState(gameOverView.getViewName());
-        viewManagerModel.firePropertyChanged();
+//        viewManagerModel.setState(gameOverView.getViewName());
+//        viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void gameSucceeded() {
-        viewManagerModel.setState(gameSucceededView.getViewName());
-        viewManagerModel.firePropertyChanged();
+//        viewManagerModel.setState(gameSucceededView.getViewName());
+//        viewManagerModel.firePropertyChanged();
     }
 }

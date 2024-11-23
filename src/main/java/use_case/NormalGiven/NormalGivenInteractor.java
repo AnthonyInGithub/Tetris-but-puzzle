@@ -69,7 +69,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             System.out.print("\n");
         }
 
-        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap));
+        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap, normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(), normalGivenDataAccessObject.getImageAddress()));
 
 
     }

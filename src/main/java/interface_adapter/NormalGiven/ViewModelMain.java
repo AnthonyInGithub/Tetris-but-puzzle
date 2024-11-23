@@ -12,7 +12,11 @@ import java.beans.PropertyChangeSupport;
 public class ViewModelMain<T> {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this); // Event manager
     private T state; // The state managed by this ViewModel
+    private final String viewName;
 
+    public ViewModelMain(String viewName) {
+        this.viewName = viewName;
+    }
     /**
      * Gets the current state.
      *
