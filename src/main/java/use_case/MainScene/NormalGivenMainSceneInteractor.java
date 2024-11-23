@@ -1,14 +1,12 @@
-package use_case.NormalGiven;
+package use_case.MainScene;
 import net.coobird.thumbnailator.Thumbnails;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
-public class NormalGivenMainSceneInteractor {
-
+public class NormalGivenMainSceneInteractor implements MainMenuInputBoundary {
     private final MainMenuOutputBoundary presenter;
-
 
     public NormalGivenMainSceneInteractor(MainMenuOutputBoundary presenter) {
         this.presenter = presenter;
@@ -19,15 +17,23 @@ public class NormalGivenMainSceneInteractor {
 
         if ("StartButton".equals(buttonName)) {
             presenter.navigateToLevelsPage();
+            System.out.println("Start button pressed in interactor");
+
         }
         if ("HistoryButton".equals(buttonName)) {
             presenter.navigateToHistoryPage();
+            System.out.println("History button pressed in interactor");
+
         }
         if ("BattleButton".equals(buttonName)) {
             presenter.navigateToBattlePage();
+            System.out.println("Batlle button pressed in interactor");
+
         }
         if ("MyOwnUploadButton".equals(buttonName)) {
-//            ();
+            handleMyOwnUpload();
+            System.out.println("MyOwnUpload button pressed in interactor");
+
         }
 //        else {
 //            presenter.present(new MainOutputData("Invalid action: " + buttonName));

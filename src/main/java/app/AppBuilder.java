@@ -13,12 +13,32 @@ import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import interface_adapter.NormalGiven.ViewModel;
+import interface_adapter.NormalGiven.MainMenuController;
+import interface_adapter.NormalGiven.MainMenuPresenter;
+import use_case.MainScene.NormalGivenMainSceneInteractor;
+import view.MainSceneView;
+
 
 /**
  * The AppBuilder class is responsible for assembling and configuring
  * the components of the Tetris application based on Clean Architecture.
  */
 public class AppBuilder {
+    public static void main(String[] args) {
+        MainSceneView view = new MainSceneView(null);
+
+        // Initialize the presenter
+        MainMenuPresenter presenter = new MainMenuPresenter(view);
+
+        // Initialize the interactor
+        NormalGivenMainSceneInteractor interactor = new NormalGivenMainSceneInteractor(presenter);
+
+        // Initialize the controller
+        MainMenuController controller = new MainMenuController(interactor);
+
+        // Link the controller to the view
+        new MainSceneView(controller);
+    }
 
     // CardLayout and JPanel for managing multiple views
     private final JPanel cardPanel = new JPanel();
@@ -48,7 +68,7 @@ public class AppBuilder {
     }
 
     /**
-     * Adds the NormalGiven Use Case to the application.
+     * Adds the use_case.NormalGiven.NormalGiven Use Case to the application.
      *
      * @return this builder
      */

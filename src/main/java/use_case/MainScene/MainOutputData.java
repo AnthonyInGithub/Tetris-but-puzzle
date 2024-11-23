@@ -1,4 +1,4 @@
-package use_case.NormalGiven;
+package use_case.MainScene;
 
 /**
  * shows the output data for the main menu interactor.
