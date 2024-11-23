@@ -58,24 +58,41 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         }
 
         updateCurrentMap();
-        outputMap = new int[currentMap.length - 2][currentMap[0].length];
-        for (int i = 2; i < currentMap.length; i++) {
-            System.arraycopy(currentMap[i], 0, outputMap[i - 2], 0, currentMap[i].length);
-        }
-        for(int i = 0; i< currentMap.length; i++){
-            for(int j = 0; j < currentMap[0].length; j++){
-                System.out.print(currentMap[i][j] + " ");
-            }
-            System.out.print("\n");
-        }
+        updateOutputMap();
+
 
         normalGivenPresenter.execute(new NormalGivenOutputData(outputMap));
 
 
     }
-private void handleInput(NormalGivenInputData inputData) {
-    if (inputData.isAPressed()) {
-        moveLeft();
+    private void updateOutputMap(){
+        outputMap = new int[currentMap.length - 2][currentMap[0].length];
+        for (int i = 2; i < currentMap.length; i++) {
+            System.arraycopy(currentMap[i], 0, outputMap[i - 2], 0, currentMap[i].length);
+        }
+    }
+    private void handleInput(NormalGivenInputData inputData) {
+        if (inputData.isAPressed()) {
+            moveLeft();
+            updateShapMatrix();
+
+        }
+
+        if (inputData.isDPressed()) {
+            moveRight();
+            updateShapMatrix();
+        }
+
+        if (inputData.isWPressed()) {
+            rotatePiece();
+        }
+
+        // For testing, remove later
+        if (inputData.isSPressed()) {
+            y++;
+        }
+    }
+    private void updateShapMatrix(){
         if (x < 0) {
             x = 0;
             for (int i = 0; i < shapeMatrix.length; i++) {
@@ -87,10 +104,6 @@ private void handleInput(NormalGivenInputData inputData) {
                 }
             }
         }
-    }
-
-    if (inputData.isDPressed()) {
-        moveRight();
         if (x > 7) {
             x = 7;
             for (int i = 0; i < shapeMatrix.length; i++) {
@@ -103,16 +116,6 @@ private void handleInput(NormalGivenInputData inputData) {
             }
         }
     }
-
-    if (inputData.isWPressed()) {
-        rotatePiece();
-    }
-
-    // For testing, remove later
-    if (inputData.isSPressed()) {
-        y++;
-    }
-}
 
 
     private void moveLeft() {
