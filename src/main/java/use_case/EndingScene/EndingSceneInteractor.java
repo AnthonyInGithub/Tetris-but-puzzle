@@ -6,8 +6,9 @@ public class EndingSceneInteractor implements EndingSceneInputBoundary{
         super();
     }
 
+
     @Override
-    public void execute(EndingSceneInputBoundary inputData) {
+    public void execute(EndingSceneInputData inputData) {
 
     }
 }
