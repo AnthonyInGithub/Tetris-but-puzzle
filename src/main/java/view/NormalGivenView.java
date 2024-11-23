@@ -16,8 +16,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import interface_adapter.NormalGiven.NormalGivenController;
+import interface_adapter.NormalGiven.NormalGivenViewModel;
 import interface_adapter.NormalGiven.NormalGivenState;
-import interface_adapter.NormalGiven.ViewModel;
 
 public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
@@ -29,7 +29,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
     private final int gameAreaHeight = 600;
     private final int sideAreaWidth = 200;
     private final int sideAreaHeight = 400;
-    private ViewModel normalGivenViewModel;
+    private NormalGivenViewModel normalGivenViewModel;
     private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
@@ -38,7 +38,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
     private final long timePeriod = 1000;
     private BufferedImage backgroundImage;
 
-    public NormalGivenView(ViewModel normalGivenViewModel) {
+    public NormalGivenView(NormalGivenViewModel normalGivenViewModel) {
         // Set the title and default close operation
         this.normalGivenViewModel = normalGivenViewModel;
         this.normalGivenViewModel.addPropertyChangeListener(this);
@@ -150,7 +150,6 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
     private void draw() {
         gameArea.removeAll();
-
         int[][] currentMap = normalGivenViewModel.getMap();
 
         for (int i = 0; i < currentMap.length; i++) {

@@ -25,4 +25,8 @@ public interface NormalGivenDataAccess {
 
     // Generate a new piece
     void generateNewPiece();
+
+    int[][] getTargetMap();
+
+    void setTargetMap(int[][] targetMap);
 }

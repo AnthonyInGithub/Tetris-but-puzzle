@@ -47,24 +47,16 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         y = normalGivenDataAccessObject.getY();
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
         handleInput(normalGivenInputData); // for process WASD input
-        //TODO: check WASD pressed and update x, y.(when S pressed, double the falling speed.)
         pieceFall(); //calculate the new piece's position y change.
         normalGivenDataAccessObject.setX(x);
         normalGivenDataAccessObject.setY(y);
         if (!canMove(x, y + 1)) { // If piece can't fall further (I changed the code to use some helper functions instead)
             lockPieceInPlace();
-            clearLines();
             generateNewPiece();
+            clearLines();
+
         }
-        // TODO: using OR operation to correspond map and shape. For example, assume shape is O.
-        // x, y = 0. Then currentMap[0][0] will be determine by (currentMap[0][0] or shape[0][0][0][0]),
-        // and currentMap[1][0] determine by (currentMap[1][0] or shape[0][0][1][0])
 
-        // TODO: Check for whether shape reach bottom. If it reachs, generate a new shape and pass it to data access object.
-        // reset and  And update the current map to DAO permanently.
-        // Also, don't forget to check if any of the line that is complete(which will then be deleted)
-
-        // TODO: pass to DAO new x, y value, the updated shape.(rotated or a new one)
         updateCurrentMap();
         outputMap = new int[currentMap.length - 2][currentMap[0].length];
         for (int i = 2; i < currentMap.length; i++) {
@@ -81,26 +73,47 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
 
     }
-    private void handleInput(NormalGivenInputData inputData) {
-
-        if (inputData.isAPressed()) {
-            moveLeft();
-            System.out.println("A pressed");
+private void handleInput(NormalGivenInputData inputData) {
+    if (inputData.isAPressed()) {
+        moveLeft();
+        if (x < 0) {
+            x = 0;
+            for (int i = 0; i < shapeMatrix.length; i++) {
+                for (int j = 1; j < shapeMatrix[0].length; j++) { // Start from 1 to avoid out-of-bounds
+                    if (shapeMatrix[i][j] == 1) {
+                        shapeMatrix[i][j] = 0;
+                        shapeMatrix[i][j - 1] = 1;
+                    }
+                }
+            }
         }
-        if (inputData.isDPressed()) {
-            moveRight();
-        }
-        if (inputData.isWPressed()) {
-            rotatePiece();
-        }
-        // for testing, delete after
-        if (inputData.isSPressed()) {
-            y ++;
-            System.out.println("S pressed");
-
-        }
-
     }
+
+    if (inputData.isDPressed()) {
+        moveRight();
+        if (x > 7) {
+            x = 7;
+            for (int i = 0; i < shapeMatrix.length; i++) {
+                for (int j = shapeMatrix[0].length - 2; j >= 0; j--) { // Start from the second last column
+                    if (shapeMatrix[i][j] == 1) {
+                        shapeMatrix[i][j] = 0;
+                        shapeMatrix[i][j + 1] = 1;
+                    }
+                }
+            }
+        }
+    }
+
+    if (inputData.isWPressed()) {
+        rotatePiece();
+    }
+
+    // For testing, remove later
+    if (inputData.isSPressed()) {
+        y++;
+    }
+}
+
 
     private void moveLeft() {
 
@@ -121,11 +134,10 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             currentShapeState[1] = originalRotation;
         }
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
+        System.out.println("x:" + x);
+        System.out.println("y:" + y);
     }
-    // accelerates the piece's fall speed by attempting to move it down by two units
-    private void accelerateFall() {
-        //
-    }
+
     // checks if the shape can be moved to the specified (newX, newY) position
     private boolean canMove(int newX, int newY) {
         for (int i = 0; i < shapeMatrix.length; i++) {
@@ -140,7 +152,6 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                 }
             }
         }
-        //System.out.println("can move");
         return true;
     }
     // locks the current shape in place by updating currentMap with the shape cells
@@ -153,6 +164,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                 }
             }
         }
+
         normalGivenDataAccessObject.updateMap(currentMap); // Save to DAO
     }
     // clears any full lines in the currentMap and shifts rows down
@@ -177,14 +189,14 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             System.arraycopy(currentMap[i - 1], 0, currentMap[i], 0, currentMap[i].length);
         }
     }
+    // Checks if the current piece is out of bounds on the game map
     private boolean isOutOfBounds() {
-        int[][] shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);//
+        int[][] shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0], currentShapeState[1]);
         for (int i = 0; i < shapeMatrix.length; i++) {
             for (int j = 0; j < shapeMatrix[0].length; j++) {
                 if (shapeMatrix[i][j] != 0) {
-                    int mapX = x + j;
-                    int mapY = y + i;
-                    if (mapX < 0 || mapX >= 10 || mapY >= 22) {
+                    // Check if the shape is out of bounds
+                    if (x + j < 0 || x + j >= 10 || y + i >= 22) {
                         return true;
                     }
                 }
@@ -192,12 +204,16 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         }
         return false;
     }
+    // Generates a new game piece by interacting with the data access object.
+    // Updates the current shape's state and coordinates (x, y).
     private void generateNewPiece() {
         normalGivenDataAccessObject.generateNewPiece();
         currentShapeState = normalGivenDataAccessObject.getCurrentShapeState();
         if (isOutOfBounds()) {
             normalGivenPresenter.gameOver();
         }
+        x = normalGivenDataAccessObject.getX();
+        y = normalGivenDataAccessObject.getY();
     }
 
     // Updates the y-coordinate to make the piece fall down one unit
@@ -205,21 +221,46 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         if (canMove(x, y + 1)) {
             y++;
         }
+        checkTargetMap();
     }
-
+    // Updates the current game map to include the current piece's position.
     private void updateCurrentMap(){
         int[][] tempMap = new int[currentMap.length][];
         for (int i = 0; i < currentMap.length; i++) {
             tempMap[i] = currentMap[i].clone();
         }
-
+        // Add the shape of the current piece to the map
         for(int i = 0; i < shapeMatrix.length; i++){
             for (int b = 0; b < shapeMatrix[0].length; b++){
-                if(y+b < 22 && x+i < 10){
+                if(y+b < 22 && x+i < 10){ // Ensure indices are within bounds
                     tempMap[y+b][x+i] = shapeMatrix[b][i] | tempMap[y+b][x+i];
                 }
             }
         }
-        currentMap = tempMap;
+        currentMap = tempMap; // Update the current map
+    }
+
+    private void checkTargetMap() {
+        int[][] targetMap = normalGivenDataAccessObject.getTargetMap();
+
+        if (outputMap == null || targetMap == null) {
+            System.out.println("one of the maps is null. Similarity: 0%");
+            return;
+        }
+        if (outputMap.length != targetMap.length || outputMap[0].length != targetMap[0].length) {
+            System.out.println("Similarity: 0%");
+            return;
+        }
+        int totalCells = 200;
+        int matchingCells = 0;
+        for (int i = 0; i < outputMap.length; i++) {
+            for (int j = 0; j < outputMap[i].length; j++) {
+                if (outputMap[i][j] == targetMap[i][j]) {
+                    matchingCells++;
+                }
+            }
+        }
+        double similarityPercentage = ((double) matchingCells / totalCells) * 100;
+        System.out.printf("The output map matches the target map by %.2f%%.%n", similarityPercentage);
     }
 }
