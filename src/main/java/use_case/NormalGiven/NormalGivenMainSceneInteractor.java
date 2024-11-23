@@ -24,42 +24,42 @@ public class NormalGivenMainSceneInteractor {
         if ("MyOwnUploadButton".equals(buttonName)) {
             handleUpload();
         }
-//        else {
-//            presenter.present(new MainOutputData("Invalid action: " + buttonName));
-//        }
+        else {
+            presenter.present(new MainOutputData("Invalid action: " + buttonName));
+        }
     }
 
-//    public void handleLevelSelection(int level) {
-//        if (level == 1) {
-//            presenter.present(new MainOutputData("Starting Level 1"));
-//        }if (level == 2) {
-//            presenter.present(new MainOutputData("Starting Level 2"));
-//        }if (level == 3) {
-//            presenter.present(new MainOutputData("Starting Level 3"));
-//        }
-//       else {
-//          presenter.present(new MainOutputData("Invalid level: " + level));
-//      }
-//    }
+    public void handleLevelSelection(int level) {
+        if (level == 1) {
+            presenter.present(new MainOutputData("Starting Level 1"));
+        }if (level == 2) {
+            presenter.present(new MainOutputData("Starting Level 2"));
+        }if (level == 3) {
+            presenter.present(new MainOutputData("Starting Level 3"));
+        }
+       else {
+          presenter.present(new MainOutputData("Invalid level: " + level));
+      }
+    }
 
-//    public void handleHistoryAction(String buttonName) {
-//        if ("ReturnButton".equals(buttonName)) {
-//            presenter.present(new MainOutputData("Returning to Main Menu"));
-//        }
-//        if ("NextHistoryButton".equals(buttonName)) {
-//            presenter.present(new MainOutputData("Navigating to the next history page"));
-//        }
-//        if ("LastHistoryButton".equals(buttonName)) {
-//            presenter.present(new MainOutputData("Navigating to the previous history page"));
-//        }
-//        else {
-//          presenter.present(new MainOutputData("Invalid history action: " + buttonName));
-//      }
-//    }
+    public void handleHistoryAction(String buttonName) {
+        if ("ReturnButton".equals(buttonName)) {
+            presenter.present(new MainOutputData("Returning to Main Menu"));
+        }
+        if ("NextHistoryButton".equals(buttonName)) {
+            presenter.present(new MainOutputData("Navigating to the next history page"));
+        }
+        if ("LastHistoryButton".equals(buttonName)) {
+            presenter.present(new MainOutputData("Navigating to the previous history page"));
+        }
+        else {
+          presenter.present(new MainOutputData("Invalid history action: " + buttonName));
+      }
+    }
 
-//    public void handleManualEnd() {
-//        presenter.present(new MainOutputData("Ending the game manually"));
-//    }
+    public void handleManualEnd() {
+        presenter.present(new MainOutputData("Ending the game manually"));
+    }
 
     private boolean handleFileUpload() {
         return true; // Assume upload is successful
