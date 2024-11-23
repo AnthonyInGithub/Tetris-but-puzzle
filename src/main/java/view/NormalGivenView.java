@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import interface_adapter.NormalGiven.NormalGivenController;
-import interface_adapter.NormalGiven.ViewModel;
+import interface_adapter.NormalGiven.NormalGivenViewModel;
 
 public class NormalGivenView extends JPanel {
 
@@ -18,12 +18,12 @@ public class NormalGivenView extends JPanel {
     private final int gameAreaHeight = 600;
     private final int sideAreaWidth = 200;
     private final int sideAreaHeight = 400;
-    private ViewModel normalGivenViewModel;
+    private NormalGivenViewModel normalGivenViewModel;
     private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
 
-    public NormalGivenView(ViewModel normalGivenViewModel) {
+    public NormalGivenView(NormalGivenViewModel normalGivenViewModel) {
         // Set the title and default close operation
         this.normalGivenViewModel = normalGivenViewModel;
         // setTitle("Game Screen Layout");

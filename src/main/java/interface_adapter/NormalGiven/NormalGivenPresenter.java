@@ -8,14 +8,14 @@ import use_case.NormalGiven.NormalGivenOutputData;
  * Handles output data from the Interactor and updates the ViewModel.
  */
 public class NormalGivenPresenter implements NormalGivenOutputBoundary {
-    private final ViewModel viewModel;
+    private final interface_adapter.NormalGiven.NormalGivenViewModel viewModel;
 
     /**
      * Constructor for the Presenter.
      *
      * @param viewModel the ViewModel instance to update
      */
-    public NormalGivenPresenter(ViewModel viewModel) {
+    public NormalGivenPresenter(interface_adapter.NormalGiven.NormalGivenViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
