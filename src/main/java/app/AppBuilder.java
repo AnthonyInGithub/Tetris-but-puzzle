@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import interface_adapter.NormalGiven.NormalGivenController;
-import data_access.InMemoryDataAccessObject;
+import data_access.InMemoryDataAccessInterfaceObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
 import view.NormalGivenView;
 import use_case.NormalGiven.NormalGivenInputBoundary;
@@ -25,7 +25,7 @@ public class AppBuilder {
     private final CardLayout cardLayout = new CardLayout();
 
     // Core components
-    private final InMemoryDataAccessObject dataAccessObject = new InMemoryDataAccessObject();
+    private final InMemoryDataAccessInterfaceObject dataAccessObject = new InMemoryDataAccessInterfaceObject();
     private final ViewModel viewModel = new ViewModel();
 
     // Views

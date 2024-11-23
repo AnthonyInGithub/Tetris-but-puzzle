@@ -3,7 +3,7 @@ package data_access;
 import entity.Entity;
 
 
-public class InMemoryDataAccessObject implements data_access.NormalGivenDataAccess {
+public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessInterface {
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
@@ -57,7 +57,7 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     };
 
     // Constructor
-    public InMemoryDataAccessObject() {
+    public InMemoryDataAccessInterfaceObject() {
         this.entity = new Entity();
         generateNewPiece();
     }

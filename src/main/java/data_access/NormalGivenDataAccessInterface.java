@@ -4,7 +4,7 @@ import entity.Entity;
 /**
  * Interface for accessing and modifying the game state and shapes.
  */
-public interface NormalGivenDataAccess {
+public interface NormalGivenDataAccessInterface {
     // Current piece information
     int[] getCurrentShapeState(); // [shapeType, rotationState]
     void setCurrentShapeState(int[] currentShapeState);
