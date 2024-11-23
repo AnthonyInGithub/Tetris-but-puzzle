@@ -4,11 +4,22 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
+import java.beans.PropertyChangeEvent;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import interface_adapter.NormalGiven.NormalGivenController;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
+import interface_adapter.NormalGiven.NormalGivenState;
 
-public class NormalGivenView extends JPanel {
+public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
     private JPanel gameArea;
     private JPanel sideArea;
@@ -22,14 +33,18 @@ public class NormalGivenView extends JPanel {
     private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
+    private final Timer timer;
+    private final long timeDelay = 1000;
+    private final long timePeriod = 1000;
+    private BufferedImage backgroundImage;
 
     public NormalGivenView(NormalGivenViewModel normalGivenViewModel) {
         // Set the title and default close operation
         this.normalGivenViewModel = normalGivenViewModel;
-        // setTitle("Game Screen Layout");
-        // setDefaultCloseOperation(JPanel.EXIT_ON_CLOSE);
+        this.normalGivenViewModel.addPropertyChangeListener(this);
+        timer = new Timer();
         setSize(widowWidth, widowHeight);
-
+        // setBackgroundImage();
         // Set the layout for the main frame
         setLayout(new BorderLayout());
 
@@ -119,21 +134,20 @@ public class NormalGivenView extends JPanel {
                 draw();
             }
         });
-    }
-    /*
-    private void draw(ViewModel v) {
-        currentMap = v.getMap();
-        for (int i = 0; i < currentMap.length(); i++) {
 
-            for (int j = 0; j < currentMap[0].length; j++) {
-                if (currentMap[i][j] == 1) {
-                    gameArea.add(squareFactory(squareSize * i, squareSize * j, squareSize));
-                }
+        inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "keyDPressed");
+        actionMap.put("keyDPressed", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Action to perform when "esc" is pressed
+                // NormalGivenController executes based on this key
+                System.out.println("esc");
+                normalGivenController.execute(false, false, false, false);
+                draw();
             }
-        }
-        gameArea.repaint();
+        });
     }
-     */
+
     private void draw() {
         gameArea.removeAll();
         int[][] currentMap = normalGivenViewModel.getMap();
@@ -163,9 +177,47 @@ public class NormalGivenView extends JPanel {
         this.normalGivenController = normalGivenController;
     }
 
-//    public static void main(String[] args) {
-//        // Run the game screen layout
-//        SwingUtilities.invokeLater(GameScreen::new);
-//    }
+    private TimerTask regularExecution(){
+        return new TimerTask() {
+            @Override
+            public void run() {
+                normalGivenController.execute();
+            }
+        };
+    }
+
+    private void setBackgroundImage(String imagePath){
+        try {
+            // Load the image from the file
+            backgroundImage = ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading image: " + imagePath);
+        }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            // Draw the image to fill the entire panel
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        final NormalGivenState normalGivenState = (NormalGivenState) evt.getNewValue();
+        if (normalGivenState.getGamingState().equals("playing")) {
+            timer.schedule(regularExecution(), timeDelay, timePeriod);
+            System.out.println("timer starts");
+        } else if (normalGivenState.getGamingState().equals("end")) {
+            timer.cancel();
+            System.out.println("timer ends");
+        }
+
+    }
+
 }
 
