@@ -9,6 +9,9 @@ import use_case.NormalGiven.NormalGivenOutputData;
  */
 public class NormalGivenPresenter implements NormalGivenOutputBoundary {
     private final ViewModel viewModel;
+    private final GameOverView gameOverView;
+    private final GameSucceededView gameSucceededView;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for the Presenter.
@@ -36,6 +39,13 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
 
     @Override
     public void gameOver() {
+        viewManagerModel.setState(gameOverView.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
 
+    @Override
+    public void gameSucceeded() {
+        viewManagerModel.setState(gameSucceededView.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 }
