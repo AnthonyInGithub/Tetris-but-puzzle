@@ -9,6 +9,6 @@ public interface EndingSceneInputBoundary {
      * @param inputData the input data from the Controller
      */
 
-    void execute(EndingSceneInputBoundary inputData);
+    void execute(EndingSceneInputData inputData);
 
 }
