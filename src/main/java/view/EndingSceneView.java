@@ -12,19 +12,30 @@ public class EndingSceneView extends JPanel implements ActionListener {
 
     private final JButton button1;
     private final JButton button2;
+    private final int WINDOW_WIDTH = 960;
+    private final int WINDOW_HEIGHT = 540;
 
     public EndingSceneView() {
         // Set up the panel layout
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        // Set the layout for the main frame
+        setLayout(new BorderLayout());
+
+// Create a topPanel to hold gameArea and sideArea
+        JPanel topPanel = new JPanel(new BorderLayout());
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Create and add an image label
         JLabel imageLabel = new JLabel();
-        imageLabel.setIcon(new ImageIcon("")); // Replace with your image path
+        ImageIcon originalImage = new ImageIcon("images/GUI.png"); // Replace with your image path
+        Image scaledImage = originalImage.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Scale image to fit
+        imageLabel.setIcon(new ImageIcon(scaledImage)); // Replace with your image path
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(imageLabel);
+        topPanel.add(imageLabel);
 
         // Add spacing between components
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        topPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Create a panel for buttons
         JPanel buttonPanel = new JPanel();
@@ -32,7 +43,9 @@ public class EndingSceneView extends JPanel implements ActionListener {
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Create and add Button 1
-        button1 = new JButton("Button 1");
+        ImageIcon button1Icon = new ImageIcon("images/GUI.png");
+        ImageIcon finalbutton1Icon = new ImageIcon(button1Icon.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH)); // Scale image to fit
+        button1 = new JButton(finalbutton1Icon);
         button1.addActionListener(this);
         buttonPanel.add(button1);
 
@@ -45,7 +58,7 @@ public class EndingSceneView extends JPanel implements ActionListener {
         buttonPanel.add(button2);
 
         // Add the button panel to the main panel
-        this.add(buttonPanel);
+        topPanel.add(buttonPanel);
     }
 
     @Override
@@ -57,16 +70,5 @@ public class EndingSceneView extends JPanel implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        // Set up the JFrame
-        JFrame frame = new JFrame("ImageView");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
 
-        // Add the ImageView panel to the frame
-        frame.add(new EndingSceneView());
-
-        // Make the frame visible
-        frame.setVisible(true);
-    }
 }
