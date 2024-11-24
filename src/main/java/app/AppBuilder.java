@@ -27,17 +27,15 @@ public class AppBuilder {
     public static void main(String[] args) {
         MainSceneView view = new MainSceneView(null);
 
-        // Initialize the presenter
         MainMenuPresenter presenter = new MainMenuPresenter(view);
 
-        // Initialize the interactor
         NormalGivenMainSceneInteractor interactor = new NormalGivenMainSceneInteractor(presenter);
 
-        // Initialize the controller
         MainMenuController controller = new MainMenuController(interactor);
 
-        // Link the controller to the view
-        new MainSceneView(controller);
+        view.setController(controller);
+
+
     }
 
     // CardLayout and JPanel for managing multiple views
