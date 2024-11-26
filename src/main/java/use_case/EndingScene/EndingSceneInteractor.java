@@ -1,14 +1,22 @@
 package use_case.EndingScene;
 
-public class EndingSceneInteractor implements EndingSceneInputBoundary{
+import data_access.EndingSceneDataAccessInterface;
 
-    public EndingSceneInteractor() {
+public class EndingSceneInteractor implements EndingSceneInputBoundary{
+    public final EndingSceneDataAccessInterface endingSceneDataAccessObject;
+    private final EndingSceneOutputBoundary endingScenePresenter;
+    public EndingSceneInteractor(EndingSceneDataAccessInterface endingSceneDataAccessObject,
+                                 EndingSceneOutputBoundary endingScenePresenter) {
         super();
+        this.endingSceneDataAccessObject = endingSceneDataAccessObject;
+        this.endingScenePresenter = endingScenePresenter;
     }
 
 
     @Override
     public void execute(EndingSceneInputData inputData) {
-
+        endingScenePresenter.execute(new EndingSceneOutputData
+                (inputData.isReturnClicked(), inputData.isSaveClicked(),
+                        endingSceneDataAccessObject.getIsWin()));
     }
 }

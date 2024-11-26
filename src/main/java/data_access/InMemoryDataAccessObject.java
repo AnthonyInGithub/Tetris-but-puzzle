@@ -9,13 +9,16 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface {
+public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
+                                                EndingSceneDataAccessInterface{
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
     private int[][] targetMap;
 
     private boolean isGameOver;
+
+    private boolean isWin;
 
     private String imageAddress;
 
@@ -169,6 +172,9 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface 
 
     public boolean getIsGameOver(){
         return isGameOver;
+    }
+    public boolean getIsWin(){
+        return isWin;
     }
 
     public void testingColorMap(){

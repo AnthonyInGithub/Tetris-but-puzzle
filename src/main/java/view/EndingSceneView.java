@@ -1,5 +1,8 @@
 package view;
 
+import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.NormalGiven.NormalGivenViewModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,51 +17,47 @@ public class EndingSceneView extends JPanel implements ActionListener {
     private final JButton button2;
     private final int WINDOW_WIDTH = 960;
     private final int WINDOW_HEIGHT = 540;
+    private EndingSceneViewModel endingSceneViewModel;
 
-    public EndingSceneView() {
+
+    public EndingSceneView(EndingSceneViewModel endingSceneViewModel) {
+        this.endingSceneViewModel = endingSceneViewModel;
+
         // Set up the panel layout
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        // Set the layout for the main frame
-        setLayout(new BorderLayout());
-
-// Create a topPanel to hold gameArea and sideArea
-        JPanel topPanel = new JPanel(new BorderLayout());
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        // Create and add an image label
+        // Create an image label
         JLabel imageLabel = new JLabel();
-        ImageIcon originalImage = new ImageIcon("images/GUI.png"); // Replace with your image path
-        Image scaledImage = originalImage.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH); // Scale image to fit
-        imageLabel.setIcon(new ImageIcon(scaledImage)); // Replace with your image path
+        ImageIcon originalImage = new ImageIcon("images/GUI.png");
+        Image scaledImage = originalImage.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH);
+        imageLabel.setIcon(new ImageIcon(scaledImage));
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        topPanel.add(imageLabel);
+        add(imageLabel);
 
-        // Add spacing between components
-        topPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        // Add spacing
+        add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Create a panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Create and add Button 1
-        ImageIcon button1Icon = new ImageIcon("images/GUI.png");
-        ImageIcon finalbutton1Icon = new ImageIcon(button1Icon.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH)); // Scale image to fit
-        button1 = new JButton(finalbutton1Icon);
+        // Create Button 1
+        button1 = new JButton(new ImageIcon(scaledImage));
         button1.addActionListener(this);
         buttonPanel.add(button1);
 
         // Add spacing between buttons
         buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        // Create and add Button 2
+        // Create Button 2
         button2 = new JButton("Button 2");
         button2.addActionListener(this);
         buttonPanel.add(button2);
 
-        // Add the button panel to the main panel
-        topPanel.add(buttonPanel);
+        // Add the button panel
+        add(buttonPanel);
     }
 
     @Override
@@ -70,5 +69,8 @@ public class EndingSceneView extends JPanel implements ActionListener {
         }
     }
 
+    public static void main(String[] args) {
+        //SwingUtilities.invokeLater(EndingSceneView::new);
+    }
 
 }

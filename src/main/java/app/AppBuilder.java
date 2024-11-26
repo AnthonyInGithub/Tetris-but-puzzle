@@ -5,9 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import interface_adapter.EndingScene.EndingScenePresenter;
+import interface_adapter.EndingScene.EndingSceneViewModel;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
+import use_case.EndingScene.EndingSceneOutputBoundary;
+import view.EndingSceneView;
 import view.NormalGivenView;
 import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
@@ -28,8 +32,11 @@ public class AppBuilder {
     private final InMemoryDataAccessObject dataAccessObject = new InMemoryDataAccessObject();
     private final NormalGivenViewModel viewModel = new NormalGivenViewModel();
 
+    private final EndingSceneViewModel endingSceneViewModel = new EndingSceneViewModel();
+
     // Views
     private NormalGivenView normalGivenView;
+    private EndingSceneView endingSceneView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -44,6 +51,11 @@ public class AppBuilder {
         // Initialize the NormalGivenView
         normalGivenView = new NormalGivenView(viewModel); // Controller will be set later
         cardPanel.add(normalGivenView, "NormalGivenView");
+        return this;
+    }
+    public AppBuilder addEndingSceneView(){
+        endingSceneView = new EndingSceneView(endingSceneViewModel);
+        cardPanel.add(endingSceneView, "EndingSceneView");
         return this;
     }
 
@@ -66,6 +78,9 @@ public class AppBuilder {
         normalGivenView.setNormalGivenController(controller);
         return this;
     }
+    public AppBuilder addEndingSceneUseCase() {
+        final EndingSceneOutputBoundary presenter = new EndingScenePresenter(endingSceneViewModel);
+    }
 
     /**
      * Builds the JFrame for the application and shows the initial view.
@@ -77,10 +92,13 @@ public class AppBuilder {
         final JFrame application = new JFrame("Tetris - Build Shapes");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         application.add(cardPanel);
-
         // Set the initial view
-        cardLayout.show(cardPanel, "NormalGivenView");
+        cardLayout.show(cardPanel, "EndingSceneView");
 
         return application;
+    }
+
+    public void TestingSwtich(){
+        cardLayout.show(cardPanel, "NormalGivenView");
     }
 }
