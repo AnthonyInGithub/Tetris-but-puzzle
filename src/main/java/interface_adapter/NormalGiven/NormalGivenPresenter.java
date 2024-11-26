@@ -38,12 +38,18 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         normalGivenViewModel.setMap(outputData.getMap());
         normalGivenViewModel.setSolutionMap(outputData.getSolutionMap());
         normalGivenViewModel.setColorMap(outputData.getColorMap());
+        normalGivenViewModel.setImgAddress(outputData.getImgAddress());
+
+        if (outputData.getIsGameOver()){
+            gameOver();
+        }
     }
 
     @Override
     public void gameOver() {
 //        viewManagerModel.setState(gameOverView.getViewName());
 //        viewManagerModel.firePropertyChanged();
+        System.out.println("Game Over");
     }
 
     @Override

@@ -15,6 +15,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
     int[][] shapeMatrix;
 
+    boolean isGameOver = false;
+
     private int[] currentShapeState; //an array of length 2, where 0th position specify the type of shape, 1st specify the rotation state.
 
     //The shape is organized this way: for example, the I shape contains I and its rotated state. You need to get shape from DAO
@@ -54,7 +56,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             lockPieceInPlace();
             generateNewPiece();
             clearLines();
-
+            checkTargetMap();
         }
 
         updateCurrentMap();
@@ -69,7 +71,9 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             System.out.print("\n");
         }
 
-        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap, normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(), normalGivenDataAccessObject.getImageAddress()));
+        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap,
+                normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(),
+                normalGivenDataAccessObject.getImageAddress(), normalGivenDataAccessObject.getIsGameOver()));
 
 
     }
@@ -210,6 +214,7 @@ private void handleInput(NormalGivenInputData inputData) {
         normalGivenDataAccessObject.generateNewPiece();
         currentShapeState = normalGivenDataAccessObject.getCurrentShapeState();
         if (isOutOfBounds()) {
+            System.out.println("out of screen");
             normalGivenPresenter.gameOver();
         }
         x = normalGivenDataAccessObject.getX();
@@ -221,7 +226,6 @@ private void handleInput(NormalGivenInputData inputData) {
         if (canMove(x, y + 1)) {
             y++;
         }
-        checkTargetMap();
     }
     // Updates the current game map to include the current piece's position.
     private void updateCurrentMap(){
@@ -261,6 +265,11 @@ private void handleInput(NormalGivenInputData inputData) {
             }
         }
         double similarityPercentage = ((double) matchingCells / totalCells) * 100;
+        if (similarityPercentage>50){
+            isGameOver = true;
+            System.out.println("Similarity: " + similarityPercentage + "%");
+            normalGivenPresenter.gameOver();
+        }
         System.out.printf("The output map matches the target map by %.2f%%.%n", similarityPercentage);
     }
 }
