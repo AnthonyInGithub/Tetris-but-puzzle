@@ -1,6 +1,12 @@
 package data_access;
 
 import entity.Entity;
+import net.coobird.thumbnailator.Thumbnails;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessInterface {
@@ -8,6 +14,14 @@ public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessI
     private int[] currentShapeState;
 
     private int[][] targetMap;
+
+    private boolean isGameOver;
+
+    private String imageAddress;
+
+    private int current_level; //testing, delete after
+
+    private int[][][] colorMap;
 
     // Position of the current piece
     private int x;
@@ -59,6 +73,7 @@ public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessI
     // Constructor
     public InMemoryDataAccessInterfaceObject() {
         this.entity = new Entity();
+        testingColorMap();
         generateNewPiece();
     }
 
@@ -115,6 +130,33 @@ public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessI
         x = 3; // Initial x position to center the piece
         y = 0; // Initial y position at the top of the board
     }
+    @Override
+    public void setImageAddress() {
+        if(current_level == 1){
+            imageAddress = "images/sampleLevel1.png";
+        }
+        if(current_level == 2){
+            imageAddress = "images/level2.png";
+        }
+        if(current_level == 3){
+            imageAddress = "images/level3.png";
+        }
+    }
+    @Override
+    public String getImageAddress() {
+        return imageAddress;
+    }
+
+    @Override
+    public void setCurrentGameLevel(int current_level) {
+        this.current_level = current_level;
+    }
+    @Override
+    public int[][][] getColorMap() {
+        return colorMap;
+    }
+
+
     public void updateMap(int[][] currentMap){
         entity.setGameBoard(currentMap);
     }
@@ -123,5 +165,69 @@ public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessI
     }
     public int[][] getTargetMap(){
         return targetMap;
+    }
+
+    public boolean getIsGameOver(){
+        return isGameOver;
+    }
+
+    public void testingColorMap(){
+        {
+            try {
+                // Resize the image to 10x20 using Thumbnailator
+                BufferedImage resizedImage = Thumbnails.of(new File("images/sampleLevel1.png"))
+                        .forceSize(10, 20)
+                        .asBufferedImage();
+
+                // Initialize a 2D array for binary representation
+                int width = resizedImage.getWidth();
+                int height = resizedImage.getHeight();
+                int[][] binaryArray = new int[height][width];
+                colorMap = new int[height][width][3];
+                System.out.println(height +" " +width);
+
+                // Process each pixel to determine binary value
+                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
+                        // Get the RGB value of the pixel
+                        int rgb = resizedImage.getRGB(x, y);
+                        Color color = new Color(rgb);
+                        colorMap[y][x][0] = color.getRed();
+                        colorMap[y][x][1] = color.getGreen();
+                        colorMap[y][x][2] = color.getBlue();
+                        // Convert to grayscale for thresholding
+                        int gray = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
+
+                        // Threshold: convert to binary (1 for dark, 0 for light)
+                        binaryArray[y][x] = gray < 128 ? 1 : 0;
+                    }
+                }
+
+                // Print the binary array
+                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
+                        System.out.print(binaryArray[y][x] + " ");
+                    }
+                    System.out.println();
+                }
+                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
+                        System.out.print("[");
+                        for (int i = 0; i < 3; i++) {
+                            System.out.print(colorMap[y][x][i] + " ");
+                        }
+                        System.out.println("]");
+
+                    }
+                    System.out.println();
+                }
+                current_level = 1;
+                setTargetMap(binaryArray);
+                setImageAddress();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

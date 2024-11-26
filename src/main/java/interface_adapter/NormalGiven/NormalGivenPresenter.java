@@ -8,15 +8,19 @@ import use_case.NormalGiven.NormalGivenOutputData;
  * Handles output data from the Interactor and updates the ViewModel.
  */
 public class NormalGivenPresenter implements NormalGivenOutputBoundary {
-    private final ViewModel viewModel;
+
+    private final interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel;
+    //private final GameOverView gameOverView;
+    //private final GameSucceededView gameSucceededView;
+    //private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for the Presenter.
      *
-     * @param viewModel the ViewModel instance to update
+     * @param normalGivenViewModel the ViewModel instance to update
      */
-    public NormalGivenPresenter(ViewModel viewModel) {
-        this.viewModel = viewModel;
+    public NormalGivenPresenter(interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel) {
+        this.normalGivenViewModel = normalGivenViewModel;
     }
 
     /**
@@ -31,11 +35,26 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         }
 
         // Update the ViewModel with the map from the output data
-        viewModel.setMap(outputData.getMap());
+        normalGivenViewModel.setMap(outputData.getMap());
+        normalGivenViewModel.setSolutionMap(outputData.getSolutionMap());
+        normalGivenViewModel.setColorMap(outputData.getColorMap());
+        normalGivenViewModel.setImgAddress(outputData.getImgAddress());
+
+        if (outputData.getIsGameOver()){
+            gameOver();
+        }
     }
 
     @Override
     public void gameOver() {
+//        viewManagerModel.setState(gameOverView.getViewName());
+//        viewManagerModel.firePropertyChanged();
+        System.out.println("Game Over");
+    }
 
+    @Override
+    public void gameSucceeded() {
+//        viewManagerModel.setState(gameSucceededView.getViewName());
+//        viewManagerModel.firePropertyChanged();
     }
 }

@@ -4,60 +4,79 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
+import java.beans.PropertyChangeEvent;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import interface_adapter.NormalGiven.NormalGivenController;
-import interface_adapter.NormalGiven.ViewModel;
+import interface_adapter.NormalGiven.NormalGivenViewModel;
+import interface_adapter.NormalGiven.NormalGivenState;
 
-public class NormalGivenView extends JPanel {
+public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
     private JPanel gameArea;
-    private JPanel sideArea;
     private final int widowWidth = 515;
     private final int widowHeight = 635;
     private final int gameAreaWidth = 300;
     private final int gameAreaHeight = 600;
-    private final int sideAreaWidth = 200;
-    private final int sideAreaHeight = 400;
-    private ViewModel normalGivenViewModel;
+    private NormalGivenViewModel normalGivenViewModel;
     private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
+    private final Timer timer;
+    private final long timeDelay = 1000;
+    private final long timePeriod = 1000;
+    private boolean firstTime = true;
 
-    public NormalGivenView(ViewModel normalGivenViewModel) {
+    public NormalGivenView(NormalGivenViewModel normalGivenViewModel) {
         // Set the title and default close operation
         this.normalGivenViewModel = normalGivenViewModel;
-        // setTitle("Game Screen Layout");
-        // setDefaultCloseOperation(JPanel.EXIT_ON_CLOSE);
+        this.normalGivenViewModel.addPropertyChangeListener(this);
+        timer = new Timer();
         setSize(widowWidth, widowHeight);
-
         // Set the layout for the main frame
         setLayout(new BorderLayout());
-
-// Create a topPanel to hold gameArea and sideArea
-        JPanel topPanel = new JPanel(new BorderLayout());
-
-// Create a left-aligned panel to hold gameArea
-        JPanel gameAreaWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        // normalGivenController.execute();
         final Border redline = BorderFactory.createLineBorder(Color.red);
-        gameArea = new JPanel();
-        gameArea.setBackground(Color.BLACK);
-        gameArea.setPreferredSize(new Dimension(gameAreaWidth, gameAreaHeight));
+        // String imagePath = normalGivenViewModel.getImgAddress();
+        gameArea = new CustomBackgroundPanel(){
+//            private BufferedImage backgroundImage;
+//
+//            public void setBackgroundImage(String imagePath) {
+//                try {
+//                    backgroundImage = ImageIO.read(new File(imagePath));
+//                    repaint(); // Trigger repaint to apply the new background
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    System.err.println("Error loading background image: " + imagePath);
+//                }
+//            }
+//
+//            @Override
+//            protected void paintComponent(Graphics g) {
+//                super.paintComponent(g);
+//                if (backgroundImage != null) {
+//                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+//                }
+//            }
+
+            @Override
+            public Dimension getPreferredSize() {
+                // Set the preferred size of the panel
+                return new Dimension(gameAreaWidth, gameAreaHeight); // Width: 500, Height: 400
+            }
+        };
+
+        ((CustomBackgroundPanel) gameArea).setBackgroundImage("images/sampleLevel1.png");
         gameArea.setBorder(redline);
-        gameAreaWrapper.add(gameArea);  // Add gameArea to the left-aligned wrapper
-        topPanel.add(gameAreaWrapper, BorderLayout.WEST);  // Add wrapper to topPanel
-
-// Create a right-aligned panel to hold sideArea
-        JPanel sideAreaWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        final Border yellowline = BorderFactory.createLineBorder(Color.yellow);
-        sideArea = new JPanel();
-        sideArea.setBackground(Color.GRAY);
-        sideArea.setPreferredSize(new Dimension(sideAreaWidth, sideAreaHeight));
-        sideArea.setBorder(yellowline);
-        sideAreaWrapper.add(sideArea);  // Add sideArea to the right-aligned wrapper
-        topPanel.add(sideAreaWrapper, BorderLayout.EAST);  // Add wrapper to topPanel
-
-// Add topPanel to the main frame at the top (NORTH)
-        add(topPanel, BorderLayout.NORTH);
+        add(gameArea, BorderLayout.CENTER);
 
         setupKeyBindings();
 
@@ -91,7 +110,9 @@ public class NormalGivenView extends JPanel {
                 // Action to perform when "A" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("A");
+
                 normalGivenController.execute(false, true, false, false);
+
                 draw();
             }
         });
@@ -119,41 +140,51 @@ public class NormalGivenView extends JPanel {
                 draw();
             }
         });
-    }
-    /*
-    private void draw(ViewModel v) {
-        currentMap = v.getMap();
-        for (int i = 0; i < currentMap.length(); i++) {
 
-            for (int j = 0; j < currentMap[0].length; j++) {
-                if (currentMap[i][j] == 1) {
-                    gameArea.add(squareFactory(squareSize * i, squareSize * j, squareSize));
-                }
+        inputMap.put(KeyStroke.getKeyStroke("ESCAPE"), "keyESCPressed");
+        actionMap.put("keyESCPressed", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Action to perform when "esc" is pressed
+                // NormalGivenController executes based on this key
+                System.out.println("esc");
+                normalGivenController.execute(false, false, false, false);
+                draw();
             }
-        }
-        gameArea.repaint();
+        });
+
+
     }
-     */
+
     private void draw() {
         gameArea.removeAll();
         int[][] currentMap = normalGivenViewModel.getMap();
+        int[][] solutionMap = normalGivenViewModel.getSolutionMap();
+        int[][][] colorMap = normalGivenViewModel.getColorMap();
 
         for (int i = 0; i < currentMap.length; i++) {
 
             for (int j = 0; j < currentMap[0].length; j++) {
                 if (currentMap[i][j] == 1) {
-                    gameArea.add(squareFactory(margin + squareSize * j,
-                            squareSize * i - margin, squareSize));
+                    int[] color = colorMap[i][j];
+                    if (solutionMap[i][j] == 1) {
+                        gameArea.add(squareFactory(margin + squareSize * j,
+                                squareSize * i - margin, squareSize, color));
+                    } else {
+                        gameArea.add(squareFactory(margin + squareSize * j,
+                                squareSize * i - margin, squareSize, new int[]{0,0,0}));
+                    }
+
                 }
             }
         }
         gameArea.repaint();
     }
 
-    private JLabel squareFactory(int xPosition, int yPosition, int size) {
+    private JLabel squareFactory(int xPosition, int yPosition, int size, int[] color) {
         final JLabel square = new JLabel();
         square.setOpaque(true);
-        square.setBackground(Color.BLUE);
+        square.setBackground(new Color(color[0], color[1], color[2]));
         square.setBounds(xPosition, yPosition, size, size); // Initial position and size
         square.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         return square;
@@ -163,9 +194,56 @@ public class NormalGivenView extends JPanel {
         this.normalGivenController = normalGivenController;
     }
 
-//    public static void main(String[] args) {
-//        // Run the game screen layout
-//        SwingUtilities.invokeLater(GameScreen::new);
-//    }
+    private TimerTask regularExecution(){
+        return new TimerTask() {
+            @Override
+            public void run() {
+                normalGivenController.execute();
+                if (firstTime) {
+                    String imagePath = normalGivenViewModel.getImgAddress();
+                    ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
+                    firstTime = false;
+                }
+
+            }
+        };
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        final NormalGivenState normalGivenState = (NormalGivenState) evt.getNewValue();
+        if (normalGivenState.getGamingState().equals("playing")) {
+            timer.schedule(regularExecution(), timeDelay, timePeriod);
+            System.out.println("timer starts");
+        } else if (normalGivenState.getGamingState().equals("end")) {
+            timer.cancel();
+            System.out.println("timer ends");
+        }
+
+    }
+
+    public class CustomBackgroundPanel extends JPanel {
+        private BufferedImage backgroundImage;
+
+        public void setBackgroundImage(String imagePath) {
+            try {
+                backgroundImage = ImageIO.read(new File(imagePath));
+                repaint(); // Trigger repaint to apply the new background
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("Error loading background image: " + imagePath);
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (backgroundImage != null) {
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
+    }
+
 }
 

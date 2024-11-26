@@ -29,4 +29,12 @@ public interface NormalGivenDataAccessInterface {
     int[][] getTargetMap();
 
     void setTargetMap(int[][] targetMap);
+
+    void setImageAddress();
+
+    String getImageAddress();
+
+    void setCurrentGameLevel(int currentGameLevel);
+
+    int[][][] getColorMap();
 }
