@@ -18,7 +18,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     private boolean isGameOver;
 
-    private boolean isWin;
 
     private String imageAddress;
 
@@ -172,9 +171,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     public boolean getIsGameOver(){
         return isGameOver;
-    }
-    public boolean getIsWin(){
-        return isWin;
     }
 
     public void testingColorMap(){

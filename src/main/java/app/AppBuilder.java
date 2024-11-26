@@ -5,11 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingScenePresenter;
 import interface_adapter.EndingScene.EndingSceneViewModel;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
+import use_case.EndingScene.EndingSceneInteractor;
 import use_case.EndingScene.EndingSceneOutputBoundary;
 import view.EndingSceneView;
 import view.NormalGivenView;
@@ -79,7 +81,15 @@ public class AppBuilder {
         return this;
     }
     public AppBuilder addEndingSceneUseCase() {
-        final EndingSceneOutputBoundary presenter = new EndingScenePresenter(endingSceneViewModel);
+        final EndingSceneOutputBoundary endingScenePresenter = new EndingScenePresenter(endingSceneViewModel, viewModel);
+
+        final EndingSceneInteractor endingSceneInteractor = new EndingSceneInteractor(dataAccessObject, endingScenePresenter);
+
+        final EndingSceneController endingSceneController = new EndingSceneController(endingSceneInteractor);
+
+        endingSceneView.setEndingSceneController(endingSceneController);
+
+        return this;
     }
 
     /**

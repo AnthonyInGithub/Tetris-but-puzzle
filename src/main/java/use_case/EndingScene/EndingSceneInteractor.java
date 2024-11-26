@@ -16,7 +16,6 @@ public class EndingSceneInteractor implements EndingSceneInputBoundary{
     @Override
     public void execute(EndingSceneInputData inputData) {
         endingScenePresenter.execute(new EndingSceneOutputData
-                (inputData.isReturnClicked(), inputData.isSaveClicked(),
-                        endingSceneDataAccessObject.getIsWin()));
+                (inputData.isReturnClicked(), inputData.isSaveClicked()));
     }
 }

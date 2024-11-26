@@ -1,13 +1,13 @@
 package interface_adapter.EndingScene;
 
 public class EndingSceneState {
-    private String gamingState = "";
+    private boolean isWin;
 
-    public String getGamingState() {
-        return gamingState;
+    public boolean getIsWin(){
+        return isWin;
     }
 
-    public void setGamingState(String newGamingState) {
-        this.gamingState = newGamingState;
+    public void setWin(boolean win){
+        isWin = win;
     }
 }

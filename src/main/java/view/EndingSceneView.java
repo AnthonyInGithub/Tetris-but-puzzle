@@ -1,6 +1,8 @@
 package view;
 
+import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.NormalGiven.NormalGivenController;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
 
 import javax.swing.*;
@@ -18,6 +20,7 @@ public class EndingSceneView extends JPanel implements ActionListener {
     private final int WINDOW_WIDTH = 960;
     private final int WINDOW_HEIGHT = 540;
     private EndingSceneViewModel endingSceneViewModel;
+    private EndingSceneController endingSceneController;
 
 
     public EndingSceneView(EndingSceneViewModel endingSceneViewModel) {
@@ -67,6 +70,9 @@ public class EndingSceneView extends JPanel implements ActionListener {
         } else if (e.getSource() == button2) {
             System.out.println("Button 2 clicked");
         }
+    }
+    public void setEndingSceneController(EndingSceneController endingSceneController) {
+        this.endingSceneController = endingSceneController;
     }
 
     public static void main(String[] args) {

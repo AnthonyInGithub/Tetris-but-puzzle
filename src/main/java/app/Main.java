@@ -14,6 +14,7 @@ public class Main {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder.addEndingSceneView()
                                             .addNormalGivenView()
+                                            .addEndingSceneUseCase()
                                             .addNormalGivenUseCase()
                                             .build();
 
