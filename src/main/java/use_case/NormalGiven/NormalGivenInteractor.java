@@ -5,7 +5,7 @@ import entity.Entity;
 
 
 public class NormalGivenInteractor implements NormalGivenInputBoundary{
-    public final NormalGivenDataAccessInterface normalGivenDataAccessInterfaceObject;
+    public final NormalGivenDataAccessInterface normalGivenDataAccessObject;
     private final NormalGivenOutputBoundary normalGivenPresenter;
     private int[][] currentMap; //first index height, second index width. 10*22 in size
     //IMPORTANT: the outputMap is different from currentMap, where outputMap is 10*20 in size and current map is
@@ -32,10 +32,10 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     int x, y; //(0,0) position is in left top corner for map. the position that corresponds to x, y is at the top left of the shape.
 
 
-    public NormalGivenInteractor(NormalGivenDataAccessInterface normalGivenDataAccessInterfaceObject, NormalGivenOutputBoundary normalGivenPresenter) {
-        this.normalGivenDataAccessInterfaceObject = normalGivenDataAccessInterfaceObject;
+    public NormalGivenInteractor(NormalGivenDataAccessInterface normalGivenDataAccessObject, NormalGivenOutputBoundary normalGivenPresenter) {
+        this.normalGivenDataAccessObject = normalGivenDataAccessObject;
         this.normalGivenPresenter = normalGivenPresenter;
-        Entity currentEntity = normalGivenDataAccessInterfaceObject.getEntity();
+        Entity currentEntity = normalGivenDataAccessObject.getEntity();
         currentMap = currentEntity.getGameBoard();
 
         generateNewPiece();
@@ -43,15 +43,15 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
 
     public void execute(NormalGivenInputData normalGivenInputData){
-        Entity currentEntity = normalGivenDataAccessInterfaceObject.getEntity();
+        Entity currentEntity = normalGivenDataAccessObject.getEntity();
         currentMap = currentEntity.getGameBoard();
-        x = normalGivenDataAccessInterfaceObject.getX();
-        y = normalGivenDataAccessInterfaceObject.getY();
-        shapeMatrix = normalGivenDataAccessInterfaceObject.getShape(currentShapeState[0],currentShapeState[1]);
+        x = normalGivenDataAccessObject.getX();
+        y = normalGivenDataAccessObject.getY();
+        shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
         handleInput(normalGivenInputData); // for process WASD input
         pieceFall(); //calculate the new piece's position y change.
-        normalGivenDataAccessInterfaceObject.setX(x);
-        normalGivenDataAccessInterfaceObject.setY(y);
+        normalGivenDataAccessObject.setX(x);
+        normalGivenDataAccessObject.setY(y);
         if (!canMove(x, y + 1)) { // If piece can't fall further (I changed the code to use some helper functions instead)
             lockPieceInPlace();
             generateNewPiece();
@@ -140,7 +140,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         if (!canMove(x, y)) { // revert rotation if there's a collision
             currentShapeState[1] = originalRotation;
         }
-        shapeMatrix = normalGivenDataAccessInterfaceObject.getShape(currentShapeState[0],currentShapeState[1]);
+        shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
         System.out.println("x:" + x);
         System.out.println("y:" + y);
     }
@@ -163,7 +163,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
     // locks the current shape in place by updating currentMap with the shape cells
     private void lockPieceInPlace() {
-        int[][] shapeMatrix = normalGivenDataAccessInterfaceObject.getShape(currentShapeState[0],currentShapeState[1]);//
+        int[][] shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);//
         for (int i = 0; i < shapeMatrix.length; i++) {
             for (int j = 0; j < shapeMatrix[0].length; j++) {
                 if (shapeMatrix[i][j] != 0) {
@@ -172,7 +172,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             }
         }
 
-        normalGivenDataAccessInterfaceObject.updateMap(currentMap); // Save to DAO
+        normalGivenDataAccessObject.updateMap(currentMap); // Save to DAO
     }
     // clears any full lines in the currentMap and shifts rows down
     private void clearLines() {
@@ -198,7 +198,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
     // Checks if the current piece is out of bounds on the game map
     private boolean isOutOfBounds() {
-        int[][] shapeMatrix = normalGivenDataAccessInterfaceObject.getShape(currentShapeState[0], currentShapeState[1]);
+        int[][] shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0], currentShapeState[1]);
         for (int i = 0; i < shapeMatrix.length; i++) {
             for (int j = 0; j < shapeMatrix[0].length; j++) {
                 if (shapeMatrix[i][j] != 0) {
@@ -214,14 +214,14 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     // Generates a new game piece by interacting with the data access object.
     // Updates the current shape's state and coordinates (x, y).
     private void generateNewPiece() {
-        normalGivenDataAccessInterfaceObject.generateNewPiece();
-        currentShapeState = normalGivenDataAccessInterfaceObject.getCurrentShapeState();
+        normalGivenDataAccessObject.generateNewPiece();
+        currentShapeState = normalGivenDataAccessObject.getCurrentShapeState();
         if (isOutOfBounds()) {
             System.out.println("out of screen");
             normalGivenPresenter.gameOver();
         }
-        x = normalGivenDataAccessInterfaceObject.getX();
-        y = normalGivenDataAccessInterfaceObject.getY();
+        x = normalGivenDataAccessObject.getX();
+        y = normalGivenDataAccessObject.getY();
     }
 
     // Updates the y-coordinate to make the piece fall down one unit
@@ -248,7 +248,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
 
     private void checkTargetMap() {
-        int[][] targetMap = normalGivenDataAccessInterfaceObject.getTargetMap();
+        int[][] targetMap = normalGivenDataAccessObject.getTargetMap();
 
         if (outputMap == null || targetMap == null) {
             System.out.println("one of the maps is null. Similarity: 0%");

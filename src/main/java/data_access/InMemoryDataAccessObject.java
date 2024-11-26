@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessInterface {
+public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface {
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
@@ -71,7 +71,7 @@ public class InMemoryDataAccessInterfaceObject implements NormalGivenDataAccessI
     };
 
     // Constructor
-    public InMemoryDataAccessInterfaceObject() {
+    public InMemoryDataAccessObject() {
         this.entity = new Entity();
         testingColorMap();
         generateNewPiece();

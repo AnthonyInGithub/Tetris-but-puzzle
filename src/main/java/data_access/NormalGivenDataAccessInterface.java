@@ -37,4 +37,6 @@ public interface NormalGivenDataAccessInterface {
     void setCurrentGameLevel(int currentGameLevel);
 
     int[][][] getColorMap();
+
+    public boolean getIsGameOver();
 }
