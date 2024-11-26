@@ -1,11 +1,11 @@
 package use_case.NormalGiven;
 
-import data_access.InMemoryDataAccessObject;
+import data_access.NormalGivenDataAccessInterface;
 import entity.Entity;
 
 
 public class NormalGivenInteractor implements NormalGivenInputBoundary{
-    public final data_access.InMemoryDataAccessObject normalGivenDataAccessObject;
+    public final NormalGivenDataAccessInterface normalGivenDataAccessObject;
     private final NormalGivenOutputBoundary normalGivenPresenter;
     private int[][] currentMap; //first index height, second index width. 10*22 in size
     //IMPORTANT: the outputMap is different from currentMap, where outputMap is 10*20 in size and current map is
@@ -14,6 +14,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     private int[][] outputMap; //10*22 in size
 
     int[][] shapeMatrix;
+
+    boolean isGameOver = false;
 
     private int[] currentShapeState; //an array of length 2, where 0th position specify the type of shape, 1st specify the rotation state.
 
@@ -30,7 +32,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     int x, y; //(0,0) position is in left top corner for map. the position that corresponds to x, y is at the top left of the shape.
 
 
-    public NormalGivenInteractor(InMemoryDataAccessObject normalGivenDataAccessObject, NormalGivenOutputBoundary normalGivenPresenter) {
+    public NormalGivenInteractor(NormalGivenDataAccessInterface normalGivenDataAccessObject, NormalGivenOutputBoundary normalGivenPresenter) {
         this.normalGivenDataAccessObject = normalGivenDataAccessObject;
         this.normalGivenPresenter = normalGivenPresenter;
         Entity currentEntity = normalGivenDataAccessObject.getEntity();
@@ -54,14 +56,16 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             lockPieceInPlace();
             generateNewPiece();
             clearLines();
-
+            checkTargetMap();
         }
 
         updateCurrentMap();
         updateOutputMap();
 
 
-        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap));
+        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap,
+                normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(),
+                normalGivenDataAccessObject.getImageAddress(), normalGivenDataAccessObject.getIsGameOver()));
 
 
     }
@@ -213,6 +217,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         normalGivenDataAccessObject.generateNewPiece();
         currentShapeState = normalGivenDataAccessObject.getCurrentShapeState();
         if (isOutOfBounds()) {
+            System.out.println("out of screen");
             normalGivenPresenter.gameOver();
         }
         x = normalGivenDataAccessObject.getX();
@@ -224,7 +229,6 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         if (canMove(x, y + 1)) {
             y++;
         }
-        checkTargetMap();
     }
     // Updates the current game map to include the current piece's position.
     private void updateCurrentMap(){
@@ -264,6 +268,11 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             }
         }
         double similarityPercentage = ((double) matchingCells / totalCells) * 100;
+        if (similarityPercentage>50){
+            isGameOver = true;
+            System.out.println("Similarity: " + similarityPercentage + "%");
+            normalGivenPresenter.gameOver();
+        }
         System.out.printf("The output map matches the target map by %.2f%%.%n", similarityPercentage);
     }
 }

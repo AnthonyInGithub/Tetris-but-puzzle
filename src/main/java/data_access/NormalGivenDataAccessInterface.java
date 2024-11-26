@@ -4,7 +4,7 @@ import entity.Entity;
 /**
  * Interface for accessing and modifying the game state and shapes.
  */
-public interface NormalGivenDataAccess {
+public interface NormalGivenDataAccessInterface {
     // Current piece information
     int[] getCurrentShapeState(); // [shapeType, rotationState]
     void setCurrentShapeState(int[] currentShapeState);
@@ -29,4 +29,14 @@ public interface NormalGivenDataAccess {
     int[][] getTargetMap();
 
     void setTargetMap(int[][] targetMap);
+
+    void setImageAddress();
+
+    String getImageAddress();
+
+    void setCurrentGameLevel(int currentGameLevel);
+
+    int[][][] getColorMap();
+
+    public boolean getIsGameOver();
 }

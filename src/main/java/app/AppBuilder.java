@@ -12,7 +12,7 @@ import view.NormalGivenView;
 import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
-import interface_adapter.NormalGiven.ViewModel;
+import interface_adapter.NormalGiven.NormalGivenViewModel;
 
 /**
  * The AppBuilder class is responsible for assembling and configuring
@@ -26,7 +26,7 @@ public class AppBuilder {
 
     // Core components
     private final InMemoryDataAccessObject dataAccessObject = new InMemoryDataAccessObject();
-    private final ViewModel viewModel = new ViewModel();
+    private final NormalGivenViewModel viewModel = new NormalGivenViewModel();
 
     // Views
     private NormalGivenView normalGivenView;

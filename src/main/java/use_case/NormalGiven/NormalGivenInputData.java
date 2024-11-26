@@ -90,4 +90,5 @@ public class NormalGivenInputData {
     public boolean isAnyKeyPressed() {
         return isWPressed || isAPressed || isSPressed || isDPressed;
     }
+
 }

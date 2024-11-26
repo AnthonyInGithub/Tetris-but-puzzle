@@ -16,4 +16,5 @@ public interface NormalGivenOutputBoundary {
      * Informs the Presenter that the game is over.
      */
     void gameOver();
+    void gameSucceeded();
 }
