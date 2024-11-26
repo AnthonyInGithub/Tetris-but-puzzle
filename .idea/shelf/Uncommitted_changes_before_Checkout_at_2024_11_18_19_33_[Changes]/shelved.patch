@@ -1,0 +1,44 @@
+Index: src/main/java/view/NormalGivenView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.border.Border;\r\nimport java.awt.*;\r\nimport java.awt.event.ActionEvent;\r\n\r\nimport interface_adapter.NormalGiven.NormalGivenController;\r\nimport interface_adapter.NormalGiven.ViewModel;\r\n\r\npublic class NormalGivenView extends JPanel {\r\n\r\n    private JPanel gameArea;\r\n    private JPanel sideArea;\r\n    private final int widowWidth = 515;\r\n    private final int widowHeight = 635;\r\n    private final int gameAreaWidth = 300;\r\n    private final int gameAreaHeight = 600;\r\n    private final int sideAreaWidth = 200;\r\n    private final int sideAreaHeight = 400;\r\n    private ViewModel normalGivenViewModel;\r\n    private NormalGivenController normalGivenController;\r\n    private final int squareSize = 30;\r\n    private final int margin = 5;\r\n\r\n    public NormalGivenView(ViewModel normalGivenViewModel) {\r\n        // Set the title and default close operation\r\n        this.normalGivenViewModel = normalGivenViewModel;\r\n        // setTitle(\"Game Screen Layout\");\r\n        // setDefaultCloseOperation(JPanel.EXIT_ON_CLOSE);\r\n        setSize(widowWidth, widowHeight);\r\n\r\n        // Set the layout for the main frame\r\n        setLayout(new BorderLayout());\r\n\r\n// Create a topPanel to hold gameArea and sideArea\r\n        JPanel topPanel = new JPanel(new BorderLayout());\r\n\r\n// Create a left-aligned panel to hold gameArea\r\n        JPanel gameAreaWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));\r\n        final Border redline = BorderFactory.createLineBorder(Color.red);\r\n        gameArea = new JPanel();\r\n        gameArea.setBackground(Color.BLACK);\r\n        gameArea.setPreferredSize(new Dimension(gameAreaWidth, gameAreaHeight));\r\n        gameArea.setBorder(redline);\r\n        gameAreaWrapper.add(gameArea);  // Add gameArea to the left-aligned wrapper\r\n        topPanel.add(gameAreaWrapper, BorderLayout.WEST);  // Add wrapper to topPanel\r\n\r\n// Create a right-aligned panel to hold sideArea\r\n        JPanel sideAreaWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));\r\n        final Border yellowline = BorderFactory.createLineBorder(Color.yellow);\r\n        sideArea = new JPanel();\r\n        sideArea.setBackground(Color.GRAY);\r\n        sideArea.setPreferredSize(new Dimension(sideAreaWidth, sideAreaHeight));\r\n        sideArea.setBorder(yellowline);\r\n        sideAreaWrapper.add(sideArea);  // Add sideArea to the right-aligned wrapper\r\n        topPanel.add(sideAreaWrapper, BorderLayout.EAST);  // Add wrapper to topPanel\r\n\r\n// Add topPanel to the main frame at the top (NORTH)\r\n        add(topPanel, BorderLayout.NORTH);\r\n\r\n        setupKeyBindings();\r\n\r\n        // Make the frame visible\r\n        setVisible(true);\r\n    }\r\n\r\n    public void setupKeyBindings() {\r\n        /*\r\n        setup listeners for W A S D\r\n        */\r\n        final InputMap inputMap = gameArea.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);\r\n        final ActionMap actionMap = gameArea.getActionMap();\r\n\r\n        inputMap.put(KeyStroke.getKeyStroke(\"W\"), \"keyWPressed\");\r\n        actionMap.put(\"keyWPressed\", new AbstractAction() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                // Action to perform when \"B\" is pressed\r\n                // NormalGivenController executes based on this key\r\n                System.out.println(\"W\");\r\n                normalGivenController.execute(true, false, false, false);\r\n                draw();\r\n            }\r\n        });\r\n\r\n        inputMap.put(KeyStroke.getKeyStroke(\"A\"), \"keyAPressed\");\r\n        actionMap.put(\"keyAPressed\", new AbstractAction() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                // Action to perform when \"A\" is pressed\r\n                // NormalGivenController executes based on this key\r\n                System.out.println(\"A\");\r\n                normalGivenController.execute(false, true, false, false);\r\n                draw();\r\n            }\r\n        });\r\n\r\n        inputMap.put(KeyStroke.getKeyStroke(\"S\"), \"keySPressed\");\r\n        actionMap.put(\"keySPressed\", new AbstractAction() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                // Action to perform when \"S\" is pressed\r\n                // NormalGivenController executes based on this key\r\n                System.out.println(\"S\");\r\n                normalGivenController.execute(false, false, true, false);\r\n                draw();\r\n            }\r\n        });\r\n\r\n        inputMap.put(KeyStroke.getKeyStroke(\"D\"), \"keyDPressed\");\r\n        actionMap.put(\"keyDPressed\", new AbstractAction() {\r\n            @Override\r\n            public void actionPerformed(ActionEvent e) {\r\n                // Action to perform when \"D\" is pressed\r\n                // NormalGivenController executes based on this key\r\n                System.out.println(\"D\");\r\n                normalGivenController.execute(false, false, false, true);\r\n                draw();\r\n            }\r\n        });\r\n    }\r\n    /*\r\n    private void draw(ViewModel v) {\r\n        currentMap = v.getMap();\r\n        for (int i = 0; i < currentMap.length(); i++) {\r\n\r\n            for (int j = 0; j < currentMap[0].length; j++) {\r\n                if (currentMap[i][j] == 1) {\r\n                    gameArea.add(squareFactory(squareSize * i, squareSize * j, squareSize));\r\n                }\r\n            }\r\n        }\r\n        gameArea.repaint();\r\n    }\r\n     */\r\n    private void draw() {\r\n        int[][] currentMap = normalGivenViewModel.getMap();\r\n\r\n        for (int i = 0; i < currentMap.length; i++) {\r\n\r\n            for (int j = 0; j < currentMap[0].length; j++) {\r\n                if (currentMap[i][j] == 1) {\r\n                    gameArea.add(squareFactory(margin + squareSize * j,\r\n                            squareSize * i - margin, squareSize));\r\n                }\r\n            }\r\n        }\r\n        gameArea.repaint();\r\n    }\r\n\r\n    private JLabel squareFactory(int xPosition, int yPosition, int size) {\r\n        final JLabel square = new JLabel();\r\n        square.setOpaque(true);\r\n        square.setBackground(Color.BLUE);\r\n        square.setBounds(xPosition, yPosition, size, size); // Initial position and size\r\n        square.setBorder(BorderFactory.createLineBorder(Color.GREEN));\r\n        return square;\r\n    }\r\n\r\n    public void setNormalGivenController(NormalGivenController normalGivenController) {\r\n        this.normalGivenController = normalGivenController;\r\n    }\r\n\r\n//    public static void main(String[] args) {\r\n//        // Run the game screen layout\r\n//        SwingUtilities.invokeLater(GameScreen::new);\r\n//    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/view/NormalGivenView.java b/src/main/java/view/NormalGivenView.java
+--- a/src/main/java/view/NormalGivenView.java	(revision f7cd00be9ce216e666cc81261e91343f6332bc16)
++++ b/src/main/java/view/NormalGivenView.java	(date 1731976363701)
+@@ -120,21 +120,10 @@
+             }
+         });
+     }
+-    /*
+-    private void draw(ViewModel v) {
+-        currentMap = v.getMap();
+-        for (int i = 0; i < currentMap.length(); i++) {
+ 
+-            for (int j = 0; j < currentMap[0].length; j++) {
+-                if (currentMap[i][j] == 1) {
+-                    gameArea.add(squareFactory(squareSize * i, squareSize * j, squareSize));
+-                }
+-            }
+-        }
+-        gameArea.repaint();
+-    }
+-     */
+     private void draw() {
++        gameArea.removeAll();
++
+         int[][] currentMap = normalGivenViewModel.getMap();
+ 
+         for (int i = 0; i < currentMap.length; i++) {
+@@ -162,9 +151,5 @@
+         this.normalGivenController = normalGivenController;
+     }
+ 
+-//    public static void main(String[] args) {
+-//        // Run the game screen layout
+-//        SwingUtilities.invokeLater(GameScreen::new);
+-//    }
+ }
+ 
