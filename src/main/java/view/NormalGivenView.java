@@ -41,7 +41,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         this.normalGivenViewModel = normalGivenViewModel;
         this.normalGivenViewModel.addPropertyChangeListener(this);
         timer = new Timer();
-        setSize(widowWidth, widowHeight);
+        setPreferredSize(new Dimension(gameAreaWidth, gameAreaHeight));
         // Set the layout for the main frame
         setLayout(new BorderLayout());
         // normalGivenController.execute();
@@ -82,7 +82,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         setupKeyBindings();
 
         // Make the frame visible
-        setVisible(true);
+        //setVisible(true);
     }
 
     public void setupKeyBindings() {

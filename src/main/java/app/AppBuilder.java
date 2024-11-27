@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import data_access.FileDataAccessObject;
 import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingScenePresenter;
 import interface_adapter.EndingScene.EndingSceneViewModel;
@@ -33,12 +34,13 @@ public class AppBuilder {
     private final CardLayout cardLayout = new CardLayout();
 
     private ViewManagerModel viewManagerModel = new ViewManagerModel();
-    private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
+    private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel, null);
 
     // Core components
     private final InMemoryDataAccessObject dataAccessObject = new InMemoryDataAccessObject();
-    private final NormalGivenViewModel viewModel = new NormalGivenViewModel();
+    private final FileDataAccessObject fileAccessObject = new FileDataAccessObject();
 
+    private final NormalGivenViewModel viewModel = new NormalGivenViewModel();
     private final EndingSceneViewModel endingSceneViewModel = new EndingSceneViewModel();
 
     // Views
@@ -73,10 +75,10 @@ public class AppBuilder {
      */
     public AppBuilder addNormalGivenUseCase() {
         // Step 1: Initialize Presenter
-        final NormalGivenOutputBoundary presenter = new NormalGivenPresenter(viewModel);
+        final NormalGivenOutputBoundary presenter = new NormalGivenPresenter(viewManagerModel, viewModel, endingSceneViewModel);
 
         // Step 2: Initialize Interactor
-        final NormalGivenInputBoundary interactor = new NormalGivenInteractor(dataAccessObject, presenter);
+        final NormalGivenInputBoundary interactor = new NormalGivenInteractor(dataAccessObject, presenter, normalGivenView);
 
         // Step 3: Initialize Controller
         final NormalGivenController controller = new NormalGivenController(interactor);
@@ -88,7 +90,7 @@ public class AppBuilder {
     public AppBuilder addEndingSceneUseCase() {
         final EndingSceneOutputBoundary endingScenePresenter = new EndingScenePresenter(endingSceneViewModel, viewModel, viewManagerModel);
 
-        final EndingSceneInteractor endingSceneInteractor = new EndingSceneInteractor(dataAccessObject, endingScenePresenter);
+        final EndingSceneInteractor endingSceneInteractor = new EndingSceneInteractor(dataAccessObject, endingScenePresenter, fileAccessObject);
 
         final EndingSceneController endingSceneController = new EndingSceneController(endingSceneInteractor);
 
@@ -109,6 +111,9 @@ public class AppBuilder {
         application.add(cardPanel);
         // Set the initial view
         cardLayout.show(cardPanel, endingSceneView.getViewName());
+
+        //this allows us to change the windows size later
+        viewManager.setJFrame(application);
 
         return application;
     }

@@ -18,6 +18,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     private boolean isGameOver;
 
+    BufferedImage endGameScreenShot;
 
     private String imageAddress;
 
@@ -165,12 +166,30 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     public void setTargetMap(int[][] targetMap){
         this.targetMap = targetMap;
     }
+
     public int[][] getTargetMap(){
         return targetMap;
     }
 
     public boolean getIsGameOver(){
         return isGameOver;
+    }
+
+    public BufferedImage getEndGameScreenShot(){
+        return endGameScreenShot;
+    }
+
+    @Override
+    public int getNumberOfSavedImages() {
+        return 0;
+    }
+
+    @Override
+    public void setNumberOfSavedImages(int numberOfSavedImages) {
+    }
+
+    public void setEndGameScreenShot(BufferedImage endGameScreenShot){
+        this.endGameScreenShot = endGameScreenShot;
     }
 
     public void testingColorMap(){

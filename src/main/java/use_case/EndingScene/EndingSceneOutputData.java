@@ -2,15 +2,15 @@ package use_case.EndingScene;
 
 public class EndingSceneOutputData {
     private final boolean isReturnClicked;
-    private final boolean isSaveClicked;
-    public EndingSceneOutputData(boolean isReturnClicked, boolean isSaveClicked) {
+    private final boolean isSaveSuccess;
+    public EndingSceneOutputData(boolean isReturnClicked, boolean isSaveSuccess) {
         this.isReturnClicked = isReturnClicked;
-        this.isSaveClicked = isSaveClicked;
+        this.isSaveSuccess = isSaveSuccess;
     }
     public boolean getIsReturnClicked() {
         return isReturnClicked;
     }
-    public boolean getIsSaveClicked() {
-        return isSaveClicked;
+    public boolean getIsSaveSuccess() {
+        return isSaveSuccess;
     }
 }

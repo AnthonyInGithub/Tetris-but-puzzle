@@ -10,6 +10,7 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
     private EndingSceneViewModel endingSceneViewModel;
     private NormalGivenViewModel normalGivenViewModel;
     private ViewManagerModel viewManagerModel;
+
     /**
      * Constructor for the Presenter.
      *
@@ -23,6 +24,9 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
 
     @Override
     public void execute(EndingSceneOutputData endingSceneOutputData) {
+        if(endingSceneOutputData.getIsSaveSuccess()){
+            endingSceneViewModel.setSavedSuccess(endingSceneOutputData.getIsSaveSuccess());
+        }
         if(endingSceneOutputData.getIsReturnClicked()) {
             final NormalGivenState normalGivenState = normalGivenViewModel.getState();
             // This set the data needed at the start of next view
@@ -31,10 +35,8 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
             // This cause the change of scene
             viewManagerModel.setState(normalGivenViewModel.getViewName());
             viewManagerModel.firePropertyChanged();
-
-
-
         }
+
     }
 
 

@@ -2,8 +2,6 @@ package view;
 
 import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingSceneViewModel;
-import interface_adapter.NormalGiven.NormalGivenController;
-import interface_adapter.NormalGiven.NormalGivenViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,12 +15,13 @@ public class EndingSceneView extends JPanel implements ActionListener {
 
     private final String viewName = "EndingSceneView";
 
-    private final JButton button1;
-    private final JButton button2;
+    private final JButton saveButton;
+    private final JButton returnButton;
     private final int WINDOW_WIDTH = 960;
     private final int WINDOW_HEIGHT = 540;
     private EndingSceneViewModel endingSceneViewModel;
     private EndingSceneController endingSceneController;
+
 
 
     public EndingSceneView(EndingSceneViewModel endingSceneViewModel) {
@@ -49,17 +48,17 @@ public class EndingSceneView extends JPanel implements ActionListener {
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Create Button 1
-        button1 = new JButton(new ImageIcon(scaledImage));
-        button1.addActionListener(this);
-        buttonPanel.add(button1);
+        saveButton = new JButton(new ImageIcon(scaledImage));
+        saveButton.addActionListener(this);
+        buttonPanel.add(saveButton);
 
         // Add spacing between buttons
         buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         // Create Button 2
-        button2 = new JButton("Button 2");
-        button2.addActionListener(this);
-        buttonPanel.add(button2);
+        returnButton = new JButton("Button 2");
+        returnButton.addActionListener(this);
+        buttonPanel.add(returnButton);
 
         // Add the button panel
         add(buttonPanel);
@@ -67,22 +66,31 @@ public class EndingSceneView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button1) {
-            endingSceneController.execute(true, true);
-        } else if (e.getSource() == button2) {
-            System.out.println("Button 2 clicked");
+        if (e.getSource() == saveButton) {
+            endingSceneController.execute(true, false);
+            checkSaveSuccess();
+        } else if (e.getSource() == returnButton) {
+            endingSceneController.execute(false, true);
+            resetSaveButton();
         }
     }
     public void setEndingSceneController(EndingSceneController endingSceneController) {
         this.endingSceneController = endingSceneController;
     }
 
-    public static void main(String[] args) {
-        //SwingUtilities.invokeLater(EndingSceneView::new);
-    }
     public String getViewName() {
         return viewName;
     }
+
+    private void checkSaveSuccess() {
+        if (endingSceneViewModel.getSavedSuccess()) {
+            saveButton.setEnabled(false);
+        }
+    }
+    private void resetSaveButton() {
+        saveButton.setEnabled(true);
+    }
+
 
 
 }
