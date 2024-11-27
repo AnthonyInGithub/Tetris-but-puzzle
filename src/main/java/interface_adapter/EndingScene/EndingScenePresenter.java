@@ -29,7 +29,8 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
             normalGivenViewModel.setState(normalGivenState);
 
             // This cause the change of scene
-
+            viewManagerModel.setState(normalGivenViewModel.getViewName());
+            viewManagerModel.firePropertyChanged();
 
 
 

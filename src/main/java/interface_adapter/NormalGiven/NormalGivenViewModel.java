@@ -13,7 +13,7 @@ public class NormalGivenViewModel extends ViewModelMain<NormalGivenState> {
     private int[][][] colorMap;
     private String imgAddress;
     public NormalGivenViewModel() {
-        super("NormalGiven");
+        super("NormalGivenView");
         setState(new NormalGivenState());
     }
     public void setMap(int[][] map) {

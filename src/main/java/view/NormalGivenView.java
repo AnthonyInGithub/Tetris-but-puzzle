@@ -9,7 +9,6 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.beans.PropertyChangeEvent;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import java.util.Timer;
@@ -20,6 +19,8 @@ import interface_adapter.NormalGiven.NormalGivenViewModel;
 import interface_adapter.NormalGiven.NormalGivenState;
 
 public class NormalGivenView extends JPanel implements PropertyChangeListener {
+
+    private final String viewName = "NormalGivenView";
 
     private JPanel gameArea;
     private final int widowWidth = 515;
@@ -243,6 +244,9 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         }
+    }
+    public String getViewName(){
+        return viewName;
     }
 
 }

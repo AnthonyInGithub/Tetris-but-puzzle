@@ -4,7 +4,7 @@ import interface_adapter.NormalGiven.ViewModelMain;
 
 public class EndingSceneViewModel extends ViewModelMain<EndingSceneState> {
     public EndingSceneViewModel() {
-        super("EndingScene");
+        super("EndingSceneView");
         setState(new EndingSceneState());
     }
 }

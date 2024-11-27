@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
  */
 public class EndingSceneView extends JPanel implements ActionListener {
 
+    private final String viewName = "EndingSceneView";
+
     private final JButton button1;
     private final JButton button2;
     private final int WINDOW_WIDTH = 960;
@@ -66,7 +68,7 @@ public class EndingSceneView extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button1) {
-            System.out.println("Button 1 clicked");
+            endingSceneController.execute(true, true);
         } else if (e.getSource() == button2) {
             System.out.println("Button 2 clicked");
         }
@@ -78,5 +80,9 @@ public class EndingSceneView extends JPanel implements ActionListener {
     public static void main(String[] args) {
         //SwingUtilities.invokeLater(EndingSceneView::new);
     }
+    public String getViewName() {
+        return viewName;
+    }
+
 
 }

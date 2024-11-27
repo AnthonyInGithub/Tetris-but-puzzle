@@ -11,6 +11,7 @@ import interface_adapter.EndingScene.EndingSceneViewModel;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
+import interface_adapter.NormalGiven.ViewManagerModel;
 import use_case.EndingScene.EndingSceneInteractor;
 import use_case.EndingScene.EndingSceneOutputBoundary;
 import view.EndingSceneView;
@@ -19,6 +20,7 @@ import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
+import view.ViewManager;
 
 /**
  * The AppBuilder class is responsible for assembling and configuring
@@ -29,6 +31,9 @@ public class AppBuilder {
     // CardLayout and JPanel for managing multiple views
     private final JPanel cardPanel = new JPanel();
     private final CardLayout cardLayout = new CardLayout();
+
+    private ViewManagerModel viewManagerModel = new ViewManagerModel();
+    private ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     // Core components
     private final InMemoryDataAccessObject dataAccessObject = new InMemoryDataAccessObject();
@@ -52,12 +57,12 @@ public class AppBuilder {
     public AppBuilder addNormalGivenView() {
         // Initialize the NormalGivenView
         normalGivenView = new NormalGivenView(viewModel); // Controller will be set later
-        cardPanel.add(normalGivenView, "NormalGivenView");
+        cardPanel.add(normalGivenView, normalGivenView.getViewName());
         return this;
     }
     public AppBuilder addEndingSceneView(){
         endingSceneView = new EndingSceneView(endingSceneViewModel);
-        cardPanel.add(endingSceneView, "EndingSceneView");
+        cardPanel.add(endingSceneView, endingSceneView.getViewName());
         return this;
     }
 
@@ -81,7 +86,7 @@ public class AppBuilder {
         return this;
     }
     public AppBuilder addEndingSceneUseCase() {
-        final EndingSceneOutputBoundary endingScenePresenter = new EndingScenePresenter(endingSceneViewModel, viewModel);
+        final EndingSceneOutputBoundary endingScenePresenter = new EndingScenePresenter(endingSceneViewModel, viewModel, viewManagerModel);
 
         final EndingSceneInteractor endingSceneInteractor = new EndingSceneInteractor(dataAccessObject, endingScenePresenter);
 
@@ -103,7 +108,7 @@ public class AppBuilder {
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         application.add(cardPanel);
         // Set the initial view
-        cardLayout.show(cardPanel, "EndingSceneView");
+        cardLayout.show(cardPanel, endingSceneView.getViewName());
 
         return application;
     }
