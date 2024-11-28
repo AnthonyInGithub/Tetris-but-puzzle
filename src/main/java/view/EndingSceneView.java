@@ -22,6 +22,11 @@ public class EndingSceneView extends JPanel implements ActionListener {
     private EndingSceneViewModel endingSceneViewModel;
     private EndingSceneController endingSceneController;
 
+    private final int BUTTON_WIDTH = 180;
+    private final int BUTTON_HEIGHT = 75;
+
+    private final Image backgroundImage;
+
 
 
     public EndingSceneView(EndingSceneViewModel endingSceneViewModel) {
@@ -31,37 +36,58 @@ public class EndingSceneView extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        // Create an image label
-        JLabel imageLabel = new JLabel();
-        ImageIcon originalImage = new ImageIcon("images/GUI.png");
-        Image scaledImage = originalImage.getImage().getScaledInstance(300, 150, Image.SCALE_SMOOTH);
-        imageLabel.setIcon(new ImageIcon(scaledImage));
-        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(imageLabel);
+        // setup background image
+        backgroundImage = new ImageIcon("images/EndingSceneBackground.png").getImage();
 
-        // Add spacing
-        add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // adjust vertical padding
+        add(Box.createRigidArea(new Dimension(0, 300)));
+
 
         // Create a panel for buttons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.setOpaque(false);
+
+        buttonPanel.add(Box.createRigidArea(new Dimension(75, 0))); // Adjust horizontal padding
+
 
         // Create Button 1
-        saveButton = new JButton(new ImageIcon(scaledImage));
+        saveButton = createButtonWithImage("images/ButtonSave.png", BUTTON_WIDTH,BUTTON_HEIGHT);
         saveButton.addActionListener(this);
         buttonPanel.add(saveButton);
 
         // Add spacing between buttons
-        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Create Button 2
-        returnButton = new JButton("Button 2");
+        returnButton = createButtonWithImage("images/ButtonReturn.png", BUTTON_WIDTH,BUTTON_HEIGHT);
         returnButton.addActionListener(this);
         buttonPanel.add(returnButton);
 
         // Add the button panel
         add(buttonPanel);
+
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Paint the panel's components
+
+        // Draw the background image, scaled to fill the panel
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+    private JButton createButtonWithImage(String imagePath, int buttonWidth, int buttonHeight) {
+        ImageIcon icon = new ImageIcon(new ImageIcon(imagePath).getImage()
+                .getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
+        JButton button = new JButton(icon);
+        button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        button.setMaximumSize(new Dimension(buttonWidth, buttonHeight));
+        button.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
+        button.setContentAreaFilled(false); // Make the button area transparent
+        button.setBorderPainted(false); // Remove button border
+        button.setFocusPainted(false); // Remove focus border
+        return button;
     }
 
     @Override
