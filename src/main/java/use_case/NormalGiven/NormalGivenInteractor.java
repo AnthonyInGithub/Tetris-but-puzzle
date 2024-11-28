@@ -66,7 +66,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
         normalGivenPresenter.execute(new NormalGivenOutputData(outputMap,
                 normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(),
-                normalGivenDataAccessObject.getImageAddress(), normalGivenDataAccessObject.getIsGameOver()));
+                normalGivenDataAccessObject.getImageAddress()));
         //This allows the view to update before we saved the end game screenshot
         checkTargetMap();
 

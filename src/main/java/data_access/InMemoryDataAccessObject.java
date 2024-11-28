@@ -16,8 +16,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     private int[][] targetMap;
 
-    private boolean isGameOver;
-
     BufferedImage endGameScreenShot;
 
     private String imageAddress;
@@ -76,7 +74,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     // Constructor
     public InMemoryDataAccessObject() {
         this.entity = new Entity();
-        testingColorMap();
+        setColorMapAndBinaryMap();
         generateNewPiece();
     }
 
@@ -136,7 +134,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     @Override
     public void setImageAddress() {
         if(current_level == 1){
-            imageAddress = "images/sampleLevel1.png";
+            imageAddress = "images/level1.png";
         }
         if(current_level == 2){
             imageAddress = "images/level2.png";
@@ -171,10 +169,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         return targetMap;
     }
 
-    public boolean getIsGameOver(){
-        return isGameOver;
-    }
-
     public BufferedImage getEndGameScreenShot(){
         return endGameScreenShot;
     }
@@ -192,11 +186,14 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         this.endGameScreenShot = endGameScreenShot;
     }
 
-    public void testingColorMap(){
+
+    public void setColorMapAndBinaryMap(){
         {
             try {
                 // Resize the image to 10x20 using Thumbnailator
-                BufferedImage resizedImage = Thumbnails.of(new File("images/sampleLevel1.png"))
+                current_level = 1;
+                setImageAddress();
+                BufferedImage resizedImage = Thumbnails.of(new File(imageAddress))
                         .forceSize(10, 20)
                         .asBufferedImage();
 
@@ -242,9 +239,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                     }
                     System.out.println();
                 }
-                current_level = 1;
                 setTargetMap(binaryArray);
-                setImageAddress();
 
             } catch (IOException e) {
                 e.printStackTrace();

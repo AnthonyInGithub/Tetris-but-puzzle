@@ -42,7 +42,5 @@ public interface NormalGivenDataAccessInterface {
 
     int[][][] getColorMap();
 
-    public boolean getIsGameOver();
-
     void setEndGameScreenShot(BufferedImage endgameScreenShot);
 }

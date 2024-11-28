@@ -9,13 +9,12 @@ public class NormalGivenOutputData {
     private final int[][] solutionMap;
     private final int[][][] colorMap;
     private final String ImgAddress;
-    private final boolean isGameOver;
     /**
      * Constructor for NormalGivenOutputData.
      *
      * @param map the updated game board
      */
-    public NormalGivenOutputData(int[][] map, int[][] solutionMap, int[][][] colorMap, String ImgAddress, boolean isGameOver) {
+    public NormalGivenOutputData(int[][] map, int[][] solutionMap, int[][][] colorMap, String ImgAddress) {
 
         if (map == null || solutionMap == null || colorMap == null || ImgAddress == null){
             throw new IllegalArgumentException("map/solutionMap cannot be null");
@@ -24,7 +23,6 @@ public class NormalGivenOutputData {
         this.solutionMap = solutionMap;
         this.colorMap = colorMap;
         this.ImgAddress = ImgAddress;
-        this.isGameOver = isGameOver;
     }
 
     /**
@@ -43,8 +41,5 @@ public class NormalGivenOutputData {
     }
     public String getImgAddress() {
         return ImgAddress;
-    }
-    public boolean getIsGameOver() {
-        return isGameOver;
     }
 }
