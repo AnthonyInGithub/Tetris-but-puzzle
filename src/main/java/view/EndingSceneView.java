@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.EndingScene.EndingSceneController;
+import interface_adapter.EndingScene.EndingSceneState;
 import interface_adapter.EndingScene.EndingSceneViewModel;
 
 import javax.swing.*;
@@ -39,9 +40,31 @@ public class EndingSceneView extends JPanel implements ActionListener {
         // setup background image
         backgroundImage = new ImageIcon("images/EndingSceneBackground.png").getImage();
 
+        // padding at the top
+        add(Box.createRigidArea(new Dimension(0, 177)));
+
+        // set ending game text
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.X_AXIS));
+        textPanel.setOpaque(false);
+        EndingSceneState endingSceneState = endingSceneViewModel.getState();
+        String displayText;
+        if(endingSceneState.getIsWin()) {
+            displayText = "WIN";
+        }else{
+            displayText = "LOSE";
+        }
+        JLabel titleLabel = new JLabel(displayText); // Example text
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Set font to bold and size to 36
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setForeground(Color.WHITE); // Adjust color if needed
+        textPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        textPanel.add(titleLabel);
+        add(textPanel);
+
 
         // adjust vertical padding
-        add(Box.createRigidArea(new Dimension(0, 300)));
+        add(Box.createRigidArea(new Dimension(0, 50)));
 
 
         // Create a panel for buttons
