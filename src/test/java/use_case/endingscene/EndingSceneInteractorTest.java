@@ -15,7 +15,7 @@ import java.io.File;
 
 import static org.junit.Assert.*;
 
-public class endingSceneInteractorTest {
+public class EndingSceneInteractorTest {
 
     @Test
     public void saveSuccessTest(){
