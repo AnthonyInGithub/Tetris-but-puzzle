@@ -2,6 +2,7 @@ package interface_adapter.NormalGiven;
 
 import interface_adapter.EndingScene.EndingSceneState;
 import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.NormalGiven.NormalGivenState;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import use_case.NormalGiven.NormalGivenOutputData;
 
@@ -52,6 +53,11 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         EndingSceneState endingSceneState = endingSceneViewModel.getState();
         endingSceneState.setWin(success);
         endingSceneViewModel.setState(endingSceneState);
+
+        NormalGivenState normalGivenState = normalGivenViewModel.getState();
+        normalGivenState.setGamingState("end");
+        normalGivenViewModel.setState(normalGivenState);
+        normalGivenViewModel.firePropertyChanged();
 
         viewManagerModel.setState(endingSceneViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

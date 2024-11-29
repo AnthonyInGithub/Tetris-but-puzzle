@@ -31,6 +31,7 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
             final NormalGivenState normalGivenState = normalGivenViewModel.getState();
             // This set the data needed at the start of next view
             normalGivenViewModel.setState(normalGivenState);
+            normalGivenViewModel.firePropertyChanged();
 
             // This cause the change of scene
             viewManagerModel.setState(normalGivenViewModel.getViewName());
