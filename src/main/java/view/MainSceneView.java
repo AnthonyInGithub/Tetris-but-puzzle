@@ -213,7 +213,6 @@ public class MainSceneView {
     }
 
     /**
-     * Creates a JButton with an image icon and optional hover effect.
      *
      * @param iconPath       Path to the default button image.
      * @param x              The x-coordinate of the button.
