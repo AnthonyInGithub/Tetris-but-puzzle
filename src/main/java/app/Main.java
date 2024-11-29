@@ -14,8 +14,10 @@ public class Main {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder.addEndingSceneView()
                                             .addNormalGivenView()
+                                            .addHistoryView()
                                             .addEndingSceneUseCase()
                                             .addNormalGivenUseCase()
+                                            .addHistoryUseCase()
                                             .build();
 
         //appBuilder.TestingSwtich();

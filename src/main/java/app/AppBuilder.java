@@ -9,13 +9,19 @@ import data_access.FileDataAccessObject;
 import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingScenePresenter;
 import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.History.HistoryController;
+import interface_adapter.History.HistoryViewModel;
+import interface_adapter.History.HistoryPresenter;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
 import interface_adapter.NormalGiven.ViewManagerModel;
 import use_case.EndingScene.EndingSceneInteractor;
 import use_case.EndingScene.EndingSceneOutputBoundary;
+import use_case.History.HistoryInterator;
+import use_case.History.HistoryOutputBoundary;
 import view.EndingSceneView;
+import view.HistoryView;
 import view.NormalGivenView;
 import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
@@ -42,10 +48,12 @@ public class AppBuilder {
 
     private final NormalGivenViewModel viewModel = new NormalGivenViewModel();
     private final EndingSceneViewModel endingSceneViewModel = new EndingSceneViewModel();
+    private final HistoryViewModel historyViewModel = new HistoryViewModel();
 
     // Views
     private NormalGivenView normalGivenView;
     private EndingSceneView endingSceneView;
+    private HistoryView historyView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -65,6 +73,12 @@ public class AppBuilder {
     public AppBuilder addEndingSceneView(){
         endingSceneView = new EndingSceneView(endingSceneViewModel);
         cardPanel.add(endingSceneView, endingSceneView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addHistoryView(){
+        historyView = new HistoryView(historyViewModel);
+        cardPanel.add(historyView, historyView.getViewName());
         return this;
     }
 
@@ -95,6 +109,17 @@ public class AppBuilder {
         final EndingSceneController endingSceneController = new EndingSceneController(endingSceneInteractor);
 
         endingSceneView.setEndingSceneController(endingSceneController);
+
+        return this;
+    }
+    public AppBuilder addHistoryUseCase() {
+        final HistoryOutputBoundary historyPresenter = new HistoryPresenter(viewManagerModel, historyViewModel /*, homepageViewModel*/);
+
+        final HistoryInterator historyInterator = new HistoryInterator(dataAccessObject, historyPresenter, fileAccessObject);
+
+        final HistoryController historyController = new HistoryController(historyInterator);
+
+        historyView.setHistoryController(historyController);
 
         return this;
     }
