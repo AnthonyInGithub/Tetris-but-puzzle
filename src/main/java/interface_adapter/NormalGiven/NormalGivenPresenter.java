@@ -1,5 +1,8 @@
 package interface_adapter.NormalGiven;
 
+import interface_adapter.EndingScene.EndingSceneState;
+import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.NormalGiven.NormalGivenState;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import use_case.NormalGiven.NormalGivenOutputData;
 
@@ -9,18 +12,21 @@ import use_case.NormalGiven.NormalGivenOutputData;
  */
 public class NormalGivenPresenter implements NormalGivenOutputBoundary {
 
-    private final interface_adapter.NormalGiven.NormalGivenViewModel viewModel;
-    private final GameOverView gameOverView;
-    private final GameSucceededView gameSucceededView;
+    private final interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel;
+    private final EndingSceneViewModel endingSceneViewModel;
     private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for the Presenter.
      *
-     * @param viewModel the ViewModel instance to update
+     * @param normalGivenViewModel the ViewModel instance to update
      */
-    public NormalGivenPresenter(interface_adapter.NormalGiven.NormalGivenViewModel viewModel) {
-        this.viewModel = viewModel;
+    public NormalGivenPresenter(ViewManagerModel viewManagerModel,
+                                interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel,
+                                EndingSceneViewModel endingSceneViewModel) {
+        this.normalGivenViewModel = normalGivenViewModel;
+        this.viewManagerModel = viewManagerModel;
+        this.endingSceneViewModel = endingSceneViewModel;
     }
 
     /**
@@ -35,18 +41,27 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         }
 
         // Update the ViewModel with the map from the output data
-        viewModel.setMap(outputData.getMap());
+        normalGivenViewModel.setMap(outputData.getMap());
+        normalGivenViewModel.setSolutionMap(outputData.getSolutionMap());
+        normalGivenViewModel.setColorMap(outputData.getColorMap());
+        normalGivenViewModel.setImgAddress(outputData.getImgAddress());
+
     }
 
     @Override
-    public void gameOver() {
-        viewManagerModel.setState(gameOverView.getViewName());
+    public void gameOver(boolean success) {
+        EndingSceneState endingSceneState = endingSceneViewModel.getState();
+        endingSceneState.setWin(success);
+        endingSceneViewModel.setState(endingSceneState);
+
+        NormalGivenState normalGivenState = normalGivenViewModel.getState();
+        normalGivenState.setGamingState("end");
+        normalGivenViewModel.setState(normalGivenState);
+        normalGivenViewModel.firePropertyChanged();
+
+        viewManagerModel.setState(endingSceneViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+        //System.out.println("Game Over");
     }
 
-    @Override
-    public void gameSucceeded() {
-        viewManagerModel.setState(gameSucceededView.getViewName());
-        viewManagerModel.firePropertyChanged();
-    }
 }

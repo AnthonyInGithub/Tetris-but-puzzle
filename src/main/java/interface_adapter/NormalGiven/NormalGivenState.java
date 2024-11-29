@@ -1,7 +1,7 @@
 package interface_adapter.NormalGiven;
 
 public class NormalGivenState {
-    private String gamingState = "";
+    private String gamingState = "playing";
 
     public String getGamingState() {
         return gamingState;

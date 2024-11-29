@@ -6,23 +6,38 @@ import interface_adapter.NormalGiven.ViewModelMain;
  * NormalGivenViewModel manages the state for the Normal Given Use Case.
  * It inherits from the generic ViewModelMain.
  */
-public class NormalGivenViewModel extends ViewModelMain<int[][]> {
+public class NormalGivenViewModel extends ViewModelMain<NormalGivenState> {
 
-    /**
-     * Gets the current game map.
-     *
-     * @return the current game map as a 2D array.
-     */
-    public int[][] getMap() {
-        return getState(); // Use the inherited getState method
+    private int[][] map;
+    private int[][] solutionMap;
+    private int[][][] colorMap;
+    private String imgAddress;
+    public NormalGivenViewModel() {
+        super("NormalGivenView");
+        setState(new NormalGivenState());
     }
-
-    /**
-     * Sets the current game map and notifies listeners.
-     *
-     * @param map the new game map to be displayed by the View.
-     */
     public void setMap(int[][] map) {
-        setState(map); // Use the inherited setState method
+        this.map = map;
+    }
+    public int[][] getMap(){
+        return map;
+    }
+    public void setSolutionMap(int[][] solutionMap) {
+        this.solutionMap = solutionMap;
+    }
+    public int[][] getSolutionMap(){
+        return solutionMap;
+    }
+    public void setColorMap(int[][][] colorMap) {
+        this.colorMap = colorMap;
+    }
+    public int[][][] getColorMap(){
+        return colorMap;
+    }
+    public void setImgAddress(String imgAddress) {
+        this.imgAddress = imgAddress;
+    }
+    public String getImgAddress() {
+        return imgAddress;
     }
 }

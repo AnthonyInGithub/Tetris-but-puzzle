@@ -12,7 +12,11 @@ import java.beans.PropertyChangeSupport;
 public class ViewModelMain<T> {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this); // Event manager
     private T state; // The state managed by this ViewModel
+    private final String viewName;
 
+    public ViewModelMain(String viewName) {
+        this.viewName = viewName;
+    }
     /**
      * Gets the current state.
      *
@@ -34,6 +38,13 @@ public class ViewModelMain<T> {
     }
 
     /**
+     * This is call the function in viewManager which will set the cardLayOut
+     */
+    public void firePropertyChanged() {
+        this.support.firePropertyChange("state", null, this.state);
+    }
+
+    /**
      * Adds a property change listener to this ViewModel.
      *
      * @param listener the listener to be added
@@ -50,5 +61,10 @@ public class ViewModelMain<T> {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         support.removePropertyChangeListener(listener);
     }
+
+    public String getViewName() {
+        return this.viewName;
+    }
+
 }
 
