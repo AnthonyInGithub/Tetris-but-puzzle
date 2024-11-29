@@ -10,7 +10,8 @@ import java.io.IOException;
 
 
 public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
-                                                EndingSceneDataAccessInterface{
+                                                EndingSceneDataAccessInterface,
+                                                LevelSelectDataAccessInterface{
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
@@ -20,7 +21,11 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     private String imageAddress;
 
-    private int current_level; //testing, delete after
+    // Address of the current level's image
+    private String imageAddress;
+
+    // Current game level (1, 2, or 3)
+    private int currentLevel;
 
     private int[][][] colorMap;
 
@@ -70,6 +75,8 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                     {{0, 0, 1}, {0, 1, 1}, {0, 1, 0}}  // Rotation state 3
             }
     };
+
+    @Override
 
     // Constructor
     public InMemoryDataAccessObject() {
@@ -246,4 +253,17 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
             }
         }
     }
-}
+
+    @Override
+    public int getSelectedLevel() {
+        return currentLevel; // Return the currently selected level
+    }
+
+    @Override
+    public void setSelectedLevel(int level) {
+        if (level < 1 || level > 3) {
+            throw new IllegalArgumentException("Level must be between 1 and 3."); // Validate input
+        }
+        this.currentLevel = level; // Update the current level
+        setImageAddress(); // Update the image address based on the selected level
+    }
