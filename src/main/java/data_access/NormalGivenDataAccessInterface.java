@@ -1,6 +1,10 @@
 package data_access;
 
 import entity.Entity;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 /**
  * Interface for accessing and modifying the game state and shapes.
  */
@@ -38,5 +42,5 @@ public interface NormalGivenDataAccessInterface {
 
     int[][][] getColorMap();
 
-    public boolean getIsGameOver();
+    void setEndGameScreenShot(BufferedImage endgameScreenShot);
 }
