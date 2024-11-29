@@ -120,10 +120,14 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
     }
 
     private void showHistroyScreenshot(ArrayList<String> addressList) {
+        System.out.println("breakpoint1");
         if (!(addressList == null || addressList.isEmpty())) {
+            System.out.println("breakpoint2");
             for (String address : addressList) {
+                System.out.println(address);
                 this.panelCenter.add(createImagePanel(address));
             }
+            System.out.println("breakpoint3");
             removeAll();
             repaint();
         } else {

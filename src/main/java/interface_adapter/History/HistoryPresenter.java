@@ -21,6 +21,7 @@ public class HistoryPresenter implements HistoryOutputBoundary {
 
     @Override
     public void switchToHomepage(HistoryOutputData historyOutputData) {
-
+        // viewManagerModel.setState();
+        viewManagerModel.firePropertyChanged();
     }
 }
