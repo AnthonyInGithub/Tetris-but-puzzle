@@ -38,6 +38,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         this.normalGivenPresenter = normalGivenPresenter;
         Entity currentEntity = normalGivenDataAccessObject.getEntity();
         currentMap = currentEntity.getGameBoard();
+        //This seems to violate the CA here, but it is neccessary to have Jpanel to get current screenshot
         this.currentView = currentView;
 
         generateNewPiece();
