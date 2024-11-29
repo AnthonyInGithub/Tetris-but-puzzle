@@ -1,4 +1,4 @@
-package interface_adapter.NormalGiven;
+package interface_adapter.MainMenu;
 
 import use_case.MainScene.MainMenuInputBoundary;
 import use_case.MainScene.MainInputData;

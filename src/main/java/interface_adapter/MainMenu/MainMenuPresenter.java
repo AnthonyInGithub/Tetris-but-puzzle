@@ -1,8 +1,9 @@
-package interface_adapter.NormalGiven;
+package interface_adapter.MainMenu;
 
 import use_case.MainScene.MainMenuOutputBoundary;
 import use_case.MainScene.MainOutputData;
 import view.MainSceneView;
+
 
 public class MainMenuPresenter implements MainMenuOutputBoundary {
 
