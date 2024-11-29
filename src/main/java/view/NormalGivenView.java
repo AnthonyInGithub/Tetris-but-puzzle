@@ -45,7 +45,8 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         setLayout(new BorderLayout());
         // normalGivenController.execute();
         final Border redline = BorderFactory.createLineBorder(Color.red);
-        // String imagePath = normalGivenViewModel.getImgAddress();
+
+        String imagePath = "images/sampleLevel1.png";
         gameArea = new CustomBackgroundPanel(){
 //            private BufferedImage backgroundImage;
 //
@@ -74,7 +75,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             }
         };
 
-        ((CustomBackgroundPanel) gameArea).setBackgroundImage("images/sampleLevel1.png");
+        ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
         gameArea.setBorder(redline);
         add(gameArea, BorderLayout.CENTER);
 
@@ -200,9 +201,12 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             public void run() {
                 normalGivenController.execute();
                 if (firstTime) {
+                    System.out.println("first time timer starts -- line 203");
                     String imagePath = normalGivenViewModel.getImgAddress();
                     ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
                     firstTime = false;
+                    gameArea.removeAll();
+                    gameArea.repaint();
                 }
 
             }
@@ -227,6 +231,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         private BufferedImage backgroundImage;
 
         public void setBackgroundImage(String imagePath) {
+            System.out.println(imagePath + " <-- path");
             try {
                 backgroundImage = ImageIO.read(new File(imagePath));
                 repaint(); // Trigger repaint to apply the new background
