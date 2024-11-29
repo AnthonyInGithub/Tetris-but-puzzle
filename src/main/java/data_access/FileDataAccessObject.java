@@ -8,10 +8,9 @@ public class FileDataAccessObject implements EndingSceneDataAccessInterface,
                                 LevelSelectDataAccessInterface {
     // Original fields for EndingScene functionality
     private int numberOfSavedImages;
-    private static final String CSV_FILE = "FiledData/playerProgress.csv";
-
-    // New field for LevelSelect functionality
     private int selectedLevel; // Stores the selected level
+    private String imageAddress; // Stores the current image address
+    private static final String CSV_FILE = "FiledData/playerProgress.csv";
 
     // Constructor
     public FileDataAccessObject() {
@@ -63,18 +62,6 @@ public class FileDataAccessObject implements EndingSceneDataAccessInterface,
         saveToFile();
     }
 
-    // New methods for LevelSelect functionality
-    @Override
-    public int getSelectedLevel() {
-        return selectedLevel; // Return the current selected level
-    }
-
-    @Override
-    public void setS(int level) {
-        this.selectedLevel = level; // Update the selected level
-        saveToFile(); // Persist the change
-    }
-
     // Helper method to save all data to the file
     private void saveToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE))) {
@@ -83,5 +70,39 @@ public class FileDataAccessObject implements EndingSceneDataAccessInterface,
         } catch (IOException e) {
             System.err.println("Error writing to the file: " + e.getMessage());
         }
+    }
+
+    // Methods for LevelSelect functionality
+    @Override
+    public int getSelectedLevel() {
+        return selectedLevel;
+    }
+
+
+    // Methods for LevelSelect functionality
+    @Override
+    public int getSelectedLevel() {
+        return selectedLevel;
+    }
+
+    @Override
+    public void setSelectedLevel(int level) {
+        if (level < 1 || level > 3) {
+            throw new IllegalArgumentException("Level must be between 1 and 3.");
+        }
+        this.selectedLevel = level; // Update the selected level
+        setImageAddress(); // Directly update the image address
+        saveToFile(); // Persist changes to file
+    }
+
+    @Override
+    public String getImageAddressLevel() {
+        return imageAddress; // Return the current image address
+    }
+
+    @Override
+    public void setImageAddress() {
+        // Directly set the image address based on the current level
+        imageAddress = "images/level" + selectedLevel + ".png";
     }
 }

@@ -7,7 +7,5 @@ public interface LevelSelectDataAccessInterface {
     void setSelectedLevel(int level);
     String getImageAddressLevel();
     void setImageAddress();
-    // New methods for LevelSelect functionality
-    int getSelectedLevel();
-    void setS(int level);
 }
+
