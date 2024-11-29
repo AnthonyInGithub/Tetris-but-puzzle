@@ -1,5 +1,8 @@
 package interface_adapter.NormalGiven;
 
+import interface_adapter.EndingScene.EndingSceneState;
+import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.NormalGiven.NormalGivenState;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import use_case.NormalGiven.NormalGivenOutputData;
 
@@ -10,17 +13,20 @@ import use_case.NormalGiven.NormalGivenOutputData;
 public class NormalGivenPresenter implements NormalGivenOutputBoundary {
 
     private final interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel;
-    //private final GameOverView gameOverView;
-    //private final GameSucceededView gameSucceededView;
-    //private final ViewManagerModel viewManagerModel;
+    private final EndingSceneViewModel endingSceneViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for the Presenter.
      *
      * @param normalGivenViewModel the ViewModel instance to update
      */
-    public NormalGivenPresenter(interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel) {
+    public NormalGivenPresenter(ViewManagerModel viewManagerModel,
+                                interface_adapter.NormalGiven.NormalGivenViewModel normalGivenViewModel,
+                                EndingSceneViewModel endingSceneViewModel) {
         this.normalGivenViewModel = normalGivenViewModel;
+        this.viewManagerModel = viewManagerModel;
+        this.endingSceneViewModel = endingSceneViewModel;
     }
 
     /**
@@ -43,15 +49,19 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
     }
 
     @Override
-    public void gameOver() {
-//        viewManagerModel.setState(gameOverView.getViewName());
-//        viewManagerModel.firePropertyChanged();
-        System.out.println("Game Over");
+    public void gameOver(boolean success) {
+        EndingSceneState endingSceneState = endingSceneViewModel.getState();
+        endingSceneState.setWin(success);
+        endingSceneViewModel.setState(endingSceneState);
+
+        NormalGivenState normalGivenState = normalGivenViewModel.getState();
+        normalGivenState.setGamingState("end");
+        normalGivenViewModel.setState(normalGivenState);
+        normalGivenViewModel.firePropertyChanged();
+
+        viewManagerModel.setState(endingSceneViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+        //System.out.println("Game Over");
     }
 
-    @Override
-    public void gameSucceeded() {
-//        viewManagerModel.setState(gameSucceededView.getViewName());
-//        viewManagerModel.firePropertyChanged();
-    }
 }

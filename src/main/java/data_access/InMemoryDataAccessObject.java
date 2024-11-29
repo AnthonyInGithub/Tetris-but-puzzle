@@ -9,13 +9,14 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class InMemoryDataAccessObject implements data_access.NormalGivenDataAccess {
+public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
+                                                EndingSceneDataAccessInterface{
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
     private int[][] targetMap;
 
-    private boolean isGameOver;
+    BufferedImage endGameScreenShot;
 
     private String imageAddress;
 
@@ -73,7 +74,7 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     // Constructor
     public InMemoryDataAccessObject() {
         this.entity = new Entity();
-        testingColorMap();
+        setColorMapAndBinaryMap();
         generateNewPiece();
     }
 
@@ -133,7 +134,7 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     @Override
     public void setImageAddress() {
         if(current_level == 1){
-            imageAddress = "images/sampleLevel1.png";
+            imageAddress = "images/level1.png";
         }
         if(current_level == 2){
             imageAddress = "images/level2.png";
@@ -163,19 +164,36 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
     public void setTargetMap(int[][] targetMap){
         this.targetMap = targetMap;
     }
+
     public int[][] getTargetMap(){
         return targetMap;
     }
 
-    public boolean getIsGameOver(){
-        return isGameOver;
+    public BufferedImage getEndGameScreenShot(){
+        return endGameScreenShot;
     }
 
-    public void testingColorMap(){
+    @Override
+    public int getNumberOfSavedImages() {
+        return 0;
+    }
+
+    @Override
+    public void setNumberOfSavedImages(int numberOfSavedImages) {
+    }
+
+    public void setEndGameScreenShot(BufferedImage endGameScreenShot){
+        this.endGameScreenShot = endGameScreenShot;
+    }
+
+
+    public void setColorMapAndBinaryMap(){
         {
             try {
                 // Resize the image to 10x20 using Thumbnailator
-                BufferedImage resizedImage = Thumbnails.of(new File("images/sampleLevel1.png"))
+                current_level = 1;
+                setImageAddress();
+                BufferedImage resizedImage = Thumbnails.of(new File(imageAddress))
                         .forceSize(10, 20)
                         .asBufferedImage();
 
@@ -221,9 +239,7 @@ public class InMemoryDataAccessObject implements data_access.NormalGivenDataAcce
                     }
                     System.out.println();
                 }
-                current_level = 1;
                 setTargetMap(binaryArray);
-                setImageAddress();
 
             } catch (IOException e) {
                 e.printStackTrace();

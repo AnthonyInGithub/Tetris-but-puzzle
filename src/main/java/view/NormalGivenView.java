@@ -9,7 +9,6 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.beans.PropertyChangeEvent;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import java.util.Timer;
@@ -21,6 +20,8 @@ import interface_adapter.NormalGiven.NormalGivenState;
 
 public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
+    private final String viewName = "NormalGivenView";
+
     private JPanel gameArea;
     private final int widowWidth = 515;
     private final int widowHeight = 635;
@@ -30,22 +31,22 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
     private NormalGivenController normalGivenController;
     private final int squareSize = 30;
     private final int margin = 5;
-    private final Timer timer;
-    private final long timeDelay = 1000;
+    private Timer timer;
+    private final long timeDelay = 0;
     private final long timePeriod = 1000;
     private boolean firstTime = true;
 
     public NormalGivenView(NormalGivenViewModel normalGivenViewModel) {
-        // Set the title and default close operation
+
         this.normalGivenViewModel = normalGivenViewModel;
         this.normalGivenViewModel.addPropertyChangeListener(this);
-        timer = new Timer();
-        setSize(widowWidth, widowHeight);
+        setPreferredSize(new Dimension(gameAreaWidth, gameAreaHeight));
         // Set the layout for the main frame
         setLayout(new BorderLayout());
         // normalGivenController.execute();
         final Border redline = BorderFactory.createLineBorder(Color.red);
-        // String imagePath = normalGivenViewModel.getImgAddress();
+
+        String imagePath = "images/sampleLevel1.png";
         gameArea = new CustomBackgroundPanel(){
 //            private BufferedImage backgroundImage;
 //
@@ -74,14 +75,14 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             }
         };
 
-        ((CustomBackgroundPanel) gameArea).setBackgroundImage("images/sampleLevel1.png");
+        ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
         gameArea.setBorder(redline);
         add(gameArea, BorderLayout.CENTER);
 
         setupKeyBindings();
 
         // Make the frame visible
-        setVisible(true);
+        // setVisible(true);
     }
 
     public void setupKeyBindings() {
@@ -199,10 +200,14 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             @Override
             public void run() {
                 normalGivenController.execute();
+                System.out.println("regular execution");
                 if (firstTime) {
+                    System.out.println("first time timer starts -- line 203");
                     String imagePath = normalGivenViewModel.getImgAddress();
                     ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
                     firstTime = false;
+                    gameArea.removeAll();
+                    gameArea.repaint();
                 }
 
             }
@@ -214,6 +219,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
         final NormalGivenState normalGivenState = (NormalGivenState) evt.getNewValue();
         if (normalGivenState.getGamingState().equals("playing")) {
+            this.timer = new Timer();
             timer.schedule(regularExecution(), timeDelay, timePeriod);
             System.out.println("timer starts");
         } else if (normalGivenState.getGamingState().equals("end")) {
@@ -227,6 +233,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         private BufferedImage backgroundImage;
 
         public void setBackgroundImage(String imagePath) {
+            System.out.println(imagePath + " <-- path");
             try {
                 backgroundImage = ImageIO.read(new File(imagePath));
                 repaint(); // Trigger repaint to apply the new background
@@ -243,6 +250,9 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         }
+    }
+    public String getViewName(){
+        return viewName;
     }
 
 }

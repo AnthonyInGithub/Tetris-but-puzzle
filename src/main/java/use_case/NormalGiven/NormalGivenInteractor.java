@@ -1,11 +1,17 @@
 package use_case.NormalGiven;
 
-import data_access.InMemoryDataAccessObject;
+import data_access.NormalGivenDataAccessInterface;
 import entity.Entity;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 
 public class NormalGivenInteractor implements NormalGivenInputBoundary{
-    public final data_access.InMemoryDataAccessObject normalGivenDataAccessObject;
+    public final NormalGivenDataAccessInterface normalGivenDataAccessObject;
     private final NormalGivenOutputBoundary normalGivenPresenter;
     private int[][] currentMap; //first index height, second index width. 10*22 in size
     //IMPORTANT: the outputMap is different from currentMap, where outputMap is 10*20 in size and current map is
@@ -15,28 +21,24 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
     int[][] shapeMatrix;
 
-    boolean isGameOver = false;
-
     private int[] currentShapeState; //an array of length 2, where 0th position specify the type of shape, 1st specify the rotation state.
 
+    private JPanel currentView;
+
     //The shape is organized this way: for example, the I shape contains I and its rotated state. You need to get shape from DAO
-    //private final int[][][][] shapes = {
-    //        {{{0,0,0},{1,1,0},{1,1,0}}, {{0,0,0},{1,1,0},{1,1,0}}, {{0,0,0},{1,1,0},{1,1,0}}, {{0,0,0},{1,1,0},{1,1,0}}}, // O Shapes
-    //        {{{1,0,0},{1,0,0},{1,0,0}}, {{0,0,0},{0,0,0},{1,1,1}}, {{1,0,0},{1,0,0},{1,0,0}}, {{0,0,0},{0,0,0},{1,1,1}}}, //I shape
-    //        {{{1,1,1},{0,1,0},{0,0,0}}, {{0,1,0},{0,1,1},{0,1,0}}, {{0,1,0},{1,1,0},{0,1,0}}, {{0,1,0},{1,1,1},{0,0,0}}}, // T Shape
-    //        {{{0,1,0},{0,1,0},{0,1,1}}, {{0,0,0},{1,1,1},{1,0,0}}, {{1,1,0},{0,1,0},{0,1,0}}, {{0,0,1},{1,1,1},{0,0,0}}}, // L Shape
-    //        {{{1,1,0},{0,1,1},{0,0,0}}, {{0,0,1},{0,1,1},{0,1,0}}, {{1,1,0},{0,1,1},{0,0,0}}, {{0,0,1},{0,1,1},{0,1,0}}} //Z Shape
-    //};
-    private final int[][][][] shapes = {};
 
     int x, y; //(0,0) position is in left top corner for map. the position that corresponds to x, y is at the top left of the shape.
 
+    int similarityLevelSpecification = 80;
 
-    public NormalGivenInteractor(InMemoryDataAccessObject normalGivenDataAccessObject, NormalGivenOutputBoundary normalGivenPresenter) {
+    public NormalGivenInteractor(NormalGivenDataAccessInterface normalGivenDataAccessObject,
+                                 NormalGivenOutputBoundary normalGivenPresenter,
+                                 JPanel currentView) {
         this.normalGivenDataAccessObject = normalGivenDataAccessObject;
         this.normalGivenPresenter = normalGivenPresenter;
         Entity currentEntity = normalGivenDataAccessObject.getEntity();
         currentMap = currentEntity.getGameBoard();
+        this.currentView = currentView;
 
         generateNewPiece();
 
@@ -56,30 +58,47 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             lockPieceInPlace();
             generateNewPiece();
             clearLines();
-            checkTargetMap();
         }
 
         updateCurrentMap();
+        updateOutputMap();
+
+
+        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap,
+                normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(),
+                normalGivenDataAccessObject.getImageAddress()));
+        //This allows the view to update before we saved the end game screenshot
+        checkTargetMap();
+
+    }
+    private void updateOutputMap(){
         outputMap = new int[currentMap.length - 2][currentMap[0].length];
         for (int i = 2; i < currentMap.length; i++) {
             System.arraycopy(currentMap[i], 0, outputMap[i - 2], 0, currentMap[i].length);
         }
-        for(int i = 0; i< currentMap.length; i++){
-            for(int j = 0; j < currentMap[0].length; j++){
-                System.out.print(currentMap[i][j] + " ");
-            }
-            System.out.print("\n");
+    }
+    private void handleInput(NormalGivenInputData inputData) {
+        if (inputData.isAPressed()) {
+            moveLeft();
+            updateShapMatrix();
+
         }
 
-        normalGivenPresenter.execute(new NormalGivenOutputData(outputMap,
-                normalGivenDataAccessObject.getTargetMap(), normalGivenDataAccessObject.getColorMap(),
-                normalGivenDataAccessObject.getImageAddress(), normalGivenDataAccessObject.getIsGameOver()));
+        if (inputData.isDPressed()) {
+            moveRight();
+            updateShapMatrix();
+        }
 
+        if (inputData.isWPressed()) {
+            rotatePiece();
+        }
 
+        // For testing, remove later
+        if (inputData.isSPressed()) {
+            y++;
+        }
     }
-private void handleInput(NormalGivenInputData inputData) {
-    if (inputData.isAPressed()) {
-        moveLeft();
+    private void updateShapMatrix(){
         if (x < 0) {
             x = 0;
             for (int i = 0; i < shapeMatrix.length; i++) {
@@ -91,10 +110,6 @@ private void handleInput(NormalGivenInputData inputData) {
                 }
             }
         }
-    }
-
-    if (inputData.isDPressed()) {
-        moveRight();
         if (x > 7) {
             x = 7;
             for (int i = 0; i < shapeMatrix.length; i++) {
@@ -107,16 +122,6 @@ private void handleInput(NormalGivenInputData inputData) {
             }
         }
     }
-
-    if (inputData.isWPressed()) {
-        rotatePiece();
-    }
-
-    // For testing, remove later
-    if (inputData.isSPressed()) {
-        y++;
-    }
-}
 
 
     private void moveLeft() {
@@ -215,7 +220,7 @@ private void handleInput(NormalGivenInputData inputData) {
         currentShapeState = normalGivenDataAccessObject.getCurrentShapeState();
         if (isOutOfBounds()) {
             System.out.println("out of screen");
-            normalGivenPresenter.gameOver();
+            gameOver(false);
         }
         x = normalGivenDataAccessObject.getX();
         y = normalGivenDataAccessObject.getY();
@@ -248,11 +253,11 @@ private void handleInput(NormalGivenInputData inputData) {
         int[][] targetMap = normalGivenDataAccessObject.getTargetMap();
 
         if (outputMap == null || targetMap == null) {
-            System.out.println("one of the maps is null. Similarity: 0%");
+            //System.out.println("one of the maps is null. Similarity: 0%");
             return;
         }
         if (outputMap.length != targetMap.length || outputMap[0].length != targetMap[0].length) {
-            System.out.println("Similarity: 0%");
+            //System.out.println("Similarity: 0%");
             return;
         }
         int totalCells = 200;
@@ -265,11 +270,35 @@ private void handleInput(NormalGivenInputData inputData) {
             }
         }
         double similarityPercentage = ((double) matchingCells / totalCells) * 100;
-        if (similarityPercentage>50){
-            isGameOver = true;
+
+        if (similarityPercentage> similarityLevelSpecification){
             System.out.println("Similarity: " + similarityPercentage + "%");
-            normalGivenPresenter.gameOver();
+            gameOver(true);
         }
         System.out.printf("The output map matches the target map by %.2f%%.%n", similarityPercentage);
+    }
+    private void getCurrentScreenShot() {
+        try{
+            // Get the screen size of the current view
+            Rectangle panelBounds = currentView.getBounds();
+            Point panelLocation = currentView.getLocationOnScreen();
+            panelBounds.setLocation(panelLocation);
+
+            // Create a Robot instance
+            Robot robot = new Robot();
+
+            // Capture the screen as a BufferedImage
+            BufferedImage screenCapture = robot.createScreenCapture(panelBounds);
+
+            // Save the screenshot as a PNG file
+            normalGivenDataAccessObject.setEndGameScreenShot(screenCapture);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void gameOver(boolean success){
+        getCurrentScreenShot();
+        normalGivenPresenter.gameOver(success);
     }
 }

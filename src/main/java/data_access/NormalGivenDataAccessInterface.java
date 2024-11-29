@@ -1,10 +1,14 @@
 package data_access;
 
 import entity.Entity;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 /**
  * Interface for accessing and modifying the game state and shapes.
  */
-public interface NormalGivenDataAccess {
+public interface NormalGivenDataAccessInterface {
     // Current piece information
     int[] getCurrentShapeState(); // [shapeType, rotationState]
     void setCurrentShapeState(int[] currentShapeState);
@@ -37,4 +41,6 @@ public interface NormalGivenDataAccess {
     void setCurrentGameLevel(int currentGameLevel);
 
     int[][][] getColorMap();
+
+    void setEndGameScreenShot(BufferedImage endgameScreenShot);
 }
