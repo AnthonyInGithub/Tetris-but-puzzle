@@ -38,8 +38,6 @@ public interface NormalGivenDataAccessInterface {
 
     String getImageAddress();
 
-    void setCurrentGameLevel(int currentGameLevel);
-
     int[][][] getColorMap();
 
     void setEndGameScreenShot(BufferedImage endgameScreenShot);

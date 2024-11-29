@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                                                 EndingSceneDataAccessInterface,
-                                                LevelSelectDataAccessInterface{
+                                                LevelSelectDataAccessInterface {
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
@@ -21,8 +21,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     private String imageAddress;
 
-    // Address of the current level's image
-    private String imageAddress;
 
     // Current game level (1, 2, or 3)
     private int currentLevel;
@@ -76,7 +74,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
             }
     };
 
-    @Override
 
     // Constructor
     public InMemoryDataAccessObject() {
@@ -138,45 +135,54 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         x = 3; // Initial x position to center the piece
         y = 0; // Initial y position at the top of the board
     }
-    @Override
-    public void setImageAddress() {
-        if(current_level == 1){
-            imageAddress = "images/level1.png";
-        }
-        if(current_level == 2){
-            imageAddress = "images/level2.png";
-        }
-        if(current_level == 3){
-            imageAddress = "images/level3.png";
-        }
-    }
+
     @Override
     public String getImageAddress() {
         return imageAddress;
     }
 
     @Override
-    public void setCurrentGameLevel(int current_level) {
-        this.current_level = current_level;
+    public void setImageAddress() {
+        if (currentLevel == 1) {
+            imageAddress = "images/level1.png";
+        }
+        if (currentLevel == 2) {
+            imageAddress = "images/level2.png";
+        }
+        if (currentLevel == 3) {
+            imageAddress = "images/level3.png";
+        }
     }
+
+    public String getImageAddressLevel(){
+        return imageAddress;
+    }
+
+    @Override
+    public void setSelectedLevel(int selectedLevel) {
+        this.currentLevel = selectedLevel;
+        setImageAddress(); // Update image address based on the selected level
+    }
+
     @Override
     public int[][][] getColorMap() {
         return colorMap;
     }
 
 
-    public void updateMap(int[][] currentMap){
+    public void updateMap(int[][] currentMap) {
         entity.setGameBoard(currentMap);
     }
-    public void setTargetMap(int[][] targetMap){
+
+    public void setTargetMap(int[][] targetMap) {
         this.targetMap = targetMap;
     }
 
-    public int[][] getTargetMap(){
+    public int[][] getTargetMap() {
         return targetMap;
     }
 
-    public BufferedImage getEndGameScreenShot(){
+    public BufferedImage getEndGameScreenShot() {
         return endGameScreenShot;
     }
 
@@ -189,12 +195,12 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     public void setNumberOfSavedImages(int numberOfSavedImages) {
     }
 
-    public void setEndGameScreenShot(BufferedImage endGameScreenShot){
+    public void setEndGameScreenShot(BufferedImage endGameScreenShot) {
         this.endGameScreenShot = endGameScreenShot;
     }
 
 
-    public void setColorMapAndBinaryMap(){
+    public void setColorMapAndBinaryMap() {
         {
             try {
                 // Resize the image to 10x20 using Thumbnailator
@@ -209,7 +215,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                 int height = resizedImage.getHeight();
                 int[][] binaryArray = new int[height][width];
                 colorMap = new int[height][width][3];
-                System.out.println(height +" " +width);
+                System.out.println(height + " " + width);
 
                 // Process each pixel to determine binary value
                 for (int y = 0; y < height; y++) {
@@ -253,17 +259,5 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
             }
         }
     }
+}
 
-    @Override
-    public int getSelectedLevel() {
-        return currentLevel; // Return the currently selected level
-    }
-
-    @Override
-    public void setSelectedLevel(int level) {
-        if (level < 1 || level > 3) {
-            throw new IllegalArgumentException("Level must be between 1 and 3."); // Validate input
-        }
-        this.currentLevel = level; // Update the current level
-        setImageAddress(); // Update the image address based on the selected level
-    }

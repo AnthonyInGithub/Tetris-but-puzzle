@@ -1,7 +1,5 @@
 package data_access;
 
-import use_case.LevelSelect.LevelSelectInteractor;
-
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Scanner;
@@ -72,7 +70,7 @@ public class FileDataAccessObject implements EndingSceneDataAccessInterface,
     }
 
     @Override
-    public void setSelectedLevel(int level) {
+    public void setS(int level) {
         this.selectedLevel = level; // Update the selected level
         saveToFile(); // Persist the change
     }

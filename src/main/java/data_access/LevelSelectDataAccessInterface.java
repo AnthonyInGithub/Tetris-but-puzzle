@@ -4,6 +4,10 @@ package data_access;
  * DataAccessInterface for saving and retrieving the selected level.
  */
 public interface LevelSelectDataAccessInterface {
-    int getSelectedLevel();
     void setSelectedLevel(int level);
+    String getImageAddressLevel();
+    void setImageAddress();
+    // New methods for LevelSelect functionality
+    int getSelectedLevel();
+    void setS(int level);
 }
