@@ -1,7 +1,8 @@
 package use_case.LevelSelect;
 
+import data_access.LevelSelectDataAccessInterface;
 import interface_adapter.LevelSelect.LevelSelectOutputBoundary;
-import data_access.DataAccessInterface;
+import data_access.LevelSelectDataAccessInterface;
 
 /**
  * Interactor for the Level Select Use Case.
@@ -9,9 +10,9 @@ import data_access.DataAccessInterface;
  */
 public class LevelSelectInteractor implements LevelSelectInputBoundary {
     private final LevelSelectOutputBoundary presenter;
-    private final DataAccessInterface dataAccess;
+    private final LevelSelectDataAccessInterface dataAccess;
 
-    public LevelSelectInteractor(LevelSelectOutputBoundary presenter, DataAccessInterface dataAccess) {
+    public LevelSelectInteractor(LevelSelectOutputBoundary presenter, LevelSelectDataAccessInterface dataAccess) {
         this.presenter = presenter;
         this.dataAccess = dataAccess;
     }
