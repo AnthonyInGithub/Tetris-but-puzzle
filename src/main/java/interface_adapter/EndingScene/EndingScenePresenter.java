@@ -30,6 +30,7 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
         if(endingSceneOutputData.getIsReturnClicked()) {
             final NormalGivenState normalGivenState = normalGivenViewModel.getState();
             // This set the data needed at the start of next view
+            normalGivenState.setGamingState("playing");
             normalGivenViewModel.setState(normalGivenState);
             normalGivenViewModel.firePropertyChanged();
 
