@@ -1,5 +1,5 @@
 //package view;
-//import interface_adapter.NormalGiven.MainMenuController;
+//import interface_adapter.mainScene.MainMenuController;
 //import javax.swing.*;
 //        import java.awt.*;
 //        import java.awt.event.ActionListener;
@@ -114,7 +114,7 @@
 //    }
 //}
 package view;
-import interface_adapter.NormalGiven.MainMenuController;
+import interface_adapter.mainScene.MainMenuController;
 import javax.swing.*;
 import java.awt.*;
 

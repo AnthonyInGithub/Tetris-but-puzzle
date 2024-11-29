@@ -13,8 +13,8 @@ import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import interface_adapter.NormalGiven.ViewModel;
-import interface_adapter.NormalGiven.MainMenuController;
-import interface_adapter.NormalGiven.MainMenuPresenter;
+import interface_adapter.mainScene.MainMenuController;
+import interface_adapter.mainScene.MainMenuPresenter;
 import use_case.MainScene.NormalGivenMainSceneInteractor;
 import view.MainSceneView;
 
