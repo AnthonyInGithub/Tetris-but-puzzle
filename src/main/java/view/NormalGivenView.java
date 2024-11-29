@@ -199,7 +199,8 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         return new TimerTask() {
             @Override
             public void run() {
-                normalGivenController.execute();
+                normalGivenController.execute(false,false,true,false);
+                draw();
                 System.out.println("regular execution");
                 if (firstTime) {
                     System.out.println("first time timer starts -- line 203");
