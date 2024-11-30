@@ -9,19 +9,27 @@ import data_access.FileDataAccessObject;
 import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingScenePresenter;
 import interface_adapter.EndingScene.EndingSceneViewModel;
+import interface_adapter.History.HistoryController;
+import interface_adapter.History.HistoryViewModel;
+import interface_adapter.History.HistoryPresenter;
+import interface_adapter.MainMenu.MainMenuController;
+import interface_adapter.MainMenu.MainMenuPresenter;
+import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
 import interface_adapter.NormalGiven.ViewManagerModel;
 import use_case.EndingScene.EndingSceneInteractor;
 import use_case.EndingScene.EndingSceneOutputBoundary;
-import view.EndingSceneView;
-import view.NormalGivenView;
+import use_case.History.HistoryInterator;
+import use_case.History.HistoryOutputBoundary;
+import use_case.MainScene.MainMenuOutputBoundary;
+import use_case.MainScene.MainSceneInteractor;
+import view.*;
 import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
-import view.ViewManager;
 
 /**
  * The AppBuilder class is responsible for assembling and configuring
@@ -42,10 +50,14 @@ public class AppBuilder {
 
     private final NormalGivenViewModel viewModel = new NormalGivenViewModel();
     private final EndingSceneViewModel endingSceneViewModel = new EndingSceneViewModel();
+    private final HistoryViewModel historyViewModel = new HistoryViewModel();
+    private final MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
 
     // Views
     private NormalGivenView normalGivenView;
     private EndingSceneView endingSceneView;
+    private HistoryView historyView;
+    private MainSceneView mainSceneView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -65,6 +77,18 @@ public class AppBuilder {
     public AppBuilder addEndingSceneView(){
         endingSceneView = new EndingSceneView(endingSceneViewModel);
         cardPanel.add(endingSceneView, endingSceneView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addHistoryView(){
+        historyView = new HistoryView(historyViewModel);
+        cardPanel.add(historyView, historyView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addMainMenuView(){
+        mainSceneView = new MainSceneView(mainMenuViewModel);
+        cardPanel.add(mainSceneView, mainSceneView.getViewName());
         return this;
     }
 
@@ -98,6 +122,28 @@ public class AppBuilder {
 
         return this;
     }
+    public AppBuilder addHistoryUseCase() {
+        final HistoryOutputBoundary historyPresenter = new HistoryPresenter(viewManagerModel, historyViewModel, mainMenuViewModel);
+
+        final HistoryInterator historyInterator = new HistoryInterator(dataAccessObject, historyPresenter, fileAccessObject);
+
+        final HistoryController historyController = new HistoryController(historyInterator);
+
+        historyView.setHistoryController(historyController);
+
+        return this;
+    }
+    public AppBuilder addMainMenuUseCase(){
+        final MainMenuOutputBoundary mainMenuPresenter = new MainMenuPresenter(historyViewModel, viewManagerModel/*, levelSelectViewModel*/);
+
+        final MainSceneInteractor mainSceneInteractor = new MainSceneInteractor(mainMenuPresenter);
+
+        final MainMenuController mainMenuController = new MainMenuController(mainSceneInteractor);
+
+        mainSceneView.setMainMenuController(mainMenuController);
+
+        return this;
+    }
 
     /**
      * Builds the JFrame for the application and shows the initial view.
@@ -110,8 +156,7 @@ public class AppBuilder {
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         application.add(cardPanel);
         // Set the initial view
-        cardLayout.show(cardPanel, endingSceneView.getViewName());
-
+        cardLayout.show(cardPanel, mainSceneView.getViewName());
         //this allows us to change the windows size later
         viewManager.setJFrame(application);
 

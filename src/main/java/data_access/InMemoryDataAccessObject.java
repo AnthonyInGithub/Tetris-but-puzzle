@@ -10,8 +10,9 @@ import java.io.IOException;
 
 
 public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
-                                                EndingSceneDataAccessInterface,
-                                                LevelSelectDataAccessInterface {
+                                                    EndingSceneDataAccessInterface,
+                                                    HistoryDataAccessInterface,
+                                                   LevelSelectDataAccessInterface{
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 

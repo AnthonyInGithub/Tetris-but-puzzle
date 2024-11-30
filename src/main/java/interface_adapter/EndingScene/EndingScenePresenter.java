@@ -6,6 +6,10 @@ import interface_adapter.NormalGiven.ViewManagerModel;
 import use_case.EndingScene.EndingSceneOutputBoundary;
 import use_case.EndingScene.EndingSceneOutputData;
 
+// for testing history purpose ----------------------------------------------------------------------
+//import interface_adapter.History.HistoryState;
+//import interface_adapter.History.HistoryViewModel;
+
 public class EndingScenePresenter implements EndingSceneOutputBoundary {
     private EndingSceneViewModel endingSceneViewModel;
     private NormalGivenViewModel normalGivenViewModel;
@@ -26,6 +30,11 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
     public void execute(EndingSceneOutputData endingSceneOutputData) {
         if(endingSceneOutputData.getIsSaveSuccess()){
             endingSceneViewModel.setSavedSuccess(endingSceneOutputData.getIsSaveSuccess());
+            // for testing history purpose ----------------------------------------------------------
+//            HistoryViewModel historyViewModel = new HistoryViewModel();
+//            historyViewModel.firePropertyChanged();
+//            viewManagerModel.setState(historyViewModel.getViewName());
+//            viewManagerModel.firePropertyChanged();
         }
         if(endingSceneOutputData.getIsReturnClicked()) {
             final NormalGivenState normalGivenState = normalGivenViewModel.getState();

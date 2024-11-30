@@ -195,15 +195,16 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         this.normalGivenController = normalGivenController;
     }
 
-    private TimerTask regularExecution(){
+    private TimerTask regularExecution(NormalGivenState normalGivenState){
         return new TimerTask() {
             @Override
             public void run() {
-                normalGivenController.execute();
+                normalGivenController.execute(false,false,true,false);
+                draw();
                 System.out.println("regular execution");
                 if (firstTime) {
                     System.out.println("first time timer starts -- line 203");
-                    String imagePath = normalGivenViewModel.getImgAddress();
+                    String imagePath = normalGivenState.getImgAddress();
                     ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
                     firstTime = false;
                     gameArea.removeAll();
@@ -220,7 +221,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         final NormalGivenState normalGivenState = (NormalGivenState) evt.getNewValue();
         if (normalGivenState.getGamingState().equals("playing")) {
             this.timer = new Timer();
-            timer.schedule(regularExecution(), timeDelay, timePeriod);
+            timer.schedule(regularExecution(normalGivenState), timeDelay, timePeriod);
             System.out.println("timer starts");
         } else if (normalGivenState.getGamingState().equals("end")) {
             timer.cancel();

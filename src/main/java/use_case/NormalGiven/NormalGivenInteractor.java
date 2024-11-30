@@ -38,6 +38,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         this.normalGivenPresenter = normalGivenPresenter;
         Entity currentEntity = normalGivenDataAccessObject.getEntity();
         currentMap = currentEntity.getGameBoard();
+        //This seems to violate the CA here, but it is neccessary to have Jpanel to get current screenshot
         this.currentView = currentView;
 
         generateNewPiece();
@@ -51,7 +52,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         y = normalGivenDataAccessObject.getY();
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
         handleInput(normalGivenInputData); // for process WASD input
-        pieceFall(); //calculate the new piece's position y change.
+        // pieceFall(); //calculate the new piece's position y change.
         normalGivenDataAccessObject.setX(x);
         normalGivenDataAccessObject.setY(y);
         if (!canMove(x, y + 1)) { // If piece can't fall further (I changed the code to use some helper functions instead)
@@ -95,7 +96,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
         // For testing, remove later
         if (inputData.isSPressed()) {
-            y++;
+            //y++;
+            pieceFall();
         }
     }
     private void updateShapMatrix(){
