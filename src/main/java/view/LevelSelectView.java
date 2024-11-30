@@ -55,11 +55,11 @@ public class LevelSelectView extends JPanel {
      */
     private JButton createImageButton(String imagePath, Runnable action) {
         // Load the image icon for the button
-        ImageIcon icon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(200, 80, Image.SCALE_SMOOTH));
+        ImageIcon icon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
         JButton button = new JButton(icon);
 
         // Set button properties
-        button.setPreferredSize(new Dimension(200, 80));
+        button.setPreferredSize(new Dimension(200, 200));
         button.setContentAreaFilled(false); // Make button background transparent
         button.setBorderPainted(false);     // Remove button border
         button.setFocusPainted(false);     // Remove focus border
