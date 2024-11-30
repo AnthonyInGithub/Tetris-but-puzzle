@@ -10,6 +10,7 @@ import org.junit.Test;
 import use_case.NormalGiven.NormalGivenInputData;
 import use_case.NormalGiven.NormalGivenInteractor;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
+import use_case.NormalGiven.NormalGivenOutputData;
 
 import static org.junit.Assert.assertEquals;
 
@@ -59,17 +60,34 @@ public class NormalGivenInteractorTest {
     @Test
     public void GameOverTest(){
         NormalGivenDataAccessInterface normalGivenDataAccessObject = new InMemoryDataAccessObject();
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        NormalGivenViewModel normalGivenViewModel = new NormalGivenViewModel();
-        EndingSceneViewModel endingSceneViewModel = new EndingSceneViewModel();
 
-        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenPresenter(null, null) {
+        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenPresenter(null,null, null) {
             @Override
-            protected void gameOver(){
+            public void execute(NormalGivenOutputData normalGivenOutputData) {
+
+
+            }
+            @Override
+            public void gameOver(boolean success){
                 assert true;
             }
         };
 
+        int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+        //set the button line to 1 and the rest 0
+        for(int i = 0; i < 22; i++){
+            for(int j = 0; j < 10; j++){
+                currentMap[i][j] = 1;
+            }
+        }
+        NormalGivenInputData normalGivenInputData = new NormalGivenInputData();
+        normalGivenInputData.setAPressed(false);
+        normalGivenInputData.setDPressed(false);
+        normalGivenInputData.setSPressed(false);
+        normalGivenInputData.setWPressed(false);
+
+        NormalGivenInteractor normalGivenInteractor = new NormalGivenInteractor(normalGivenDataAccessObject, normalGivenPresenter, null);
+        normalGivenInteractor.execute(normalGivenInputData);
 
 
     }
