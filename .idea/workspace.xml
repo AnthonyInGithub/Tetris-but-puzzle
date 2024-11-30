@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="Delete out">
-      <change beforePath="$PROJECT_DIR$/FiledData/playerProgress.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FiledData/playerProgress.csv" afterDir="false" />
+    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="change button size">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="view" />
+        <entry key="$PROJECT_DIR$" value="Integrate-Testing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,7 +56,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "Integrate-Testing",
+    "git-widget-placeholder": "bo'test1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Desktop/CSC207/Tetris-but-puzzle",
     "node.js.detected.package.eslint": "true",
@@ -89,6 +90,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Tetris-but-puzzle" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Tetris-but-puzzle" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -193,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733002154683</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="change button size">
+      <option name="closed" value="true" />
+      <created>1733004110522</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733004110522</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +237,7 @@
     <MESSAGE value="Refractor" />
     <MESSAGE value="Delete target" />
     <MESSAGE value="Delete out" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete out" />
+    <MESSAGE value="change button size" />
+    <option name="LAST_COMMIT_MESSAGE" value="change button size" />
   </component>
 </project>
