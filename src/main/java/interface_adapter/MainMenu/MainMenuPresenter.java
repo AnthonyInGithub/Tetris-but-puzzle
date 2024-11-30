@@ -1,5 +1,6 @@
 package interface_adapter.MainMenu;
 
+import interface_adapter.LevelSelect.LevelSelectViewModel;
 import use_case.MainScene.MainMenuOutputBoundary;
 import use_case.MainScene.MainOutputData;
 import view.MainSceneView;
@@ -13,15 +14,15 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
 
     private final HistoryViewModel historyViewModel;
     private final ViewManagerModel viewManagerModel;
-    // private final LevelSelectViewModel levelSelectViewModel;
+    private final LevelSelectViewModel levelSelectViewModel;
 
 
-    public MainMenuPresenter(HistoryViewModel historyViewModel, ViewManagerModel viewManagerModel
-                                                /*, LevelSelectViewModel levelSelectViewModel*/) {
+    public MainMenuPresenter(HistoryViewModel historyViewModel, ViewManagerModel viewManagerModel,
+                                                LevelSelectViewModel levelSelectViewModel) {
 
         this.historyViewModel = historyViewModel;
         this.viewManagerModel = viewManagerModel;
-        // this.levelSelectViewModel = levelSelectViewModel
+        this.levelSelectViewModel = levelSelectViewModel;
     }
 
     @Override
@@ -32,9 +33,9 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
     @Override
     public void navigateToLevelsPage() {
         // view.navigateTo("LevelsPage");
-//        levelSelectViewModel.firePropertyChanged();
-//        viewManagerModel.setState(levelSelectViewModel.getViewName());
-//        viewManagerModel.firePropertyChanged();
+        levelSelectViewModel.firePropertyChanged();
+        viewManagerModel.setState(levelSelectViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override

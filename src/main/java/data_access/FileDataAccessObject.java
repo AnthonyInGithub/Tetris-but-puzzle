@@ -72,19 +72,6 @@ public class FileDataAccessObject implements EndingSceneDataAccessInterface,
         }
     }
 
-    // Methods for LevelSelect functionality
-    @Override
-    public int getSelectedLevel() {
-        return selectedLevel;
-    }
-
-
-    // Methods for LevelSelect functionality
-    @Override
-    public int getSelectedLevel() {
-        return selectedLevel;
-    }
-
     @Override
     public void setSelectedLevel(int level) {
         if (level < 1 || level > 3) {

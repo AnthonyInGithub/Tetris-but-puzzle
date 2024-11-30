@@ -16,10 +16,12 @@ public class Main {
                                             .addMainMenuView()
                                             .addNormalGivenView()
                                             .addHistoryView()
+                                            .addLevelSelectView()
                                             .addEndingSceneUseCase()
                                             .addNormalGivenUseCase()
                                             .addHistoryUseCase()
                                             .addMainMenuUseCase()
+                                            .addLevelSelectUseCase()
                                             .build();
 
         //appBuilder.TestingSwtich();

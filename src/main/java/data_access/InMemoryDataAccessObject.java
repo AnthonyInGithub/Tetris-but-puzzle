@@ -205,7 +205,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         {
             try {
                 // Resize the image to 10x20 using Thumbnailator
-                current_level = 1;
+                currentLevel = 1;
                 setImageAddress();
                 BufferedImage resizedImage = Thumbnails.of(new File(imageAddress))
                         .forceSize(10, 20)

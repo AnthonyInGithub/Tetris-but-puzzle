@@ -3,23 +3,24 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import interface_adapter.LevelSelect.LevelSelectController;
+import interface_adapter.LevelSelect.LevelSelectViewModel;
 
 /**
  * View for the Level Select Use Case.
  * Displays buttons for selecting levels with corresponding images and a custom background.
  */
 public class LevelSelectView extends JPanel {
-    private final LevelSelectController controller;
+    private LevelSelectController controller;
+    private final LevelSelectViewModel levelSelectViewModel;
 
-    public LevelSelectView(LevelSelectController controller) {
-        this.controller = controller;
-
+    public LevelSelectView(LevelSelectViewModel levelSelectViewModel) {
+        this.levelSelectViewModel = levelSelectViewModel;
         // Set layout and panel size
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800, 600));
 
         // Add custom background
-        JLabel backgroundLabel = new JLabel(new ImageIcon("images/background.png"));
+        JLabel backgroundLabel = new JLabel(new ImageIcon("images/GUI.png"));
         backgroundLabel.setLayout(new GridBagLayout()); // Use GridBagLayout for positioning
         add(backgroundLabel, BorderLayout.CENTER);
 
@@ -30,9 +31,9 @@ public class LevelSelectView extends JPanel {
         gbc.gridy = 0;
 
         // Create buttons with corresponding images
-        JButton level1Button = createImageButton("images/button1.png", () -> controller.selectLevel(1));
-        JButton level2Button = createImageButton("images/button2.png", () -> controller.selectLevel(2));
-        JButton level3Button = createImageButton("images/button3.png", () -> controller.selectLevel(3));
+        JButton level1Button = createImageButton("images/GUI.png", () -> controller.selectLevel(1));
+        JButton level2Button = createImageButton("images/GUI.png", () -> controller.selectLevel(2));
+        JButton level3Button = createImageButton("images/GUI.png", () -> controller.selectLevel(3));
 
         // Add buttons to the background with positioning
         gbc.gridy = 0;
@@ -68,4 +69,8 @@ public class LevelSelectView extends JPanel {
 
         return button;
     }
+    public void setLevelSelectController(LevelSelectController controller) {
+        this.controller = controller;
+    }
+
 }

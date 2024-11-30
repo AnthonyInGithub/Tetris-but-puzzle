@@ -121,8 +121,6 @@ import java.awt.*;
 
 public class MainSceneView extends JPanel {
 
-    private final String viewName = "MainMenu";
-
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
 
@@ -272,7 +270,4 @@ public class MainSceneView extends JPanel {
         cardLayout.show(mainPanel, pageName);
     }
 
-    public String getViewName() {
-        return this.viewName;
-    }
 }
