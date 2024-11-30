@@ -4,8 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m">
+    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="Refractor">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/AppBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_access/EndingSceneDataAccessInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_access/FileDataAccessObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_access/InMemoryDataAccessObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_access/NormalGivenDataAccessInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entity/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingSceneController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingScenePresenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingSceneState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingSceneViewModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenPresenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenViewModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/ViewManagerModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/ViewModelMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myOwnFunctionalityTesting.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/EndingScene/EndingSceneInputBoundary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/EndingScene/EndingSceneInputData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/EndingScene/EndingSceneInteractor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/EndingScene/EndingSceneOutputBoundary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/EndingScene/EndingSceneOutputData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInputBoundary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInputData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenOutputBoundary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenOutputData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/EndingSceneView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$CustomBackgroundPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/use_case/endingscene/endingSceneInteractorTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/use_case/normalgiven/NormalGivenInteractorTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733000426881</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refractor">
+      <option name="closed" value="true" />
+      <created>1733001389178</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733001389178</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +228,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="m" />
-    <option name="LAST_COMMIT_MESSAGE" value="m" />
+    <MESSAGE value="Refractor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refractor" />
   </component>
 </project>
