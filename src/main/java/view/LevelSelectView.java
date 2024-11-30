@@ -20,7 +20,7 @@ public class LevelSelectView extends JPanel {
         setPreferredSize(new Dimension(800, 600));
 
         // Add custom background
-        JLabel backgroundLabel = new JLabel(new ImageIcon("images/GUI.png"));
+        JLabel backgroundLabel = new JLabel(new ImageIcon("images/LevelBackground.png"));
         backgroundLabel.setLayout(new GridBagLayout()); // Use GridBagLayout for positioning
         add(backgroundLabel, BorderLayout.CENTER);
 
@@ -31,9 +31,9 @@ public class LevelSelectView extends JPanel {
         gbc.gridy = 0;
 
         // Create buttons with corresponding images
-        JButton level1Button = createImageButton("images/GUI.png", () -> controller.selectLevel(1));
-        JButton level2Button = createImageButton("images/GUI.png", () -> controller.selectLevel(2));
-        JButton level3Button = createImageButton("images/GUI.png", () -> controller.selectLevel(3));
+        JButton level1Button = createImageButton("images/levelbutton1.png", () -> controller.selectLevel(1));
+        JButton level2Button = createImageButton("images/levelbutton2.png", () -> controller.selectLevel(2));
+        JButton level3Button = createImageButton("images/levelbutton3.png", () -> controller.selectLevel(3));
 
         // Add buttons to the background with positioning
         gbc.gridy = 0;
