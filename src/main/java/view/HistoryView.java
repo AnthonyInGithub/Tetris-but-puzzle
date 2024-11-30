@@ -58,27 +58,17 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
             }
         };
 
+        labelAtTop = new JLabel();
+        labelAtTop.setPreferredSize(new Dimension(340, 70));
+        ImageIcon icon = new ImageIcon("images/historyLabel.png");
+        Image scaledImage = icon.getImage().getScaledInstance(340, 70, Image.SCALE_SMOOTH);
+
         panelTop.setPreferredSize(new Dimension(topWidth, topHeight)); // Adjust height
         panelTop.setBackground(Color.LIGHT_GRAY);
-        panelTop.setLayout(new FlowLayout(FlowLayout.CENTER, 0, panelTop.getPreferredSize().height/3));
+        panelTop.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
 
-
-        ImageIcon icon = new ImageIcon("images/historyLabel.png");
-
-        this.labelAtTop = new JLabel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-
-                // Scale the image to the size of the label
-                Image scaledImage = icon.getImage().getScaledInstance(
-                        getWidth(), getHeight(), Image.SCALE_SMOOTH);
-                g.drawImage(scaledImage, 0, 0, getWidth(), getHeight(), this);
-            }
-        };
+        labelAtTop.setIcon(new ImageIcon(scaledImage));
         // labelAtTop.setPreferredSize(new Dimension(100, 100));
-        labelAtTop.setIcon(icon);
-
 
 
         panelTop.add(labelAtTop);
@@ -102,11 +92,16 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
                 }
             }
         };
-        panelBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
+        panelBottom.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 10));
         panelBottom.setPreferredSize(new Dimension(bottomWidth, bottomHeight)); // Adjust height
-        panelBottom.setBackground(Color.LIGHT_GRAY); // Optional background color
+        // panelBottom.setBackground(Color.LIGHT_GRAY); // Optional background color
 
-        this.backButton = new JButton("Back");
+        // Load the image
+        ImageIcon originalIcon = new ImageIcon("images/bottomButton(1).png");
+        Image scaledImage2 = originalIcon.getImage().getScaledInstance(130, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage2);
+
+        this.backButton = new JButton();
         backButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -117,6 +112,11 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
                     }
                 }
         );
+        backButton.setPreferredSize(new Dimension(130, 50));
+        backButton.setIcon(scaledIcon);
+        backButton.setBorderPainted(false);  // Remove border
+        backButton.setContentAreaFilled(false);  // Remove content area
+        backButton.setFocusPainted(false);  // Remove focus indicator
         panelBottom.add(backButton, BorderLayout.EAST);
         add(panelBottom, BorderLayout.SOUTH);
 
@@ -194,4 +194,5 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
 //        SwingUtilities.invokeLater(() -> new HistoryView().createAndShowGUI());
 //    }
 }
+
 
