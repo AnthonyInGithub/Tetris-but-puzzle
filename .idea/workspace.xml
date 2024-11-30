@@ -5,10 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_18_19_33_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_18_19_33__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024_11_18_19_35_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024_11_18_19_35__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/History/HistoryPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/History/HistoryPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/NormalGiven/NormalGivenState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/NormalGiven/NormalGivenState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/NormalGivenMainSceneInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainSceneInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainSceneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainSceneView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/NormalGivenView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/NormalGivenView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/AppBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/AppBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingScenePresenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingScenePresenter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenState.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/NormalGivenView$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/NormalGivenView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Integrate-Testing" />
+        <entry key="$PROJECT_DIR$" value="view" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,6 +111,7 @@
       <workItem from="1731975602115" duration="6170000" />
       <workItem from="1732386958264" duration="22763000" />
       <workItem from="1732580466345" duration="3706000" />
+      <workItem from="1732989636524" duration="2478000" />
     </task>
     <task id="LOCAL-00001" summary="m">
       <option name="closed" value="true" />
