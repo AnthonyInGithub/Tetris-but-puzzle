@@ -8,11 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * A simple view with an image and two buttons.
  */
-public class EndingSceneView extends JPanel implements ActionListener {
+public class EndingSceneView extends JPanel implements PropertyChangeListener,ActionListener {
     private final JButton saveButton;
     private final JButton returnButton;
     private final int WINDOW_WIDTH = 960;
@@ -24,6 +26,10 @@ public class EndingSceneView extends JPanel implements ActionListener {
     private final int BUTTON_HEIGHT = 75;
 
     private final Image backgroundImage;
+
+    String displayText;
+    JLabel titleLabel;
+
 
 
 
@@ -38,20 +44,19 @@ public class EndingSceneView extends JPanel implements ActionListener {
         backgroundImage = new ImageIcon("images/EndingSceneBackground.png").getImage();
 
         // padding at the top
-        add(Box.createRigidArea(new Dimension(0, 177)));
+        add(Box.createRigidArea(new Dimension(0, 160)));
 
         // set ending game text
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.X_AXIS));
         textPanel.setOpaque(false);
         EndingSceneState endingSceneState = endingSceneViewModel.getState();
-        String displayText;
         if(endingSceneState.getIsWin()) {
             displayText = "WIN";
         }else{
             displayText = "LOSE";
         }
-        JLabel titleLabel = new JLabel(displayText); // Example text
+        titleLabel = new JLabel(displayText); // Example text
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Set font to bold and size to 36
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setForeground(Color.WHITE); // Adjust color if needed
@@ -131,6 +136,18 @@ public class EndingSceneView extends JPanel implements ActionListener {
     }
     private void resetSaveButton() {
         saveButton.setEnabled(true);
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(endingSceneViewModel.getState().getIsWin()){
+            displayText = "WIN";
+            titleLabel.setText(displayText);
+
+        }else{
+            displayText = "LOSE";
+            titleLabel.setText(displayText);
+        }
+
     }
 
 

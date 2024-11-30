@@ -1,15 +1,20 @@
-package use_case.MainScene;
+package use_case.MainMenu;
+import data_access.MainMenuDataAccessInterface;
 import net.coobird.thumbnailator.Thumbnails;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class MainSceneInteractor implements MainMenuInputBoundary {
+public class MainMenuInteractor implements MainMenuInputBoundary {
     private final MainMenuOutputBoundary presenter;
+    private final MainMenuDataAccessInterface mainMenuDataAccessObject;
+    private String myOwnImagePath = "images/UploadedImage/temp.png";
 
-    public MainSceneInteractor(MainMenuOutputBoundary presenter) {
+    public MainMenuInteractor(MainMenuOutputBoundary presenter, MainMenuDataAccessInterface mainMenuDataAccessObject) {
         this.presenter = presenter;
+        this.mainMenuDataAccessObject = mainMenuDataAccessObject;
     }
 
     public void handleMainMenuAction(MainInputData inputData) {
@@ -23,11 +28,6 @@ public class MainSceneInteractor implements MainMenuInputBoundary {
         if ("HistoryButton".equals(buttonName)) {
             presenter.navigateToHistoryPage();
             System.out.println("History button pressed in interactor");
-
-        }
-        if ("BattleButton".equals(buttonName)) {
-            presenter.navigateToBattlePage();
-            System.out.println("Batlle button pressed in interactor");
 
         }
         if ("MyOwnUploadButton".equals(buttonName)) {
@@ -80,15 +80,23 @@ public class MainSceneInteractor implements MainMenuInputBoundary {
             try {
                 // Resize and process the uploaded file
                 BufferedImage resizedImage = Thumbnails.of(file)
-                        .size(10, 20)
+                        .forceSize(10, 20)
                         .asBufferedImage();
+                BufferedImage resizedBackgroundImage = Thumbnails.of(file)
+                        .forceSize(300, 600)
+                        .asBufferedImage();
+                File outputFile = new File(myOwnImagePath);
+                ImageIO.write(resizedBackgroundImage, "png", outputFile);
 
                 int[][] binaryArray = generateBinaryArray(resizedImage);
                 int[][][] colorMap = generateColorMap(resizedImage);
 
                 // Log or process the binary array and color map as needed
-                logBinaryArray(binaryArray);
-                logColorMap(colorMap);
+                mainMenuDataAccessObject.setBinaryMap(binaryArray);
+                mainMenuDataAccessObject.setColorMap(colorMap);
+                mainMenuDataAccessObject.setBackgroundImageAddress(myOwnImagePath);
+
+                presenter.navigateToNormalGivenPage(new MainOutputData(null, null, null, myOwnImagePath));
 
                 presenter.present(new MainOutputData("file processed successfully: " + file.getName()));
 
@@ -131,6 +139,7 @@ public class MainSceneInteractor implements MainMenuInputBoundary {
     private int[][][] generateColorMap(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
+        System.out.println("heihgt"+height);
         int[][][] colorMap = new int[height][width][3];
 
         for (int y = 0; y < height; y++) {

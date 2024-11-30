@@ -119,7 +119,7 @@ import interface_adapter.MainMenu.MainMenuViewModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainSceneView extends JPanel {
+public class MainMenuView extends JPanel {
 
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
@@ -128,7 +128,7 @@ public class MainSceneView extends JPanel {
     private MainMenuController mainMenuController;
 
 
-    public MainSceneView(MainMenuViewModel mainMenuViewModel) {
+    public MainMenuView(MainMenuViewModel mainMenuViewModel) {
         this.mainMenuViewModel = mainMenuViewModel;
         setBackground(Color.BLACK);
         // setPreferredSize(new Dimension(600, 600));

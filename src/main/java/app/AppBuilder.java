@@ -21,15 +21,19 @@ import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
-import interface_adapter.NormalGiven.ViewManagerModel;
+import interface_adapter.ViewManagerModel;
+import use_case.EndingScene.EndingSceneInputBoundary;
 import use_case.EndingScene.EndingSceneInteractor;
 import use_case.EndingScene.EndingSceneOutputBoundary;
+import use_case.History.HistoryInputBoundary;
 import use_case.History.HistoryInterator;
 import use_case.History.HistoryOutputBoundary;
+import use_case.LevelSelect.LevelSelectInputBoundary;
 import use_case.LevelSelect.LevelSelectInteractor;
 import use_case.LevelSelect.LevelSelectOutputBoundary;
-import use_case.MainScene.MainMenuOutputBoundary;
-import use_case.MainScene.MainSceneInteractor;
+import use_case.MainMenu.MainMenuInputBoundary;
+import use_case.MainMenu.MainMenuOutputBoundary;
+import use_case.MainMenu.MainMenuInteractor;
 import view.*;
 import use_case.NormalGiven.NormalGivenInputBoundary;
 import use_case.NormalGiven.NormalGivenInteractor;
@@ -63,7 +67,7 @@ public class AppBuilder {
     private NormalGivenView normalGivenView;
     private EndingSceneView endingSceneView;
     private HistoryView historyView;
-    private MainSceneView mainMenuView;
+    private MainMenuView mainMenuView;
     private LevelSelectView levelSelectView;
 
     public AppBuilder() {
@@ -94,7 +98,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addMainMenuView(){
-        mainMenuView = new MainSceneView(mainMenuViewModel);
+        mainMenuView = new MainMenuView(mainMenuViewModel);
         cardPanel.add(mainMenuView, mainMenuViewModel.getViewName());
         return this;
     }
@@ -126,7 +130,7 @@ public class AppBuilder {
     public AppBuilder addEndingSceneUseCase() {
         final EndingSceneOutputBoundary endingScenePresenter = new EndingScenePresenter(endingSceneViewModel, mainMenuViewModel, viewManagerModel);
 
-        final EndingSceneInteractor endingSceneInteractor = new EndingSceneInteractor(dataAccessObject, endingScenePresenter, fileAccessObject);
+        final EndingSceneInputBoundary endingSceneInteractor = new EndingSceneInteractor(dataAccessObject, endingScenePresenter, fileAccessObject);
 
         final EndingSceneController endingSceneController = new EndingSceneController(endingSceneInteractor);
 
@@ -137,7 +141,7 @@ public class AppBuilder {
     public AppBuilder addHistoryUseCase() {
         final HistoryOutputBoundary historyPresenter = new HistoryPresenter(viewManagerModel, historyViewModel, mainMenuViewModel);
 
-        final HistoryInterator historyInterator = new HistoryInterator(dataAccessObject, historyPresenter, fileAccessObject);
+        final HistoryInputBoundary historyInterator = new HistoryInterator(dataAccessObject, historyPresenter, fileAccessObject);
 
         final HistoryController historyController = new HistoryController(historyInterator);
 
@@ -146,11 +150,11 @@ public class AppBuilder {
         return this;
     }
     public AppBuilder addMainMenuUseCase(){
-        final MainMenuOutputBoundary mainMenuPresenter = new MainMenuPresenter(historyViewModel, viewManagerModel, levelSelectViewModel);
+        final MainMenuOutputBoundary mainMenuPresenter = new MainMenuPresenter(historyViewModel, viewManagerModel, levelSelectViewModel, normalGivenViewModel);
 
-        final MainSceneInteractor mainSceneInteractor = new MainSceneInteractor(mainMenuPresenter);
+        final MainMenuInputBoundary mainMenuInteractor = new MainMenuInteractor(mainMenuPresenter, dataAccessObject);
 
-        final MainMenuController mainMenuController = new MainMenuController(mainSceneInteractor);
+        final MainMenuController mainMenuController = new MainMenuController(mainMenuInteractor);
 
         mainMenuView.setMainMenuController(mainMenuController);
 
@@ -159,7 +163,7 @@ public class AppBuilder {
     public AppBuilder addLevelSelectUseCase(){
         final LevelSelectOutputBoundary levelSelectPresenter = new LevelSelectPresenter(normalGivenViewModel, viewManagerModel);
 
-        final LevelSelectInteractor levelSelectInteractor = new LevelSelectInteractor(levelSelectPresenter, dataAccessObject);
+        final LevelSelectInputBoundary levelSelectInteractor = new LevelSelectInteractor(levelSelectPresenter, dataAccessObject);
 
         final LevelSelectController levelSelectController = new LevelSelectController(levelSelectInteractor);
 
@@ -184,9 +188,5 @@ public class AppBuilder {
         viewManager.setJFrame(application);
 
         return application;
-    }
-
-    public void TestingSwtich(){
-        cardLayout.show(cardPanel, "NormalGivenView");
     }
 }

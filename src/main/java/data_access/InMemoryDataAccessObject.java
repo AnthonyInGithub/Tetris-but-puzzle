@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.Entity;
+import entity.StagedMap;
 import net.coobird.thumbnailator.Thumbnails;
 
 import java.awt.*;
@@ -12,7 +12,8 @@ import java.io.IOException;
 public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                                                     EndingSceneDataAccessInterface,
                                                     HistoryDataAccessInterface,
-                                                   LevelSelectDataAccessInterface{
+                                                   LevelSelectDataAccessInterface,
+                                                    MainMenuDataAccessInterface{
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
@@ -33,7 +34,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     private int y;
 
     // The game board entity
-    private Entity entity;
+    private StagedMap stagedMap;
 
     // Shapes definitions
     private final int[][][][] shapes = {
@@ -78,19 +79,13 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     // Constructor
     public InMemoryDataAccessObject() {
-        this.entity = new Entity();
-        setColorMapAndBinaryMap();
+        this.stagedMap = new StagedMap();
         generateNewPiece();
     }
 
     @Override
     public int[] getCurrentShapeState() {
         return currentShapeState;
-    }
-
-    @Override
-    public void setCurrentShapeState(int[] currentShapeState) {
-        this.currentShapeState = currentShapeState;
     }
 
     @Override
@@ -114,13 +109,13 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     }
 
     @Override
-    public Entity getEntity() {
-        return entity;
+    public StagedMap getStagedMap() {
+        return stagedMap;
     }
 
     @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
+    public void setEntity(StagedMap stagedMap) {
+        this.stagedMap = stagedMap;
     }
 
     @Override
@@ -172,7 +167,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
 
     public void updateMap(int[][] currentMap) {
-        entity.setGameBoard(currentMap);
+        stagedMap.setGameBoard(currentMap);
     }
 
     public void setTargetMap(int[][] targetMap) {
@@ -200,12 +195,11 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         this.endGameScreenShot = endGameScreenShot;
     }
 
-
+    @Override
     public void setColorMapAndBinaryMap() {
         {
             try {
                 // Resize the image to 10x20 using Thumbnailator
-                currentLevel = 1;
                 setImageAddress();
                 BufferedImage resizedImage = Thumbnails.of(new File(imageAddress))
                         .forceSize(10, 20)
@@ -259,6 +253,24 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                 e.printStackTrace();
             }
         }
+    }
+
+    public void resetCurrentMap(){
+        int[][] currentMap = stagedMap.getGameBoard();
+        for(int i = 0; i < currentMap.length; i++){
+            for (int j = 0; j < currentMap[i].length; j++){
+                currentMap[i][j] = 0;
+            }
+        }
+    }
+    public void setColorMap(int[][][] colorMap) {
+        this.colorMap = colorMap;
+    }
+    public void setBinaryMap(int[][] binaryMap) {
+        this.targetMap = binaryMap;
+    }
+    public void setBackgroundImageAddress(String backgroundImageAddress) {
+        this.imageAddress = backgroundImageAddress;
     }
 }
 

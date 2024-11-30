@@ -6,6 +6,7 @@ images/HistoryScreenShot
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea/easycode.ignore
+images/UploadedImage
 
 workspace.xml
 ### Mac OS ###

@@ -73,7 +73,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             }
         };
 
-        ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
+        //((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
         gameArea.setBorder(redline);
         add(gameArea, BorderLayout.CENTER);
 
@@ -161,10 +161,18 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         int[][] solutionMap = normalGivenViewModel.getSolutionMap();
         int[][][] colorMap = normalGivenViewModel.getColorMap();
 
+        for(int i = 0; i < currentMap.length; i++){
+            for(int j = 0; j < currentMap[0].length; j++){
+                System.out.print(currentMap[i][j] + " ");
+            }
+            System.out.println();
+        }
+
         for (int i = 0; i < currentMap.length; i++) {
 
             for (int j = 0; j < currentMap[0].length; j++) {
                 if (currentMap[i][j] == 1) {
+
                     int[] color = colorMap[i][j];
                     if (solutionMap[i][j] == 1) {
                         gameArea.add(squareFactory(margin + squareSize * j,
@@ -199,7 +207,6 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             public void run() {
                 normalGivenController.execute(false,false,true,false);
                 draw();
-                System.out.println("regular execution");
                 if (firstTime) {
                     System.out.println("first time timer starts -- line 203");
                     String imagePath = normalGivenState.getImgAddress();
@@ -223,6 +230,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             System.out.println("timer starts");
         } else if (normalGivenState.getGamingState().equals("end")) {
             timer.cancel();
+            firstTime = true;
             System.out.println("timer ends");
         }
 

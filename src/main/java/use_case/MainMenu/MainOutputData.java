@@ -1,4 +1,4 @@
-package use_case.MainScene;
+package use_case.MainMenu;
 
 /**
  * shows the output data for the main menu interactor.
@@ -8,6 +8,7 @@ public class MainOutputData {
     private final String responseMessage;  // Feedback or result message
     private final int[][] binaryArray;     // Optional binary array result
     private final int[][][] colorMap;      // Optional color map result
+    private final String ImgAddress;
 
     /**
      * Constructor for message-only output.
@@ -15,7 +16,7 @@ public class MainOutputData {
      * @param responseMessage The response message to be presented to the user.
      */
     public MainOutputData(String responseMessage) {
-        this(responseMessage, null, null);
+        this(responseMessage, null, null, null);
     }
 
     /**
@@ -25,10 +26,11 @@ public class MainOutputData {
      * @param binaryArray     The binary array generated.
      * @param colorMap        The color map generated.
      */
-    public MainOutputData(String responseMessage, int[][] binaryArray, int[][][] colorMap) {
+    public MainOutputData(String responseMessage, int[][] binaryArray, int[][][] colorMap, String ImgAddress) {
         this.responseMessage = responseMessage;
         this.binaryArray = binaryArray;
         this.colorMap = colorMap;
+        this.ImgAddress = ImgAddress;
     }
 
     /**
@@ -56,5 +58,9 @@ public class MainOutputData {
      */
     public int[][][] getColorMap() {
         return colorMap;
+    }
+
+    public String getImgAddress() {
+        return ImgAddress;
     }
 }

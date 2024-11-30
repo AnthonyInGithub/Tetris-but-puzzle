@@ -1,9 +1,7 @@
 package interface_adapter.EndingScene;
 
 import interface_adapter.MainMenu.MainMenuViewModel;
-import interface_adapter.NormalGiven.NormalGivenState;
-import interface_adapter.NormalGiven.NormalGivenViewModel;
-import interface_adapter.NormalGiven.ViewManagerModel;
+import interface_adapter.ViewManagerModel;
 import use_case.EndingScene.EndingSceneOutputBoundary;
 import use_case.EndingScene.EndingSceneOutputData;
 

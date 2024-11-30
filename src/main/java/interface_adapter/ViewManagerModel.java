@@ -1,4 +1,4 @@
-package interface_adapter.NormalGiven;
+package interface_adapter;
 
 /**
  * Model for the View Manager. Its state is the name of the View which

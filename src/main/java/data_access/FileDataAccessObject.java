@@ -92,4 +92,10 @@ public class FileDataAccessObject implements EndingSceneDataAccessInterface,
         // Directly set the image address based on the current level
         imageAddress = "images/level" + selectedLevel + ".png";
     }
+
+    @Override
+    public void setColorMapAndBinaryMap() {
+
+    }
+    public void resetCurrentMap(){}
 }

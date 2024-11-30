@@ -1,6 +1,6 @@
 package entity;
 
-public class Entity {
+public class StagedMap {
     private final int width = 10;
     private final int height = 22; // Includes extra space above the visible area
 
@@ -8,7 +8,7 @@ public class Entity {
     private int[][] gameBoard;
 
     // Constructor
-    public Entity() {
+    public StagedMap() {
         initializeGameBoard();
     }
 

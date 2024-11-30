@@ -5,7 +5,7 @@ import data_access.NormalGivenDataAccessInterface;
 import interface_adapter.EndingScene.EndingSceneViewModel;
 import interface_adapter.NormalGiven.NormalGivenPresenter;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
-import interface_adapter.NormalGiven.ViewManagerModel;
+import interface_adapter.ViewManagerModel;
 import org.junit.Test;
 import use_case.NormalGiven.NormalGivenInputData;
 import use_case.NormalGiven.NormalGivenInteractor;
@@ -30,7 +30,7 @@ public class NormalGivenInteractorTest {
         normalGivenInputData.setWPressed(false);
 
         NormalGivenInteractor normalGivenInteractor = new NormalGivenInteractor(normalGivenDataAccessObject, normalGivenPresenter, null);
-        int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+        int[][] currentMap = normalGivenDataAccessObject.getStagedMap().getGameBoard();
         //set the button line to 1 and the rest 0
         for(int i = 0; i < 21; i++){
             for(int j = 0; j < 10; j++){
@@ -73,7 +73,7 @@ public class NormalGivenInteractorTest {
             }
         };
 
-        int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+        int[][] currentMap = normalGivenDataAccessObject.getStagedMap().getGameBoard();
         //set the button line to 1 and the rest 0
         for(int i = 0; i < 22; i++){
             for(int j = 0; j < 10; j++){

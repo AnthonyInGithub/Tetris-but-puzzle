@@ -1,4 +1,4 @@
-package use_case.MainScene;
+package use_case.MainMenu;
 
 public interface MainMenuInputBoundary {
 

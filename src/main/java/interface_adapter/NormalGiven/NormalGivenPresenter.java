@@ -2,7 +2,7 @@ package interface_adapter.NormalGiven;
 
 import interface_adapter.EndingScene.EndingSceneState;
 import interface_adapter.EndingScene.EndingSceneViewModel;
-import interface_adapter.NormalGiven.NormalGivenState;
+import interface_adapter.ViewManagerModel;
 import use_case.NormalGiven.NormalGivenOutputBoundary;
 import use_case.NormalGiven.NormalGivenOutputData;
 
@@ -44,7 +44,7 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         normalGivenViewModel.setMap(outputData.getMap());
         normalGivenViewModel.setSolutionMap(outputData.getSolutionMap());
         normalGivenViewModel.setColorMap(outputData.getColorMap());
-        normalGivenViewModel.setImgAddress(outputData.getImgAddress());
+        //normalGivenViewModel.setImgAddress(outputData.getImgAddress());
 
     }
 

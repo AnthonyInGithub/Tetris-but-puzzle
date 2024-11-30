@@ -33,6 +33,9 @@ public class LevelSelectInteractor implements LevelSelectInputBoundary {
         // Update the current level in the data access layer
         dataAccess.setSelectedLevel(level);
         dataAccess.setImageAddress(); // Set the corresponding image address for the level
+        dataAccess.setColorMapAndBinaryMap();
+
+        dataAccess.resetCurrentMap();
 
         // Prepare output data with the selected level and image address
         String imageAddress = dataAccess.getImageAddressLevel();

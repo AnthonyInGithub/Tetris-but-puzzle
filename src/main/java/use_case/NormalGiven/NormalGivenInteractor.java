@@ -1,13 +1,11 @@
 package use_case.NormalGiven;
 
 import data_access.NormalGivenDataAccessInterface;
-import entity.Entity;
+import entity.StagedMap;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 
 public class NormalGivenInteractor implements NormalGivenInputBoundary{
@@ -39,8 +37,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                                  JPanel currentView) {
         this.normalGivenDataAccessObject = normalGivenDataAccessObject;
         this.normalGivenPresenter = normalGivenPresenter;
-        Entity currentEntity = normalGivenDataAccessObject.getEntity();
-        currentMap = currentEntity.getGameBoard();
+        StagedMap currentStagedMap = normalGivenDataAccessObject.getStagedMap();
+        currentMap = currentStagedMap.getGameBoard();
         //This seems to violate the CA here, but it is neccessary to have Jpanel to get current screenshot
         this.currentView = currentView;
 
@@ -49,8 +47,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
 
     public void execute(NormalGivenInputData normalGivenInputData){
-        Entity currentEntity = normalGivenDataAccessObject.getEntity();
-        currentMap = currentEntity.getGameBoard();
+        StagedMap currentStagedMap = normalGivenDataAccessObject.getStagedMap();
+        currentMap = currentStagedMap.getGameBoard();
         x = normalGivenDataAccessObject.getX();
         y = normalGivenDataAccessObject.getY();
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);

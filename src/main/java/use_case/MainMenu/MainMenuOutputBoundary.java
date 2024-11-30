@@ -1,4 +1,4 @@
-package use_case.MainScene;
+package use_case.MainMenu;
 
 
 
@@ -9,6 +9,6 @@ public interface MainMenuOutputBoundary {
 
     void navigateToHistoryPage(); // New navigation method
 
-    void navigateToBattlePage(); // New navigation method
+    void navigateToNormalGivenPage(MainOutputData outputData);
 }
 

@@ -24,7 +24,6 @@ public class Main {
                                             .addLevelSelectUseCase()
                                             .build();
 
-        //appBuilder.TestingSwtich();
         application.pack();
         application.setVisible(true);
     }

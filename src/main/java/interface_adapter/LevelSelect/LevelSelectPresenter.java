@@ -2,7 +2,7 @@ package interface_adapter.LevelSelect;
 
 import interface_adapter.NormalGiven.NormalGivenState;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
-import interface_adapter.NormalGiven.ViewManagerModel;
+import interface_adapter.ViewManagerModel;
 import use_case.LevelSelect.LevelSelectOutputBoundary;
 import use_case.LevelSelect.LevelSelectOutputData;
 
@@ -33,6 +33,8 @@ public class LevelSelectPresenter implements LevelSelectOutputBoundary {
         state.setImgAddress(outputData.getImageAddress());
         normalGivenViewModel.setState(state);
         normalGivenViewModel.firePropertyChanged();
+
+
 
         // Transition to the NormalGivenView
         viewManagerModel.setState(normalGivenViewModel.getViewName());

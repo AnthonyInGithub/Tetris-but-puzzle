@@ -1,9 +1,8 @@
 package data_access;
 
-import entity.Entity;
+import entity.StagedMap;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 /**
  * Interface for accessing and modifying the game state and shapes.
@@ -11,7 +10,6 @@ import java.io.File;
 public interface NormalGivenDataAccessInterface {
     // Current piece information
     int[] getCurrentShapeState(); // [shapeType, rotationState]
-    void setCurrentShapeState(int[] currentShapeState);
 
     // Piece position
     int getX();
@@ -20,8 +18,8 @@ public interface NormalGivenDataAccessInterface {
     void setY(int y);
 
     // Game board
-    Entity getEntity();
-    void setEntity(Entity entity);
+    StagedMap getStagedMap();
+    void setEntity(StagedMap stagedMap);
     void updateMap(int[][] currentMap);
 
     // Shape definitions

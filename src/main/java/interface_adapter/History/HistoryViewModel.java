@@ -1,6 +1,6 @@
 package interface_adapter.History;
 
-import interface_adapter.NormalGiven.ViewModelMain;
+import interface_adapter.ViewModelMain;
 
 public class HistoryViewModel extends ViewModelMain<HistoryState>{
 
