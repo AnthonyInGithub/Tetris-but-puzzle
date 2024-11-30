@@ -17,7 +17,7 @@ public class LevelSelectView extends JPanel {
         this.levelSelectViewModel = levelSelectViewModel;
         // Set layout and panel size
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1024, 768));
 
         // Add custom background
         JLabel backgroundLabel = new JLabel(new ImageIcon("images/LevelBackground.png"));
@@ -35,14 +35,15 @@ public class LevelSelectView extends JPanel {
         JButton level2Button = createImageButton("images/levelbutton2.png", () -> controller.selectLevel(2));
         JButton level3Button = createImageButton("images/levelbutton3.png", () -> controller.selectLevel(3));
 
-        // Add buttons to the background with positioning
-        gbc.gridy = 0;
+        // Adjust button placement (relative to the background design)
+        gbc.gridy = 1; // First button (top)
+        gbc.ipadx = 0; // Horizontal padding for centering
         backgroundLabel.add(level1Button, gbc);
 
-        gbc.gridy = 1;
+        gbc.gridy = 2; // Second button (middle)
         backgroundLabel.add(level2Button, gbc);
 
-        gbc.gridy = 2;
+        gbc.gridy = 3; // Third button (bottom)
         backgroundLabel.add(level3Button, gbc);
     }
 
@@ -55,11 +56,11 @@ public class LevelSelectView extends JPanel {
      */
     private JButton createImageButton(String imagePath, Runnable action) {
         // Load the image icon for the button
-        ImageIcon icon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon icon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(200, 60, Image.SCALE_SMOOTH));
         JButton button = new JButton(icon);
 
         // Set button properties
-        button.setPreferredSize(new Dimension(200, 200));
+        button.setPreferredSize(new Dimension(200, 60)); // Match button image size
         button.setContentAreaFilled(false); // Make button background transparent
         button.setBorderPainted(false);     // Remove button border
         button.setFocusPainted(false);     // Remove focus border
@@ -69,8 +70,13 @@ public class LevelSelectView extends JPanel {
 
         return button;
     }
+
+    /**
+     * Sets the controller for the LevelSelectView.
+     *
+     * @param controller The LevelSelectController instance.
+     */
     public void setLevelSelectController(LevelSelectController controller) {
         this.controller = controller;
     }
-
 }
