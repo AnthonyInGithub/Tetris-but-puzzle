@@ -37,7 +37,7 @@ public class LevelSelectView extends JPanel {
 
         // Adjust button placement (relative to the background design)
         gbc.gridy = 1; // First button (top)
-        gbc.ipadx = 0; // Horizontal padding for centering
+        gbc.ipadx = 870; // Horizontal padding for centering
         backgroundLabel.add(level1Button, gbc);
 
         gbc.gridy = 2; // Second button (middle)
