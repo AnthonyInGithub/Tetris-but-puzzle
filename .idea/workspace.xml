@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m">
-      <change afterPath="$PROJECT_DIR$/images/historyBackgroundBottom.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/historyBackgroundTop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/historyLabel.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/ViewModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" afterDir="false" />
-    </list>
+    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,7 +51,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "view",
+    "git-widget-placeholder": "#19 on Integrate-Testing",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/17919/IdeaProjects/Tetris-but-puzzle/images",
     "node.js.detected.package.eslint": "true",
@@ -158,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732992810905</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="m">
+      <option name="closed" value="true" />
+      <created>1733000426881</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733000426881</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
