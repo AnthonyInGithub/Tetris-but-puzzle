@@ -3,7 +3,6 @@ package interface_adapter.MainMenu;
 import interface_adapter.LevelSelect.LevelSelectViewModel;
 import use_case.MainScene.MainMenuOutputBoundary;
 import use_case.MainScene.MainOutputData;
-import view.MainSceneView;
 import interface_adapter.History.HistoryViewModel;
 import interface_adapter.History.HistoryState;
 import interface_adapter.NormalGiven.ViewManagerModel;

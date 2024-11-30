@@ -5,26 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_18_19_33_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_18_19_33__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024_11_18_19_35_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2024_11_18_19_35__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/historyBackgroundBottom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/historyBackgroundTop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/historyLabel.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/AppBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/History/HistoryPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/History/HistoryPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/NormalGiven/NormalGivenState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/NormalGiven/NormalGivenState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/NormalGivenMainSceneInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainSceneInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainSceneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainSceneView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/NormalGivenView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/NormalGivenView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app/AppBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/AppBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/app/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingScenePresenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interface_adapter/EndingScene/EndingScenePresenter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/NormalGivenState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/NormalGivenView$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/NormalGivenView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/NormalGivenView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/interface_adapter/NormalGiven/ViewModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/use_case/NormalGiven/NormalGivenInteractor.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,22 +56,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;view&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "view",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/17919/IdeaProjects/Tetris-but-puzzle/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
     </key>
@@ -90,6 +83,26 @@
       <recent name="interface_adapter.NormalGiven" />
       <recent name="view" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
+      <module name="Tetris-but-puzzle" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -111,7 +124,7 @@
       <workItem from="1731975602115" duration="6170000" />
       <workItem from="1732386958264" duration="22763000" />
       <workItem from="1732580466345" duration="3706000" />
-      <workItem from="1732989636524" duration="2478000" />
+      <workItem from="1732989636524" duration="8314000" />
     </task>
     <task id="LOCAL-00001" summary="m">
       <option name="closed" value="true" />
@@ -137,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732583517063</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="m">
+      <option name="closed" value="true" />
+      <created>1732992810905</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732992810905</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
