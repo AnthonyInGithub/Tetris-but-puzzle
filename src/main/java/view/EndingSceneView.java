@@ -13,9 +13,6 @@ import java.awt.event.ActionListener;
  * A simple view with an image and two buttons.
  */
 public class EndingSceneView extends JPanel implements ActionListener {
-
-    private final String viewName = "EndingSceneView";
-
     private final JButton saveButton;
     private final JButton returnButton;
     private final int WINDOW_WIDTH = 960;
@@ -125,10 +122,6 @@ public class EndingSceneView extends JPanel implements ActionListener {
     }
     public void setEndingSceneController(EndingSceneController endingSceneController) {
         this.endingSceneController = endingSceneController;
-    }
-
-    public String getViewName() {
-        return viewName;
     }
 
     private void checkSaveSuccess() {

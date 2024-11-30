@@ -1,5 +1,6 @@
 package interface_adapter.EndingScene;
 
+import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.NormalGiven.NormalGivenState;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
 import interface_adapter.NormalGiven.ViewManagerModel;
@@ -12,7 +13,7 @@ import use_case.EndingScene.EndingSceneOutputData;
 
 public class EndingScenePresenter implements EndingSceneOutputBoundary {
     private EndingSceneViewModel endingSceneViewModel;
-    private NormalGivenViewModel normalGivenViewModel;
+    private MainMenuViewModel mainMenuViewModel;
     private ViewManagerModel viewManagerModel;
 
     /**
@@ -20,9 +21,9 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
      *
      * @param endingSceneViewModel the ViewModel instance to update
      */
-    public EndingScenePresenter(EndingSceneViewModel endingSceneViewModel, NormalGivenViewModel normalGivenViewModel, ViewManagerModel viewManagerModel) {
+    public EndingScenePresenter(EndingSceneViewModel endingSceneViewModel, MainMenuViewModel mainMenuViewModel, ViewManagerModel viewManagerModel) {
         this.endingSceneViewModel = endingSceneViewModel;
-        this.normalGivenViewModel = normalGivenViewModel;
+        this.mainMenuViewModel = mainMenuViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
@@ -37,14 +38,11 @@ public class EndingScenePresenter implements EndingSceneOutputBoundary {
 //            viewManagerModel.firePropertyChanged();
         }
         if(endingSceneOutputData.getIsReturnClicked()) {
-            final NormalGivenState normalGivenState = normalGivenViewModel.getState();
             // This set the data needed at the start of next view
-            normalGivenState.setGamingState("playing");
-            normalGivenViewModel.setState(normalGivenState);
-            normalGivenViewModel.firePropertyChanged();
+            mainMenuViewModel.firePropertyChanged();
 
             // This cause the change of scene
-            viewManagerModel.setState(normalGivenViewModel.getViewName());
+            viewManagerModel.setState(mainMenuViewModel.getViewName());
             viewManagerModel.firePropertyChanged();
         }
 

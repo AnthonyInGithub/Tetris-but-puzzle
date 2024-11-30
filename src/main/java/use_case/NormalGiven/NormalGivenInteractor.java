@@ -31,6 +31,9 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
     int similarityLevelSpecification = 80;
 
+    final int ENDING_GAME_HEIGHT = 3;
+    final int GAME_WIDTH = 10;
+
     public NormalGivenInteractor(NormalGivenDataAccessInterface normalGivenDataAccessObject,
                                  NormalGivenOutputBoundary normalGivenPresenter,
                                  JPanel currentView) {
@@ -202,14 +205,10 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
     // Checks if the current piece is out of bounds on the game map
     private boolean isOutOfBounds() {
-        int[][] shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0], currentShapeState[1]);
-        for (int i = 0; i < shapeMatrix.length; i++) {
-            for (int j = 0; j < shapeMatrix[0].length; j++) {
-                if (shapeMatrix[i][j] != 0) {
-                    // Check if the shape is out of bounds
-                    if (x + j < 0 || x + j >= 10 || y + i >= 22) {
-                        return true;
-                    }
+        for(int i = 0; i < ENDING_GAME_HEIGHT; i++){
+            for(int j = 0; j < GAME_WIDTH; j++){
+                if(currentMap[i][j] == 1){
+                    return true;
                 }
             }
         }

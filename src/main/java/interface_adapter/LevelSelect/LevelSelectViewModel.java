@@ -8,7 +8,7 @@ import interface_adapter.NormalGiven.ViewModelMain;
  */
 public class LevelSelectViewModel extends ViewModelMain<Integer> {
 
-    public LevelSelectViewModel(String viewName) {
+    public LevelSelectViewModel() {
         super("LevelSelectView");
     }
 }

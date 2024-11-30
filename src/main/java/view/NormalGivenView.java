@@ -20,8 +20,6 @@ import interface_adapter.NormalGiven.NormalGivenState;
 
 public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
-    private final String viewName = "NormalGivenView";
-
     private JPanel gameArea;
     private final int widowWidth = 515;
     private final int widowHeight = 635;
@@ -252,9 +250,5 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             }
         }
     }
-    public String getViewName(){
-        return viewName;
-    }
-
 }
 
