@@ -13,11 +13,13 @@ public class Main {
     public static void main(String[] args) {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder.addEndingSceneView()
+                                            .addMainMenuView()
                                             .addNormalGivenView()
                                             .addHistoryView()
                                             .addEndingSceneUseCase()
                                             .addNormalGivenUseCase()
                                             .addHistoryUseCase()
+                                            .addMainMenuUseCase()
                                             .build();
 
         //appBuilder.TestingSwtich();

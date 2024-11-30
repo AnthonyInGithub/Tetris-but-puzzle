@@ -115,40 +115,46 @@
 //}
 package view;
 import interface_adapter.MainMenu.MainMenuController;
+import interface_adapter.MainMenu.MainMenuViewModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainSceneView {
+public class MainSceneView extends JPanel {
 
-    private final JFrame frame;
+    private final String viewName = "MainMenu";
+
     private final JPanel mainPanel;
     private final CardLayout cardLayout;
 
-    private MainMenuController controller;
+    private MainMenuViewModel mainMenuViewModel;
+    private MainMenuController mainMenuController;
 
 
-    /**
-     * constructor for MainSceneView.
-     *
-     * @param controller The controller to handle user interactions.
-     */
-    public MainSceneView(MainMenuController controller) {
-        this.controller = controller;
-
-        frame = new JFrame("Main Scene");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+    public MainSceneView(MainMenuViewModel mainMenuViewModel) {
+        this.mainMenuViewModel = mainMenuViewModel;
+        setBackground(Color.BLACK);
+        // setPreferredSize(new Dimension(600, 600));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        mainPanel.add(createMainMenuPanel(), "MainMenu");
+        // Set the preferred size of the main panel
+        mainPanel.setPreferredSize(new Dimension(800, 650));
 
-        frame.add(mainPanel);
-        frame.setVisible(true);
+        // Add a panel to CardLayout
+        mainPanel.add(createMainMenuPanel(), "MainMenu");
+        cardLayout.show(mainPanel, "MainMenu");
+
+        add(mainPanel, BorderLayout.CENTER);
+
+        // Validate and repaint the layout
+        revalidate();
+        repaint();
+
     }
-    public void setController(MainMenuController controller) {
-        this.controller = controller;
+    public void setMainMenuController(MainMenuController controller) {
+        this.mainMenuController = controller;
     }
 
 
@@ -165,6 +171,7 @@ public class MainSceneView {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                // System.out.println(getWidth() + " " + getHeight());
                 g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
 
             }
@@ -174,25 +181,25 @@ public class MainSceneView {
         // Add buttons with custom images
         JButton startButton = createImageButton(
                 "images/StartButton.png",
-                300, 295, 200, 50,
+                300, 260, 200, 50,
                 "StartButton"
         );
 
         JButton battleButton = createImageButton(
                 "images/BattleButton.png",
-                300, 355, 200, 50,
+                300, 320, 200, 50,
                 "BattleButton"
         );
 
         JButton historyButton = createImageButton(
                 "images/HistoryButton.png",
-                300, 465, 200, 50,
+                300, 430, 200, 50,
                 "HistoryButton"
         );
 
         JButton myOwnUploadButton = createImageButton(
                 "images/StartButton.png",
-                300, 415, 200, 50,
+                300, 380, 200, 50,
                 "myOwnUploadButton"
         );
 
@@ -206,10 +213,14 @@ public class MainSceneView {
         backgroundPanel.add(historyButton);
         backgroundPanel.add(myOwnUploadButton);
 
+        backgroundPanel.setPreferredSize(new Dimension(600, 600));
+        backgroundPanel.revalidate();
+        backgroundPanel.repaint();
+
         return backgroundPanel;
     }
     private void addActionListener(JButton button, String buttonName) {
-        button.addActionListener(e -> controller.handleMainMenuAction(buttonName));
+        button.addActionListener(e -> mainMenuController.handleMainMenuAction(buttonName));
     }
 
     /**
@@ -248,9 +259,9 @@ public class MainSceneView {
      *
      * @param message The message to display.
      */
-    public void displayMessage(String message) {
-        JOptionPane.showMessageDialog(frame, message);
-    }
+//    public void displayMessage(String message) {
+//        JOptionPane.showMessageDialog(frame, message);
+//    }
 
     /**
      * navigates to a specific page based on its name.
@@ -261,4 +272,7 @@ public class MainSceneView {
         cardLayout.show(mainPanel, pageName);
     }
 
+    public String getViewName() {
+        return this.viewName;
+    }
 }

@@ -23,8 +23,6 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
     private final int topWidth = 800;
     private final int topHeight = 100;
     private JPanel panelBottom;
-    private final int centerWidth = 800;
-    private final int centerHeight = 100;
     private JPanel panelCenter;
     private final int bottomWidth = 800;
     private final int bottomHeight = 100;
@@ -37,6 +35,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
 
     public HistoryView(HistoryViewModel historyViewModel) {
         this.historyViewModel = historyViewModel;
+        this.historyViewModel.addPropertyChangeListener(this);
         createAndShowGUI();
     }
 
@@ -68,6 +67,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
         backButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
+                        System.out.println("Back button clicked");
                         if (evt.getSource().equals(backButton)) {
                             historyController.execute();
                         }
@@ -78,7 +78,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
         add(panelBottom, BorderLayout.SOUTH);
 
         // Show frame
-        setVisible(true);
+        // setVisible(true);
     }
 
     // Method to create a JPanel with an image background
@@ -122,13 +122,14 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
     private void showHistroyScreenshot(ArrayList<String> addressList) {
         System.out.println("breakpoint1");
         if (!(addressList == null || addressList.isEmpty())) {
+
             System.out.println("breakpoint2");
             for (String address : addressList) {
                 System.out.println(address);
                 this.panelCenter.add(createImagePanel(address));
             }
             System.out.println("breakpoint3");
-            removeAll();
+
             repaint();
         } else {
             System.out.println("History is currently empty.");
@@ -137,6 +138,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("history fire property change");
         showHistroyScreenshot(getScreenshotPath());
     }
 

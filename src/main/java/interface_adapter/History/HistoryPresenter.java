@@ -3,25 +3,26 @@ package interface_adapter.History;
 import use_case.History.HistoryOutputBoundary;
 import use_case.History.HistoryOutputData;
 import interface_adapter.NormalGiven.ViewManagerModel;
-// import HomepageViewState here
-// import HomepageViewModel here
+import interface_adapter.MainMenu.MainMenuViewModel;
+import interface_adapter.MainMenu.MainMenuState;
 
 public class HistoryPresenter implements HistoryOutputBoundary {
 
     private final ViewManagerModel viewManagerModel;
-    // private final HomepageViewModel homepageViewModel;
+    private final MainMenuViewModel mainMenuViewModel;
     private final HistoryViewModel historyViewModel;
 
     public HistoryPresenter(ViewManagerModel viewManagerModel,
-                            HistoryViewModel historyViewModel/*, HomepageViewModel homepageViewModel*/) {
+                            HistoryViewModel historyViewModel, MainMenuViewModel mainMenuViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.historyViewModel = historyViewModel;
-        // this.homepageViewModel = homepageViewModel
+        this.mainMenuViewModel = mainMenuViewModel;
     }
 
     @Override
     public void switchToHomepage(HistoryOutputData historyOutputData) {
-        // viewManagerModel.setState();
+        System.out.println("switched To Homepage");
+        viewManagerModel.setState(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
 }

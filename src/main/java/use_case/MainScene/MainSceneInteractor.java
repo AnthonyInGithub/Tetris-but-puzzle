@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class NormalGivenMainSceneInteractor implements MainMenuInputBoundary {
+public class MainSceneInteractor implements MainMenuInputBoundary {
     private final MainMenuOutputBoundary presenter;
 
-    public NormalGivenMainSceneInteractor(MainMenuOutputBoundary presenter) {
+    public MainSceneInteractor(MainMenuOutputBoundary presenter) {
         this.presenter = presenter;
     }
 
