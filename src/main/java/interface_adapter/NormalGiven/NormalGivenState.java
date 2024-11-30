@@ -9,6 +9,13 @@ public class NormalGivenState {
         return gamingState;
     }
 
+    public String getImgAddress() {
+        return imgAddress;
+    }
+    public void setImgAddress(String imgAddress) {
+        this.imgAddress = imgAddress;
+    }
+
     public void setGamingState(String newGamingState) {
         this.gamingState = newGamingState;
     }
