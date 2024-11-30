@@ -19,6 +19,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
     private final String viewName = "History";
     private final String folderPath = "images/historyscreenshot";
 
+    private JLabel labelAtTop;
     private JPanel panelTop;
     private final int topWidth = 800;
     private final int topHeight = 100;
@@ -45,21 +46,64 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
         setLayout(new BorderLayout());
 
         // Top panel with full width
-        this.panelTop = new JPanel();
+        this.panelTop = new JPanel() {
+            private Image backgroundImage = new ImageIcon("images/historyBackgroundTop.png").getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Draw the background image scaled to fit the panel
+                if (backgroundImage != null) {
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+
         panelTop.setPreferredSize(new Dimension(topWidth, topHeight)); // Adjust height
         panelTop.setBackground(Color.LIGHT_GRAY);
+        panelTop.setLayout(new FlowLayout(FlowLayout.CENTER, 0, panelTop.getPreferredSize().height/3));
+
+
+        ImageIcon icon = new ImageIcon("images/historyLabel.png");
+
+        this.labelAtTop = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                // Scale the image to the size of the label
+                Image scaledImage = icon.getImage().getScaledInstance(
+                        getWidth(), getHeight(), Image.SCALE_SMOOTH);
+                g.drawImage(scaledImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        // labelAtTop.setPreferredSize(new Dimension(100, 100));
+        labelAtTop.setIcon(icon);
+
+
+
+        panelTop.add(labelAtTop);
         add(panelTop, BorderLayout.NORTH);
 
         // Central panel containing three image panels
         this.panelCenter = new JPanel(new GridLayout(1, 3, 10, 10)); // 3 columns, horizontal gaps
         panelCenter.setBackground(Color.WHITE); // Fallback color in case no image is set
-//        panelCenter.add(createImagePanel("path_to_image1.jpg"));
-//        panelCenter.add(createImagePanel("path_to_image2.jpg"));
-//        panelCenter.add(createImagePanel("path_to_image3.jpg"));
         add(panelCenter, BorderLayout.CENTER);
 
         // Bottom panel containing "Back" button in bottom-right
-        this.panelBottom = new JPanel(new BorderLayout());
+        this.panelBottom = new JPanel() {
+            private Image backgroundImage = new ImageIcon("images/historyBackgroundBottom.png").getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Draw the background image scaled to fit the panel
+                if (backgroundImage != null) {
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+                }
+            }
+        };
+        panelBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
         panelBottom.setPreferredSize(new Dimension(bottomWidth, bottomHeight)); // Adjust height
         panelBottom.setBackground(Color.LIGHT_GRAY); // Optional background color
 
@@ -122,7 +166,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
     private void showHistroyScreenshot(ArrayList<String> addressList) {
         System.out.println("breakpoint1");
         if (!(addressList == null || addressList.isEmpty())) {
-
+            this.panelCenter.removeAll();
             System.out.println("breakpoint2");
             for (String address : addressList) {
                 System.out.println(address);
@@ -135,6 +179,8 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
             System.out.println("History is currently empty.");
         }
     }
+
+
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
