@@ -8,6 +8,9 @@ public class MainOutputData {
     private final String responseMessage;  // Feedback or result message
     private final int[][] binaryArray;     // Optional binary array result
     private final int[][][] colorMap;      // Optional color map result
+    private boolean isStartClicked;
+    private boolean isHistoryClicked;
+    private boolean isBattleClicked;
 
     /**
      * Constructor for message-only output.
@@ -17,6 +20,7 @@ public class MainOutputData {
     public MainOutputData(String responseMessage) {
         this(responseMessage, null, null);
     }
+
 
     /**
      * Constructor for detailed output including processed data.
@@ -57,4 +61,12 @@ public class MainOutputData {
     public int[][][] getColorMap() {
         return colorMap;
     }
+
+    public boolean getIsStartClicked() { return isStartClicked; }
+    public boolean getIsHistoryClicked() { return isHistoryClicked; }
+    public boolean getIsBattleClicked() { return isBattleClicked; }
+
+    public void setIsStartClicked(boolean isStartClicked) { this.isStartClicked = isStartClicked; }
+    public void setIsHistoryClicked(boolean isHistoryClicked) { this.isHistoryClicked = isHistoryClicked; }
+    public void setIsBattleClicked(boolean isBattleClicked) {}
 }

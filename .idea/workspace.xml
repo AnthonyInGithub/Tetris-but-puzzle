@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="Delete out">
-      <change beforePath="$PROJECT_DIR$/FiledData/playerProgress.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FiledData/playerProgress.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainSceneInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainSceneInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="view" />
+        <entry key="$PROJECT_DIR$" value="Integrate-Testing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,9 +68,9 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "Integrate-Testing",
+    "git-widget-placeholder": "Integrate-Testing-New",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Desktop/CSC207/Tetris-but-puzzle",
+    "last_opened_file_path": "C:/Users/17919/IdeaProjects/Tetris-but-puzzle/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,8 +81,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Desktop\CSC207\Tetris-but-puzzle" />
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
+      <recent name="D:\Desktop\CSC207\Tetris-but-puzzle" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
@@ -95,6 +108,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>

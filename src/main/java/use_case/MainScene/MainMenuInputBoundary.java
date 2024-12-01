@@ -7,5 +7,5 @@ public interface MainMenuInputBoundary {
      *
      * @param inputData The input data encapsulating the button action and optional file path.
      */
-    void handleMainMenuAction(MainInputData inputData);
+    void execute(MainInputData inputData);
 }
