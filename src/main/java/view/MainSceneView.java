@@ -215,31 +215,33 @@ public class MainSceneView extends JPanel {
     }
 
     /**
-     * Creates a JButton with an image icon and optional hover effect.
+     * Creates a JButton with a scaled image icon.
      *
-     * @param iconPath       Path to the default button image.
-     * @param x              The x-coordinate of the button.
-     * @param y              The y-coordinate of the button.
-     * @param width          The width of the button.
-     * @param height         The height of the button.
-     * @param buttonName     The name of the button (action identifier).
+     * @param iconPath   Path to the button image.
+     * @param x          The x-coordinate of the button.
+     * @param y          The y-coordinate of the button.
+     * @param width      The width of the button.
+     * @param height     The height of the button.
+     * @param buttonName The name of the button (action identifier).
      * @return The created JButton.
      */
-
     private JButton createImageButton(String iconPath, int x, int y, int width, int height, String buttonName) {
         JButton button = new JButton();
 
-        // Set the button's default icon
-        ImageIcon icon = new ImageIcon(iconPath);
-        button.setIcon(icon);
+        // Load the original image
+        ImageIcon originalIcon = new ImageIcon(iconPath);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
+        // Set the button's icon to the scaled image
+        button.setIcon(scaledIcon);
 
         // Remove button borders and background
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
 
-        // set the button's size and position
+        // Set the button's size and position
         button.setBounds(x, y, width, height);
 
         return button;
