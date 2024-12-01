@@ -38,6 +38,8 @@ public class EndingSceneView extends JPanel implements PropertyChangeListener,Ac
 
     public EndingSceneView(EndingSceneViewModel endingSceneViewModel) {
         this.endingSceneViewModel = endingSceneViewModel;
+        this.endingSceneViewModel.addPropertyChangeListener(this);
+
 
         // Set up the panel layout
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -140,18 +142,18 @@ public class EndingSceneView extends JPanel implements PropertyChangeListener,Ac
     private void resetSaveButton() {
         saveButton.setEnabled(true);
     }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println("property change in final ");
         if(endingSceneViewModel.getState().getIsWin()){
             displayText = "WIN";
             titleLabel.setText(displayText);
-            playSound("next-level.wav");
+            playSound("SoundEffect/next-level.wav");
 
         }else{
             displayText = "LOSE";
             titleLabel.setText(displayText);
-            playSound("game-over.wav");
+            playSound("SoundEffect/game-over.wav");
         }
     }
 
