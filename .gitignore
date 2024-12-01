@@ -8,6 +8,6 @@ images/HistoryScreenShot
 .idea/easycode.ignore
 images/UploadedImage
 
-workspace.xml
+.idea/
 ### Mac OS ###
 .DS_Store
