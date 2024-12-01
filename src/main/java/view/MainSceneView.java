@@ -183,11 +183,6 @@ public class MainSceneView extends JPanel {
                 "StartButton"
         );
 
-        JButton battleButton = createImageButton(
-                "images/BattleButton.png",
-                300, 320, 200, 50,
-                "BattleButton"
-        );
 
         JButton historyButton = createImageButton(
                 "images/HistoryButton.png",
@@ -196,18 +191,16 @@ public class MainSceneView extends JPanel {
         );
 
         JButton myOwnUploadButton = createImageButton(
-                "images/StartButton.png",
+                "images/UPLOAD.png",
                 300, 380, 200, 50,
                 "myOwnUploadButton"
         );
 
         addActionListener(startButton, "StartButton");
-        addActionListener(battleButton, "BattleButton");
         addActionListener(historyButton, "HistoryButton");
         addActionListener(myOwnUploadButton, "MyOwnUploadButton");
 
         backgroundPanel.add(startButton);
-        backgroundPanel.add(battleButton);
         backgroundPanel.add(historyButton);
         backgroundPanel.add(myOwnUploadButton);
 

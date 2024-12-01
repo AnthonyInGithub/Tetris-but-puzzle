@@ -91,4 +91,83 @@ public class NormalGivenInteractorTest {
 
 
     }
+    @Test
+    public void PieceRotationTest() {
+        // Arrange
+        NormalGivenDataAccessInterface normalGivenDataAccessObject = new InMemoryDataAccessObject();
+
+        NormalGivenViewModel normalGivenViewModel = new NormalGivenViewModel();
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        EndingSceneViewModel endingSceneViewModel = new EndingSceneViewModel();
+
+        NormalGivenOutputBoundary normalGivenPresenter =
+                new NormalGivenPresenter(viewManagerModel, normalGivenViewModel, endingSceneViewModel);
+
+        NormalGivenInputData normalGivenInputData = new NormalGivenInputData();
+        normalGivenInputData.setAPressed(false);
+        normalGivenInputData.setDPressed(false);
+        normalGivenInputData.setSPressed(false);
+        normalGivenInputData.setWPressed(true); // rotate
+
+        NormalGivenInteractor normalGivenInteractor =
+                new NormalGivenInteractor(normalGivenDataAccessObject, normalGivenPresenter, null);
+
+        // Act
+        normalGivenInteractor.execute(normalGivenInputData);
+
+        // Assert
+        int[] currentShapeState = normalGivenDataAccessObject.getCurrentShapeState();
+        assertEquals(1, currentShapeState[1]); // check if update
+    }
+
+    @Test
+    public void testPieceDrop() {
+        // Arrange
+        NormalGivenDataAccessInterface normalGivenDataAccessObject = new InMemoryDataAccessObject();
+
+        // Create a dummy presenter (doesn't require ViewModels for simplicity)
+        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenPresenter(null, null, null) {
+            @Override
+            public void execute(NormalGivenOutputData outputData) {
+                // No-op for simplicity
+            }
+        };
+
+        // Create Interactor
+        NormalGivenInteractor normalGivenInteractor = new NormalGivenInteractor(
+                normalGivenDataAccessObject, normalGivenPresenter, null);
+
+        // Set up the game board
+        int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+        // Initialize all cells to 0 (empty)
+        for (int i = 0; i < 22; i++) {
+            for (int j = 0; j < 10; j++) {
+                currentMap[i][j] = 0;
+            }
+        }
+        normalGivenDataAccessObject.updateMap(currentMap);
+
+        // Place a piece at the top (x = 5, y = 5)
+        normalGivenDataAccessObject.setX(5);
+        normalGivenDataAccessObject.setY(5);
+
+        // Create InputData for the drop action
+        NormalGivenInputData normalGivenInputData = new NormalGivenInputData();
+        normalGivenInputData.setSPressed(true); // Simulate the "drop" key press
+        normalGivenInputData.setAPressed(false);
+        normalGivenInputData.setDPressed(false);
+        normalGivenInputData.setWPressed(false);
+
+        // Act
+        normalGivenInteractor.execute(normalGivenInputData);
+
+        // Assert
+        int[][] updatedMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+
+        // The piece should have moved down by 1 row
+        assertEquals(1, updatedMap[6][5]); // Check new position
+        assertEquals(0, updatedMap[5][5]);
+    }
+
 }
+
