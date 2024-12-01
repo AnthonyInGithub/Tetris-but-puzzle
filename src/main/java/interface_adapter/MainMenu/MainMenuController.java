@@ -23,6 +23,6 @@ public class MainMenuController {
      */
     public void handleMainMenuAction(String buttonName) {
         MainInputData inputData = new MainInputData(buttonName);
-        interactor.handleMainMenuAction(inputData);
+        interactor.execute(inputData);
     }
 }

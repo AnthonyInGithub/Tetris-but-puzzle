@@ -162,8 +162,8 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
 
     private void showHistroyScreenshot(ArrayList<String> addressList) {
         System.out.println("breakpoint1");
+        this.panelCenter.removeAll();
         if (!(addressList == null || addressList.isEmpty())) {
-            this.panelCenter.removeAll();
             System.out.println("breakpoint2");
             for (String address : addressList) {
                 System.out.println(address);
@@ -171,10 +171,11 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
             }
             System.out.println("breakpoint3");
 
-            repaint();
-        } else {
-            System.out.println("History is currently empty.");
         }
+        for (int i = 0; i < 3 - addressList.size(); i++) {
+            this.panelCenter.add(createImagePanel("images/emptyHistory.png"));
+        }
+        repaint();
     }
 
 
