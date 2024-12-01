@@ -1,7 +1,14 @@
 package use_case.History;
 
 public class HistoryOutputData {
-    /**
-     * Temporarily, this is not needed, but is saved for extension.
-     */
+
+    private boolean isBackClicked;
+
+    public boolean getIsBackClicked() {
+        return isBackClicked;
+    }
+
+    public void setIsBackClicked(boolean b) {
+        this.isBackClicked = b;
+    }
 }

@@ -20,6 +20,7 @@ public class HistoryInterator implements HistoryInputBoundary {
     @Override
     public void execute(HistoryInputData inputData) {
         final HistoryOutputData historyOutputData = new HistoryOutputData();
+        historyOutputData.setIsBackClicked(inputData.getBackClicked());
         historyPresenter.switchToHomepage(historyOutputData);
     }
 }
