@@ -99,8 +99,8 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
                 int[][][] colorMap = generateColorMap(resizedImage);
 
                 // Log or process the binary array and color map as needed
-                mainMenuDataAccessObject.setBinaryMap(binaryArray);
-                mainMenuDataAccessObject.setColorMap(colorMap);
+//                mainMenuDataAccessObject.setBinaryMap(binaryArray);
+//                mainMenuDataAccessObject.setColorMap(colorMap);
                 mainMenuDataAccessObject.setBackgroundImageAddress(myOwnImagePath);
                 MainOutputData mainOutputData = new MainOutputData("uploadButton Clicked");
                 mainOutputData.setIsUploadClicked(true);
