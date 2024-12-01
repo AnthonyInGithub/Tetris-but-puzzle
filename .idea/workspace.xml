@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="Delete out">
-      <change beforePath="$PROJECT_DIR$/FiledData/playerProgress.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FiledData/playerProgress.csv" afterDir="false" />
+    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="refractor. debug upload">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/NormalGivenView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/NormalGivenView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +54,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "git-widget-placeholder": "Integrate-Testing",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Desktop/CSC207/Tetris-but-puzzle",
+    "last_opened_file_path": "D:/Desktop/CSC207/Tetris-but-puzzle/images/UploadedImage",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,13 +71,17 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Desktop\CSC207\Tetris-but-puzzle\images\UploadedImage" />
       <recent name="D:\Desktop\CSC207\Tetris-but-puzzle" />
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Desktop\CSC207\Tetris-but-puzzle\SoundEffect" />
+      <recent name="D:\Desktop\CSC207\Tetris-but-puzzle\images" />
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="data_access" />
       <recent name="interface_adapter.NormalGiven" />
       <recent name="view" />
     </key>
@@ -193,7 +200,39 @@
       <option name="project" value="LOCAL" />
       <updated>1733002154683</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update player progress">
+      <option name="closed" value="true" />
+      <created>1733003143074</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733003143074</updated>
+    </task>
+    <task id="LOCAL-00011" summary="update LevelSelectView">
+      <option name="closed" value="true" />
+      <created>1733003331136</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733003331136</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update pom">
+      <option name="closed" value="true" />
+      <created>1733004535949</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733004535949</updated>
+    </task>
+    <task id="LOCAL-00013" summary="refractor. debug upload">
+      <option name="closed" value="true" />
+      <created>1733009428180</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733009428180</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +254,21 @@
     <MESSAGE value="Refractor" />
     <MESSAGE value="Delete target" />
     <MESSAGE value="Delete out" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete out" />
+    <MESSAGE value="update player progress" />
+    <MESSAGE value="update LevelSelectView" />
+    <MESSAGE value="update pom" />
+    <MESSAGE value="refractor. debug upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="refractor. debug upload" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuInteractor.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
