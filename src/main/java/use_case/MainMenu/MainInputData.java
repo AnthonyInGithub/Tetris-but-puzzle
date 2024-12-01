@@ -56,6 +56,6 @@ package use_case.MainMenu;
         public void setHistoryClicked(boolean historylicked) { this.historyClicked = historylicked; }
 
         public boolean getUploadClicked() { return uploadClicked; }
-        public void setBattleClicked(boolean battleClicked) { this.uploadClicked = uploadClicked; }
+        public void setUploadClicked(boolean battleClicked) { this.uploadClicked = uploadClicked; }
 
     }

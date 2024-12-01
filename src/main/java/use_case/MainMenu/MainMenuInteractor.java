@@ -21,17 +21,23 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
         String buttonName = inputData.getButtonName();
 
         if ("StartButton".equals(buttonName)) {
-
-            presenter.navigateToLevelsPage();
+            MainOutputData mainOutputData = new MainOutputData("startButton Clicked");
+            mainOutputData.setIsNormalGivenClicked(true);
+            presenter.navigateToLevelsPage(mainOutputData);
             System.out.println("Start button pressed in interactor");
 
         }
         if ("HistoryButton".equals(buttonName)) {
-            presenter.navigateToHistoryPage();
+            MainOutputData mainOutputData = new MainOutputData("historyButton Clicked");
+            mainOutputData.setIsHistoryClicked(true);
+            presenter.navigateToHistoryPage(mainOutputData);
             System.out.println("History button pressed in interactor");
 
         }
         if ("MyOwnUploadButton".equals(buttonName)) {
+            MainOutputData mainOutputData = new MainOutputData("uploadButton Clicked");
+            mainOutputData.setIsUploadClicked(true);
+            presenter.uploadClicked(mainOutputData);
             handleMyOwnUpload();
             System.out.println("MyOwnUpload button pressed in interactor");
 
@@ -96,8 +102,9 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
                 mainMenuDataAccessObject.setBinaryMap(binaryArray);
                 mainMenuDataAccessObject.setColorMap(colorMap);
                 mainMenuDataAccessObject.setBackgroundImageAddress(myOwnImagePath);
-
-                presenter.navigateToNormalGivenPage(new MainOutputData(null, null, null, myOwnImagePath));
+                MainOutputData mainOutputData = new MainOutputData("uploadButton Clicked");
+                mainOutputData.setIsUploadClicked(true);
+                presenter.uploadClicked(mainOutputData);
 
                 presenter.present(new MainOutputData("file processed successfully: " + file.getName()));
 

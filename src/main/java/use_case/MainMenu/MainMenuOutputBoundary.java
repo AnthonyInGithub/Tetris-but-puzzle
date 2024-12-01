@@ -9,6 +9,6 @@ public interface MainMenuOutputBoundary {
 
     void navigateToHistoryPage(MainOutputData outputData); // New navigation method
 
-    void navigateToNormalGivenPage(MainOutputData outputData);
+    void uploadClicked(MainOutputData outputData);
 }
 

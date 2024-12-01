@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FiledData/playerProgress.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FiledData/playerProgress.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuOutputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,28 +57,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "Integrate-Testing-New",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/17919/IdeaProjects/Tetris-but-puzzle/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.EndingSceneInteractorTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EndingSceneInteractorTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.HistoryInteractorTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.HistoryInteractorTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainSceneInteractorTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainSceneInteractorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Integrate-Testing-New&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/17919/IdeaProjects/Tetris-but-puzzle/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
       <recent name="D:\Desktop\CSC207\Tetris-but-puzzle" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images\UploadedImage" />
+      <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images\temp" />
       <recent name="C:\Users\17919\IdeaProjects\Tetris-but-puzzle\images" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -83,10 +101,10 @@
       <recent name="view" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
-      <module name="Tetris-but-puzzle" />
+      <module name="main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="app.*" />
@@ -97,12 +115,73 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EndingSceneInteractorTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tetris-but-puzzle" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="use_case.endingscene.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="use_case.endingscene" />
+      <option name="MAIN_CLASS_NAME" value="use_case.endingscene.EndingSceneInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HistoryInteractorTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tetris-but-puzzle" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="use_case.history.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="use_case.history" />
+      <option name="MAIN_CLASS_NAME" value="use_case.history.HistoryInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainSceneInteractorTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tetris-but-puzzle" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="use_case.mainscene.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="use_case.mainscene" />
+      <option name="MAIN_CLASS_NAME" value="use_case.mainscene.MainSceneInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainSceneInteractorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="use_case.mainscene.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="use_case.mainscene" />
+      <option name="MAIN_CLASS_NAME" value="use_case.mainscene.MainSceneInteractorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.HistoryInteractorTest (1)" />
+        <item itemvalue="JUnit.MainSceneInteractorTest (1)" />
+        <item itemvalue="JUnit.EndingSceneInteractorTest (1)" />
+        <item itemvalue="JUnit.MainSceneInteractorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -127,6 +206,9 @@
       <workItem from="1732386958264" duration="22763000" />
       <workItem from="1732580466345" duration="3706000" />
       <workItem from="1732989636524" duration="8314000" />
+      <workItem from="1733085311315" duration="3783000" />
+      <workItem from="1733089146983" duration="613000" />
+      <workItem from="1733089766964" duration="298000" />
     </task>
     <task id="LOCAL-00001" summary="m">
       <option name="closed" value="true" />
@@ -200,23 +282,7 @@
       <option name="project" value="LOCAL" />
       <updated>1733002154683</updated>
     </task>
-    <task id="LOCAL-00010" summary="m">
-      <option name="closed" value="true" />
-      <created>1733011390414</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1733011390414</updated>
-    </task>
-    <task id="LOCAL-00011" summary="m">
-      <option name="closed" value="true" />
-      <created>1733011741771</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1733011741771</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

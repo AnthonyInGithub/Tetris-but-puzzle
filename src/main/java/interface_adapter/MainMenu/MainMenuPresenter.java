@@ -48,7 +48,7 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
         viewManagerModel.firePropertyChanged();
     }
     @Override
-    public void navigateToNormalGivenPage(MainOutputData outputData) {
+    public void uploadClicked(MainOutputData outputData) {
         NormalGivenState state = normalGivenViewModel.getState();
         state.setGamingState("playing");
         state.setImgAddress(outputData.getImgAddress());
