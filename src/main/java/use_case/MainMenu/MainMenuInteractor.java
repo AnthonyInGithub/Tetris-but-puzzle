@@ -21,7 +21,7 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
         String buttonName = inputData.getButtonName();
 
         if ("StartButton".equals(buttonName)) {
-            MainOutputData mainOutputData = new MainOutputData();
+
             presenter.navigateToLevelsPage();
             System.out.println("Start button pressed in interactor");
 
