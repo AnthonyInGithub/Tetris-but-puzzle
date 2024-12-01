@@ -9,6 +9,9 @@ public class MainOutputData {
     private final int[][] binaryArray;     // Optional binary array result
     private final int[][][] colorMap;      // Optional color map result
     private final String ImgAddress;
+    private boolean isNormalGivenClicked;
+    private boolean isHistoryClicked;
+    private boolean isUploadClicked;
 
     /**
      * Constructor for message-only output.
@@ -63,4 +66,13 @@ public class MainOutputData {
     public String getImgAddress() {
         return ImgAddress;
     }
+
+
+    public boolean getIsHistoryClicked() { return isHistoryClicked; }
+    public boolean getIsUploadClicked() { return isUploadClicked; }
+    public boolean getIsNormalGivenClicked() { return isNormalGivenClicked; }
+    public void setIsNormalGivenClicked(boolean isNormalGivenClicked) { this.isNormalGivenClicked = isNormalGivenClicked; }
+    public void setIsHistoryClicked(boolean isHistoryClicked) { this.isHistoryClicked = isHistoryClicked; }
+    public void setIsUploadClicked(boolean isUploadClicked) { this.isUploadClicked = isUploadClicked; }
+
 }

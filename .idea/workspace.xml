@@ -4,21 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="Delete out">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6d1d53b2-0bbb-48e5-a747-b23669078c9c" name="Changes" comment="m">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interface_adapter/MainMenu/MainMenuPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryInterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/History/HistoryOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuInputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainMenuOutputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainSceneInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainScene/MainSceneInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/HistoryView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainMenuOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/use_case/MainMenu/MainOutputData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +99,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
@@ -208,7 +200,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733002154683</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="m">
+      <option name="closed" value="true" />
+      <created>1733011390414</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733011390414</updated>
+    </task>
+    <task id="LOCAL-00011" summary="m">
+      <option name="closed" value="true" />
+      <created>1733011741771</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733011741771</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,10 +234,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="m" />
     <MESSAGE value="Refractor" />
     <MESSAGE value="Delete target" />
     <MESSAGE value="Delete out" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete out" />
+    <MESSAGE value="m" />
+    <option name="LAST_COMMIT_MESSAGE" value="m" />
   </component>
 </project>
