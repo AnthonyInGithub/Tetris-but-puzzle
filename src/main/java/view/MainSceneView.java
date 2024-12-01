@@ -178,8 +178,8 @@ public class MainSceneView extends JPanel {
 
         // Add buttons with custom images
         JButton startButton = createImageButton(
-                "images/StartButton.png",
-                300, 260, 200, 50,
+                "images/NORMAL.png",
+                300, 280, 200, 50,
                 "StartButton"
         );
 
@@ -192,7 +192,7 @@ public class MainSceneView extends JPanel {
 
         JButton myOwnUploadButton = createImageButton(
                 "images/UPLOAD.png",
-                300, 380, 200, 50,
+                300, 350, 200, 50,
                 "myOwnUploadButton"
         );
 
