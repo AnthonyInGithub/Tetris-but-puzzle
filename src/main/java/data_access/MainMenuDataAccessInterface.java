@@ -4,7 +4,6 @@ public interface MainMenuDataAccessInterface {
     /**
      * Temporarily, this is not needed, but is saved for extension.
      */
-    void setColorMap(int[][][] colorMap);
-    void setBinaryMap(int[][] binaryMap);
+    void setColorMapAndBinaryMapMainMenu();
     void setBackgroundImageAddress(String backgroundImageAddress);
 }

@@ -21,20 +21,13 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
         String buttonName = inputData.getButtonName();
 
         if ("StartButton".equals(buttonName)) {
-
             presenter.navigateToLevelsPage();
-            System.out.println("Start button pressed in interactor");
-
         }
         if ("HistoryButton".equals(buttonName)) {
             presenter.navigateToHistoryPage();
-            System.out.println("History button pressed in interactor");
-
         }
         if ("MyOwnUploadButton".equals(buttonName)) {
             handleMyOwnUpload();
-            System.out.println("MyOwnUpload button pressed in interactor");
-
         }
 //        else {
 //            presenter.present(new MainOutputData("Invalid action: " + buttonName));
@@ -89,17 +82,11 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
                 File outputFile = new File(myOwnImagePath);
                 ImageIO.write(resizedBackgroundImage, "png", outputFile);
 
-                int[][] binaryArray = generateBinaryArray(resizedImage);
-                int[][][] colorMap = generateColorMap(resizedImage);
-
-                // Log or process the binary array and color map as needed
-                mainMenuDataAccessObject.setBinaryMap(binaryArray);
-                mainMenuDataAccessObject.setColorMap(colorMap);
                 mainMenuDataAccessObject.setBackgroundImageAddress(myOwnImagePath);
 
-                presenter.navigateToNormalGivenPage(new MainOutputData(null, null, null, myOwnImagePath));
+                mainMenuDataAccessObject.setColorMapAndBinaryMapMainMenu();
 
-                presenter.present(new MainOutputData("file processed successfully: " + file.getName()));
+                presenter.navigateToNormalGivenPage(new MainOutputData(null, null, null, myOwnImagePath));
 
             } catch (Exception e) {
                 presenter.present(new MainOutputData("error processing file: " + e.getMessage()));
@@ -118,65 +105,4 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
         return (result == javax.swing.JFileChooser.APPROVE_OPTION) ? fileChooser.getSelectedFile() : null;
     }
 
-
-    private int[][] generateBinaryArray(BufferedImage image) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-        int[][] binaryArray = new int[height][width];
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                int rgb = image.getRGB(x, y);
-                Color color = new Color(rgb);
-                int gray = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
-
-                // Threshold: 1 for dark pixels, 0 for light pixels
-                binaryArray[y][x] = gray < 128 ? 1 : 0;
-            }
-        }
-        return binaryArray;
-    }
-
-    private int[][][] generateColorMap(BufferedImage image) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-        System.out.println("heihgt"+height);
-        int[][][] colorMap = new int[height][width][3];
-
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                int rgb = image.getRGB(x, y);
-                Color color = new Color(rgb);
-
-                colorMap[y][x][0] = color.getRed();
-                colorMap[y][x][1] = color.getGreen();
-                colorMap[y][x][2] = color.getBlue();
-            }
-        }
-        return colorMap;
-    }
-
-    private void logBinaryArray(int[][] binaryArray) {
-        System.out.println("Binary Array:");
-        for (int[] row : binaryArray) {
-            for (int value : row) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    private void logColorMap(int[][][] colorMap) {
-        System.out.println("\nColor Map:");
-        for (int y = 0; y < colorMap.length; y++) {
-            for (int x = 0; x < colorMap[y].length; x++) {
-                System.out.print("[");
-                for (int i = 0; i < 3; i++) {
-                    System.out.print(colorMap[y][x][i] + (i < 2 ? ", " : ""));
-                }
-                System.out.print("] ");
-            }
-            System.out.println();
-        }
-    }
 }

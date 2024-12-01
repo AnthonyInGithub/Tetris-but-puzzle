@@ -39,4 +39,6 @@ public interface NormalGivenDataAccessInterface {
     int[][][] getColorMap();
 
     void setEndGameScreenShot(BufferedImage endgameScreenShot);
+
+    int getCurrentSimilarityLevelSpecification();
 }

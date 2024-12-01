@@ -9,6 +9,7 @@ import java.beans.PropertyChangeSupport;
  *
  * @param <T> The type of the state managed by the ViewModel.
  */
+
 public class ViewModelMain<T> {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this); // Event manager
     private T state; // The state managed by this ViewModel

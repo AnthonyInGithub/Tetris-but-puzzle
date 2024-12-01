@@ -11,6 +11,7 @@ import use_case.LevelSelect.LevelSelectOutputData;
 public class LevelSelectInteractor implements LevelSelectInputBoundary {
     private final LevelSelectOutputBoundary presenter;
     private final LevelSelectDataAccessInterface dataAccess;
+    private final int numberOfLevels = 3;
 
     /**
      * Constructor for LevelSelectInteractor.
@@ -26,7 +27,7 @@ public class LevelSelectInteractor implements LevelSelectInputBoundary {
     @Override
     public void selectLevel(int level) {
         // Validate the selected level
-        if (level < 1 || level > 3) {
+        if (level < 1 || level > numberOfLevels) {
             throw new IllegalArgumentException("Invalid level: " + level);
         }
 

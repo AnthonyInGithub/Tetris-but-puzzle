@@ -60,7 +60,7 @@ public class EndingSceneView extends JPanel implements PropertyChangeListener,Ac
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Set font to bold and size to 36
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setForeground(Color.WHITE); // Adjust color if needed
-        textPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        textPanel.add(Box.createRigidArea(new Dimension(30, 0)));//adjust label horizontal position
         textPanel.add(titleLabel);
         add(textPanel);
 
@@ -139,6 +139,7 @@ public class EndingSceneView extends JPanel implements PropertyChangeListener,Ac
     }
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("property change in final ");
         if(endingSceneViewModel.getState().getIsWin()){
             displayText = "WIN";
             titleLabel.setText(displayText);
