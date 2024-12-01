@@ -179,7 +179,7 @@ public class MainSceneView extends JPanel {
         // Add buttons with custom images
         JButton startButton = createImageButton(
                 "images/NORMAL.png",
-                300, 280, 200, 50,
+                300, 290, 200, 50,
                 "StartButton"
         );
 
@@ -215,7 +215,7 @@ public class MainSceneView extends JPanel {
     }
 
     /**
-     * Creates a JButton with a scaled image icon.
+     * Creates a JButton with a scaled image icon or original size based on the button name.
      *
      * @param iconPath   Path to the button image.
      * @param x          The x-coordinate of the button.
@@ -230,11 +230,19 @@ public class MainSceneView extends JPanel {
 
         // Load the original image
         ImageIcon originalIcon = new ImageIcon(iconPath);
-        Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
-        // Set the button's icon to the scaled image
-        button.setIcon(scaledIcon);
+        // Conditional scaling based on the button name
+        if (buttonName.equals("HistoryButton")) {
+            // Use the image's original size
+            button.setIcon(originalIcon);
+            width = originalIcon.getIconWidth();
+            height = originalIcon.getIconHeight();
+        } else {
+            // Scale the image for other buttons
+            Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            button.setIcon(scaledIcon);
+        }
 
         // Remove button borders and background
         button.setBorderPainted(false);
