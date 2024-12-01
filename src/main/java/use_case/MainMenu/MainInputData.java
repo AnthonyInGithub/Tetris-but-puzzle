@@ -7,9 +7,9 @@ package use_case.MainMenu;
     public class MainInputData {
         private final String buttonName; // The name of the button clicked
         private final String filePath;  // Optional file path for file-related actions
-        private boolean startClicked;
+        private boolean normalGivenClicked;
         private boolean historyClicked;
-        private boolean battleClicked;
+        private boolean uploadClicked;
 
         /**
          * constructor for MainInputData.
@@ -49,13 +49,13 @@ package use_case.MainMenu;
             return filePath;
         }
 
-        public boolean getStartClicked() { return startClicked; }
-        public void setStartClicked(boolean startClicked) { this.startClicked = startClicked; }
+        public boolean getNormalGivenClicked() { return normalGivenClicked; }
+        public void setNormalGivenClicked(boolean normalGivenClicked) { this.normalGivenClicked = normalGivenClicked; }
 
         public boolean getHistorylicked() { return historyClicked; }
         public void setHistoryClicked(boolean historylicked) { this.historyClicked = historylicked; }
 
-        public boolean getBattleClicked() { return battleClicked; }
-        public void setBattleClicked(boolean battleClicked) { this.battleClicked = battleClicked; }
+        public boolean getUploadClicked() { return uploadClicked; }
+        public void setUploadClicked(boolean battleClicked) { this.uploadClicked = uploadClicked; }
 
     }

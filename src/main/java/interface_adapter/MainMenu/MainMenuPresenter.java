@@ -33,7 +33,7 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
     }
 //
     @Override
-    public void navigateToLevelsPage() {
+    public void navigateToLevelsPage(MainOutputData outputData) {
         // view.navigateTo("LevelsPage");
         levelSelectViewModel.firePropertyChanged();
         viewManagerModel.setState(levelSelectViewModel.getViewName());
@@ -41,14 +41,14 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
     }
 
     @Override
-    public void navigateToHistoryPage(){
+    public void navigateToHistoryPage(MainOutputData outputData){
         // System.out.println("11111111111111111111");
         historyViewModel.firePropertyChanged();
         viewManagerModel.setState(historyViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
     @Override
-    public void navigateToNormalGivenPage(MainOutputData outputData) {
+    public void uploadClicked(MainOutputData outputData) {
         NormalGivenState state = normalGivenViewModel.getState();
         state.setGamingState("playing");
         state.setImgAddress(outputData.getImgAddress());
