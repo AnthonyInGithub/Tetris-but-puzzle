@@ -4,12 +4,15 @@ import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingSceneState;
 import interface_adapter.EndingScene.EndingSceneViewModel;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * A simple view with an image and two buttons.
@@ -143,12 +146,30 @@ public class EndingSceneView extends JPanel implements PropertyChangeListener,Ac
         if(endingSceneViewModel.getState().getIsWin()){
             displayText = "WIN";
             titleLabel.setText(displayText);
+            playSound("next-level.wav");
 
         }else{
             displayText = "LOSE";
             titleLabel.setText(displayText);
+            playSound("game-over.wav");
         }
+    }
 
+    private static void playSound(String soundFile) {
+        try {
+            // Load the audio file
+            File file = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+
+            // Get a sound clip resource
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            // Play the sound
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
 

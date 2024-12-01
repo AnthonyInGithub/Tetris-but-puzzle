@@ -97,7 +97,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
         // panelBottom.setBackground(Color.LIGHT_GRAY); // Optional background color
 
         // Load the image
-        ImageIcon originalIcon = new ImageIcon("images/bottomButton(1).png");
+        ImageIcon originalIcon = new ImageIcon("images/ReturnButtonHistory.png");
         Image scaledImage2 = originalIcon.getImage().getScaledInstance(130, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage2);
 
