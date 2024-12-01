@@ -53,6 +53,7 @@ public class NormalGivenPresenter implements NormalGivenOutputBoundary {
         EndingSceneState endingSceneState = endingSceneViewModel.getState();
         endingSceneState.setWin(success);
         endingSceneViewModel.setState(endingSceneState);
+        endingSceneViewModel.firePropertyChanged();
 
         NormalGivenState normalGivenState = normalGivenViewModel.getState();
         normalGivenState.setGamingState("end");

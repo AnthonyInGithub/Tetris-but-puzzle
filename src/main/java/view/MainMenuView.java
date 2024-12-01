@@ -118,6 +118,9 @@ import interface_adapter.MainMenu.MainMenuController;
 import interface_adapter.MainMenu.MainMenuViewModel;
 import javax.swing.*;
 import java.awt.*;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 
 public class MainMenuView extends JPanel {
 
@@ -149,6 +152,8 @@ public class MainMenuView extends JPanel {
         // Validate and repaint the layout
         revalidate();
         repaint();
+
+        playBackgroundMusic("SoundEffect/theme.wav");
 
     }
     public void setMainMenuController(MainMenuController controller) {
@@ -268,6 +273,29 @@ public class MainMenuView extends JPanel {
      */
     public void navigateTo(String pageName) {
         cardLayout.show(mainPanel, pageName);
+    }
+
+    public static void playBackgroundMusic(String filePath) {
+        new Thread(() -> {
+            try {
+                // Load the audio file
+                File audioFile = new File(filePath);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                // Get a clip resource
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioStream);
+
+                // Loop the clip continuously
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+                // Start playing the clip
+                clip.start();
+
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
 }
