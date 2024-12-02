@@ -257,13 +257,14 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         }
     }
     @Override
-    public void resetCurrentMap(){
+    public void reInitalizeGame(){
         int[][] currentMap = stagedMap.getGameBoard();
         for(int i = 0; i < currentMap.length; i++){
             for (int j = 0; j < currentMap[i].length; j++){
                 currentMap[i][j] = 0;
             }
         }
+        generateNewPiece();
     }
     public void setBackgroundImageAddress(String backgroundImageAddress) {
         this.imageAddress = backgroundImageAddress;
