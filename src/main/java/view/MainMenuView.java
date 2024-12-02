@@ -184,35 +184,28 @@ public class MainMenuView extends JPanel {
         // Add buttons with custom images
         JButton startButton = createImageButton(
                 "images/StartButton.png",
-                300, 260, 200, 50,
+                325, 300, 160, 50,
                 "StartButton"
         );
 
-        JButton battleButton = createImageButton(
-                "images/BattleButton.png",
-                300, 320, 200, 50,
-                "BattleButton"
-        );
 
         JButton historyButton = createImageButton(
                 "images/HistoryButton.png",
-                300, 430, 200, 50,
+                370, 430, 200, 50,
                 "HistoryButton"
         );
 
         JButton myOwnUploadButton = createImageButton(
-                "images/StartButton.png",
-                300, 380, 200, 50,
-                "myOwnUploadButton"
+                "images/UploadButton.png",
+                325, 360, 160, 50,
+                "MyOwnUploadButton"
         );
 
         addActionListener(startButton, "StartButton");
-        addActionListener(battleButton, "BattleButton");
         addActionListener(historyButton, "HistoryButton");
         addActionListener(myOwnUploadButton, "MyOwnUploadButton");
 
         backgroundPanel.add(startButton);
-        backgroundPanel.add(battleButton);
         backgroundPanel.add(historyButton);
         backgroundPanel.add(myOwnUploadButton);
 
@@ -227,31 +220,41 @@ public class MainMenuView extends JPanel {
     }
 
     /**
-     * Creates a JButton with an image icon and optional hover effect.
+     * Creates a JButton with a scaled image icon or original size based on the button name.
      *
-     * @param iconPath       Path to the default button image.
-     * @param x              The x-coordinate of the button.
-     * @param y              The y-coordinate of the button.
-     * @param width          The width of the button.
-     * @param height         The height of the button.
-     * @param buttonName     The name of the button (action identifier).
+     * @param iconPath   Path to the button image.
+     * @param x          The x-coordinate of the button.
+     * @param y          The y-coordinate of the button.
+     * @param width      The width of the button.
+     * @param height     The height of the button.
+     * @param buttonName The name of the button (action identifier).
      * @return The created JButton.
      */
-
     private JButton createImageButton(String iconPath, int x, int y, int width, int height, String buttonName) {
         JButton button = new JButton();
 
-        // Set the button's default icon
-        ImageIcon icon = new ImageIcon(iconPath);
-        button.setIcon(icon);
+        // Load the original image
+        ImageIcon originalIcon = new ImageIcon(iconPath);
 
+        // Conditional scaling based on the button name
+        if (buttonName.equals("HistoryButton")) {
+            // Use the image's original size
+            button.setIcon(originalIcon);
+            width = originalIcon.getIconWidth();
+            height = originalIcon.getIconHeight();
+        } else {
+            // Scale the image for other buttons
+            Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            button.setIcon(scaledIcon);
+        }
 
         // Remove button borders and background
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
 
-        // set the button's size and position
+        // Set the button's size and position
         button.setBounds(x, y, width, height);
 
         return button;
