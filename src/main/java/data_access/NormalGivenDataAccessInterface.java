@@ -11,7 +11,6 @@ import java.io.File;
 public interface NormalGivenDataAccessInterface {
     // Current piece information
     int[] getCurrentShapeState(); // [shapeType, rotationState]
-    void setCurrentShapeState(int[] currentShapeState);
 
     // Piece position
     int getX();

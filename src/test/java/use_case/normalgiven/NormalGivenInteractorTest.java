@@ -122,52 +122,207 @@ public class NormalGivenInteractorTest {
 
     @Test
     public void testPieceDrop() {
-        // Arrange
+        // Arrange: Initialize the dependencies
         NormalGivenDataAccessInterface normalGivenDataAccessObject = new InMemoryDataAccessObject();
+        final NormalGivenOutputData[] capturedOutputData = new NormalGivenOutputData[1]; // Capture output data
 
-        // Create a dummy presenter (doesn't require ViewModels for simplicity)
-        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenPresenter(null, null, null) {
+        // Custom Presenter to capture the output
+        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenOutputBoundary() {
             @Override
             public void execute(NormalGivenOutputData outputData) {
+                capturedOutputData[0] = outputData; // Save the output data
+            }
+
+            @Override
+            public void gameOver(boolean success) {
                 // No-op for simplicity
             }
         };
 
-        // Create Interactor
+        // Initialize the Interactor
         NormalGivenInteractor normalGivenInteractor = new NormalGivenInteractor(
-                normalGivenDataAccessObject, normalGivenPresenter, null);
+                normalGivenDataAccessObject, normalGivenPresenter, null
+        );
 
         // Set up the game board
         int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
-        // Initialize all cells to 0 (empty)
         for (int i = 0; i < 22; i++) {
             for (int j = 0; j < 10; j++) {
-                currentMap[i][j] = 0;
+                currentMap[i][j] = 0; // Clear the board
             }
         }
         normalGivenDataAccessObject.updateMap(currentMap);
 
-        // Place a piece at the top (x = 5, y = 5)
-        normalGivenDataAccessObject.setX(5);
+        // Place a piece at the top (x = 4, y = 5)
+        normalGivenDataAccessObject.setX(4);
         normalGivenDataAccessObject.setY(5);
+        int[] shape = normalGivenDataAccessObject.getCurrentShapeState();
+        shape[0] = 0;
+        shape[1] = 0;
 
         // Create InputData for the drop action
-        NormalGivenInputData normalGivenInputData = new NormalGivenInputData();
-        normalGivenInputData.setSPressed(true); // Simulate the "drop" key press
-        normalGivenInputData.setAPressed(false);
-        normalGivenInputData.setDPressed(false);
-        normalGivenInputData.setWPressed(false);
+        NormalGivenInputData inputData = new NormalGivenInputData();
+        inputData.setSPressed(true); // Simulate "drop" key press
+        inputData.setAPressed(false);
+        inputData.setDPressed(false);
+        inputData.setWPressed(false);
 
-        // Act
-        normalGivenInteractor.execute(normalGivenInputData);
+        // Act: Execute the drop action
+        normalGivenInteractor.execute(inputData);
 
-        // Assert
-        int[][] updatedMap = normalGivenDataAccessObject.getEntity().getGameBoard();
 
-        // The piece should have moved down by 1 row
-        assertEquals(1, updatedMap[6][5]); // Check new position
-        assertEquals(0, updatedMap[5][5]);
+        // Extract the game board from the output data
+        int[][] outputMap = capturedOutputData[0].getMap();
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(outputMap[i][j]);
+            }
+            System.out.println();
+        }
+        // Verify that the piece has moved down
+        assertEquals(1, outputMap[5][4]); // New position contains the piece
+        assertEquals(1, outputMap[6][4]);
+        assertEquals(1, outputMap[5][5]); // New position contains the piece
+        assertEquals(1, outputMap[6][5]);
+        assertEquals(0, outputMap[4][4]); // Original position is cleared
+        assertEquals(0, outputMap[4][5]);
     }
+    @Test
+    public void testPieceMoveLeft() {
+        // Arrange: Initialize dependencies
+        NormalGivenDataAccessInterface normalGivenDataAccessObject = new InMemoryDataAccessObject();
+        final NormalGivenOutputData[] capturedOutputData = new NormalGivenOutputData[1]; // Capture output data
+
+        // Custom Presenter to capture the output
+        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenOutputBoundary() {
+            @Override
+            public void execute(NormalGivenOutputData outputData) {
+                capturedOutputData[0] = outputData; // Save the output data
+            }
+
+            @Override
+            public void gameOver(boolean success) {
+                // No-op for simplicity
+            }
+        };
+
+        // Initialize the Interactor
+        NormalGivenInteractor normalGivenInteractor = new NormalGivenInteractor(
+                normalGivenDataAccessObject, normalGivenPresenter, null
+        );
+
+        // Set up the game board
+        int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+        for (int i = 0; i < 22; i++) {
+            for (int j = 0; j < 10; j++) {
+                currentMap[i][j] = 0; // Clear the board
+            }
+        }
+        normalGivenDataAccessObject.updateMap(currentMap);
+
+        // Place a piece at position (x = 4, y = 5)
+        normalGivenDataAccessObject.setX(4);
+        normalGivenDataAccessObject.setY(5);
+        int[] shape = normalGivenDataAccessObject.getCurrentShapeState();
+        shape[0] = 0; // O shape
+        shape[1] = 0;
+
+        // Create InputData for moving left
+        NormalGivenInputData inputData = new NormalGivenInputData();
+        inputData.setSPressed(false);
+        inputData.setAPressed(true); // Simulate "move left"
+        inputData.setDPressed(false);
+        inputData.setWPressed(false);
+
+        // Act: Execute the move left action
+        normalGivenInteractor.execute(inputData);
+
+        // Extract the game board from the output data
+        int[][] outputMap = capturedOutputData[0].getMap();
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(outputMap[i][j]);
+            }
+            System.out.println();
+        }
+
+        // Assert: Verify the piece has moved left
+        assertEquals(1, outputMap[4][3]); // New position contains the piece
+        assertEquals(1, outputMap[5][3]);
+        assertEquals(1, outputMap[4][4]); // New position contains the piece
+        assertEquals(1, outputMap[5][4]);
+        assertEquals(0, outputMap[3][3]); // Original position is cleared
+        assertEquals(0, outputMap[3][4]);
+    }
+
+    @Test
+    public void testPieceMoveRight() {
+        // Arrange: Initialize dependencies
+        NormalGivenDataAccessInterface normalGivenDataAccessObject = new InMemoryDataAccessObject();
+        final NormalGivenOutputData[] capturedOutputData = new NormalGivenOutputData[1]; // Capture output data
+
+        // Custom Presenter to capture the output
+        NormalGivenOutputBoundary normalGivenPresenter = new NormalGivenOutputBoundary() {
+            @Override
+            public void execute(NormalGivenOutputData outputData) {
+                capturedOutputData[0] = outputData; // Save the output data
+            }
+
+            @Override
+            public void gameOver(boolean success) {
+                // No-op for simplicity
+            }
+        };
+
+        // Initialize the Interactor
+        NormalGivenInteractor normalGivenInteractor = new NormalGivenInteractor(
+                normalGivenDataAccessObject, normalGivenPresenter, null
+        );
+
+        // Set up the game board
+        int[][] currentMap = normalGivenDataAccessObject.getEntity().getGameBoard();
+        for (int i = 0; i < 22; i++) {
+            for (int j = 0; j < 10; j++) {
+                currentMap[i][j] = 0; // Clear the board
+            }
+        }
+        normalGivenDataAccessObject.updateMap(currentMap);
+
+        // Place a piece at position (x = 4, y = 5)
+        normalGivenDataAccessObject.setX(4);
+        normalGivenDataAccessObject.setY(5);
+        int[] shape = normalGivenDataAccessObject.getCurrentShapeState();
+        shape[0] = 0; // O shape
+        shape[1] = 0;
+
+        // Create InputData for moving right
+        NormalGivenInputData inputData = new NormalGivenInputData();
+        inputData.setSPressed(false);
+        inputData.setAPressed(false);
+        inputData.setDPressed(true); // Simulate "move right"
+        inputData.setWPressed(false);
+
+        // Act: Execute the move right action
+        normalGivenInteractor.execute(inputData);
+
+        // Extract the game board from the output data
+        int[][] outputMap = capturedOutputData[0].getMap();
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(outputMap[i][j]);
+            }
+            System.out.println();
+        }
+
+        // Assert: Verify the piece has moved right
+        assertEquals(1, outputMap[4][5]); // New position contains the piece
+        assertEquals(1, outputMap[5][5]);
+        assertEquals(1, outputMap[4][6]); // New position contains the piece
+        assertEquals(1, outputMap[5][6]);
+        assertEquals(0, outputMap[3][5]); // Original position is cleared
+        assertEquals(0, outputMap[3][6]);
+    }
+
 
 }
 

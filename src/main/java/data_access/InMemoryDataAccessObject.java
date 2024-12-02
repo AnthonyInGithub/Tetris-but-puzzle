@@ -89,11 +89,6 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     }
 
     @Override
-    public void setCurrentShapeState(int[] currentShapeState) {
-        this.currentShapeState = currentShapeState;
-    }
-
-    @Override
     public int getX() {
         return x;
     }
