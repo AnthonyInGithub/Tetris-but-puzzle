@@ -1,0 +1,14 @@
+### IntelliJ IDEA ###
+out/
+target/
+
+images/HistoryScreenShot
+!**/src/main/**/out/
+!**/src/test/**/out/
+.idea/easycode.ignore
+images/UploadedImage
+.idea/
+FiledData/
+
+### Mac OS ###
+.DS_Store
