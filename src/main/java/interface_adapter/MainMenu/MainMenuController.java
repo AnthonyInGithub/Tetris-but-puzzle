@@ -1,7 +1,7 @@
 package interface_adapter.MainMenu;
 
-import use_case.MainScene.MainMenuInputBoundary;
-import use_case.MainScene.MainInputData;
+import use_case.MainMenu.MainMenuInputBoundary;
+import use_case.MainMenu.MainInputData;
 
 public class MainMenuController {
 
@@ -23,6 +23,6 @@ public class MainMenuController {
      */
     public void handleMainMenuAction(String buttonName) {
         MainInputData inputData = new MainInputData(buttonName);
-        interactor.handleMainMenuAction(inputData);
+        interactor.execute(inputData);
     }
 }

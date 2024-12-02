@@ -1,6 +1,6 @@
 package interface_adapter.EndingScene;
 
-import interface_adapter.NormalGiven.ViewModelMain;
+import interface_adapter.ViewModelMain;
 
 public class EndingSceneViewModel extends ViewModelMain<EndingSceneState> {
     private boolean savedSuccess;

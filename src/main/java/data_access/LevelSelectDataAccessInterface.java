@@ -7,5 +7,6 @@ public interface LevelSelectDataAccessInterface {
     void setSelectedLevel(int level);
     String getImageAddressLevel();
     void setImageAddress();
+    void setColorMapAndBinaryMap();
 }
 

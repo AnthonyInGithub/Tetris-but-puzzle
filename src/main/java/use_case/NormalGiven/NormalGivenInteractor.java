@@ -1,13 +1,11 @@
 package use_case.NormalGiven;
 
 import data_access.NormalGivenDataAccessInterface;
-import entity.Entity;
+import entity.StagedMap;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 
 public class NormalGivenInteractor implements NormalGivenInputBoundary{
@@ -17,7 +15,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     //IMPORTANT: the outputMap is different from currentMap, where outputMap is 10*20 in size and current map is
     //10*22 in size. This is for ensure that we can put the current shape into map at once when the shape is newly generated.
 
-    private int[][] outputMap; //10*22 in size
+    private int[][] outputMap; //10*20 in size
 
     int[][] shapeMatrix;
 
@@ -39,8 +37,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                                  JPanel currentView) {
         this.normalGivenDataAccessObject = normalGivenDataAccessObject;
         this.normalGivenPresenter = normalGivenPresenter;
-        Entity currentEntity = normalGivenDataAccessObject.getEntity();
-        currentMap = currentEntity.getGameBoard();
+        StagedMap currentStagedMap = normalGivenDataAccessObject.getStagedMap();
+        currentMap = currentStagedMap.getGameBoard();
         //This seems to violate the CA here, but it is neccessary to have Jpanel to get current screenshot
         this.currentView = currentView;
 
@@ -49,8 +47,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
 
     public void execute(NormalGivenInputData normalGivenInputData){
-        Entity currentEntity = normalGivenDataAccessObject.getEntity();
-        currentMap = currentEntity.getGameBoard();
+        StagedMap currentStagedMap = normalGivenDataAccessObject.getStagedMap();
+        currentMap = currentStagedMap.getGameBoard();
         x = normalGivenDataAccessObject.getX();
         y = normalGivenDataAccessObject.getY();
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
@@ -76,9 +74,9 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
     }
     private void updateOutputMap(){
-        outputMap = new int[currentMap.length - 2][currentMap[0].length];
-        for (int i = 2; i < currentMap.length; i++) {
-            System.arraycopy(currentMap[i], 0, outputMap[i - 2], 0, currentMap[i].length);
+        outputMap = new int[currentMap.length - (ENDING_GAME_HEIGHT - 1)][currentMap[0].length];
+        for (int i = (ENDING_GAME_HEIGHT - 1); i < currentMap.length; i++) {
+            System.arraycopy(currentMap[i], 0, outputMap[i - (ENDING_GAME_HEIGHT - 1)], 0, currentMap[i].length);
         }
     }
     private void handleInput(NormalGivenInputData inputData) {
@@ -115,8 +113,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                 }
             }
         }
-        if (x > 7) {
-            x = 7;
+        if (x > (10-shapeMatrix[0].length)) {
+            x = 10-shapeMatrix[0].length;
             for (int i = 0; i < shapeMatrix.length; i++) {
                 for (int j = shapeMatrix[0].length - 2; j >= 0; j--) { // Start from the second last column
                     if (shapeMatrix[i][j] == 1) {
@@ -148,8 +146,6 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
             currentShapeState[1] = originalRotation;
         }
         shapeMatrix = normalGivenDataAccessObject.getShape(currentShapeState[0],currentShapeState[1]);
-        System.out.println("x:" + x);
-        System.out.println("y:" + y);
     }
 
     // checks if the shape can be moved to the specified (newX, newY) position
@@ -160,7 +156,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
                     int mapX = newX + j;
                     int mapY = newY + i;
                     // check bounds and collision with existing pieces in currentMap
-                    if (mapX < 0 || mapX >= 10 || mapY >= 22 || (mapY >= 0 && currentMap[mapY][mapX] != 0)) {
+                    if (mapX < 0 || mapX >= GAME_WIDTH || mapY >= currentMap.length || (mapY >= 0 && currentMap[mapY][mapX] != 0)) {
                         return false; // out of bounds
                     }
                 }
@@ -242,7 +238,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
         // Add the shape of the current piece to the map
         for(int i = 0; i < shapeMatrix.length; i++){
             for (int b = 0; b < shapeMatrix[0].length; b++){
-                if(y+b < 22 && x+i < 10){ // Ensure indices are within bounds
+                if(y+b < currentMap.length && x+i < GAME_WIDTH){ // Ensure indices are within bounds
                     tempMap[y+b][x+i] = shapeMatrix[b][i] | tempMap[y+b][x+i];
                 }
             }
@@ -252,6 +248,8 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
 
     private void checkTargetMap() {
         int[][] targetMap = normalGivenDataAccessObject.getTargetMap();
+
+        similarityLevelSpecification = normalGivenDataAccessObject.getCurrentSimilarityLevelSpecification();
 
         if (outputMap == null || targetMap == null) {
             //System.out.println("one of the maps is null. Similarity: 0%");
@@ -300,6 +298,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
     private void gameOver(boolean success){
         getCurrentScreenShot();
+        normalGivenDataAccessObject.resetCurrentMap();
         normalGivenPresenter.gameOver(success);
     }
 }

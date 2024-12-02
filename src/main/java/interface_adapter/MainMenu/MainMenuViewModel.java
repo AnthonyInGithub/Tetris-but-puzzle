@@ -1,7 +1,6 @@
 package interface_adapter.MainMenu;
 
-import interface_adapter.EndingScene.EndingSceneState;
-import interface_adapter.NormalGiven.ViewModelMain;
+import interface_adapter.ViewModelMain;
 
 public class MainMenuViewModel extends ViewModelMain<MainMenuState> {
 

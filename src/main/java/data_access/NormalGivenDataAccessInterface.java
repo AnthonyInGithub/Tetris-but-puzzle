@@ -1,9 +1,8 @@
 package data_access;
 
-import entity.Entity;
+import entity.StagedMap;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 /**
  * Interface for accessing and modifying the game state and shapes.
@@ -19,8 +18,8 @@ public interface NormalGivenDataAccessInterface {
     void setY(int y);
 
     // Game board
-    Entity getEntity();
-    void setEntity(Entity entity);
+    StagedMap getStagedMap();
+    void setEntity(StagedMap stagedMap);
     void updateMap(int[][] currentMap);
 
     // Shape definitions
@@ -40,4 +39,8 @@ public interface NormalGivenDataAccessInterface {
     int[][][] getColorMap();
 
     void setEndGameScreenShot(BufferedImage endgameScreenShot);
+
+    int getCurrentSimilarityLevelSpecification();
+
+    void resetCurrentMap();
 }

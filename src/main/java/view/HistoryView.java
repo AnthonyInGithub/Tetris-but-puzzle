@@ -97,7 +97,7 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
         // panelBottom.setBackground(Color.LIGHT_GRAY); // Optional background color
 
         // Load the image
-        ImageIcon originalIcon = new ImageIcon("images/bottomButton(1).png");
+        ImageIcon originalIcon = new ImageIcon("images/ReturnButtonHistory.png");
         Image scaledImage2 = originalIcon.getImage().getScaledInstance(130, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage2);
 
@@ -162,8 +162,8 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
 
     private void showHistroyScreenshot(ArrayList<String> addressList) {
         System.out.println("breakpoint1");
+        this.panelCenter.removeAll();
         if (!(addressList == null || addressList.isEmpty())) {
-            this.panelCenter.removeAll();
             System.out.println("breakpoint2");
             for (String address : addressList) {
                 System.out.println(address);
@@ -171,10 +171,11 @@ public class HistoryView extends JPanel implements ActionListener, PropertyChang
             }
             System.out.println("breakpoint3");
 
-            repaint();
-        } else {
-            System.out.println("History is currently empty.");
         }
+        for (int i = 0; i < 3 - addressList.size(); i++) {
+            this.panelCenter.add(createImagePanel("images/emptyHistory.png"));
+        }
+        repaint();
     }
 
 

@@ -4,15 +4,20 @@ import interface_adapter.EndingScene.EndingSceneController;
 import interface_adapter.EndingScene.EndingSceneState;
 import interface_adapter.EndingScene.EndingSceneViewModel;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * A simple view with an image and two buttons.
  */
-public class EndingSceneView extends JPanel implements ActionListener {
+public class EndingSceneView extends JPanel implements PropertyChangeListener,ActionListener {
     private final JButton saveButton;
     private final JButton returnButton;
     private final int WINDOW_WIDTH = 960;
@@ -25,10 +30,16 @@ public class EndingSceneView extends JPanel implements ActionListener {
 
     private final Image backgroundImage;
 
+    String displayText;
+    JLabel titleLabel;
+
+
 
 
     public EndingSceneView(EndingSceneViewModel endingSceneViewModel) {
         this.endingSceneViewModel = endingSceneViewModel;
+        this.endingSceneViewModel.addPropertyChangeListener(this);
+
 
         // Set up the panel layout
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -38,24 +49,23 @@ public class EndingSceneView extends JPanel implements ActionListener {
         backgroundImage = new ImageIcon("images/EndingSceneBackground.png").getImage();
 
         // padding at the top
-        add(Box.createRigidArea(new Dimension(0, 177)));
+        add(Box.createRigidArea(new Dimension(0, 160)));
 
         // set ending game text
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.X_AXIS));
         textPanel.setOpaque(false);
         EndingSceneState endingSceneState = endingSceneViewModel.getState();
-        String displayText;
         if(endingSceneState.getIsWin()) {
             displayText = "WIN";
         }else{
             displayText = "LOSE";
         }
-        JLabel titleLabel = new JLabel(displayText); // Example text
+        titleLabel = new JLabel(displayText); // Example text
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Set font to bold and size to 36
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setForeground(Color.WHITE); // Adjust color if needed
-        textPanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        textPanel.add(Box.createRigidArea(new Dimension(30, 0)));//adjust label horizontal position
         textPanel.add(titleLabel);
         add(textPanel);
 
@@ -131,6 +141,37 @@ public class EndingSceneView extends JPanel implements ActionListener {
     }
     private void resetSaveButton() {
         saveButton.setEnabled(true);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(endingSceneViewModel.getState().getIsWin()){
+            displayText = "WIN";
+            titleLabel.setText(displayText);
+            playSound("SoundEffect/next-level.wav");
+
+        }else{
+            displayText = "LOSE";
+            titleLabel.setText(displayText);
+            playSound("SoundEffect/game-over.wav");
+        }
+    }
+
+    private static void playSound(String soundFile) {
+        try {
+            // Load the audio file
+            File file = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+
+            // Get a sound clip resource
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            // Play the sound
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
 

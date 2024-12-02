@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.Entity;
+import entity.StagedMap;
 import net.coobird.thumbnailator.Thumbnails;
 
 import java.awt.*;
@@ -8,11 +8,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static java.lang.Math.max;
+
 
 public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                                                     EndingSceneDataAccessInterface,
                                                     HistoryDataAccessInterface,
-                                                   LevelSelectDataAccessInterface{
+                                                   LevelSelectDataAccessInterface,
+                                                    MainMenuDataAccessInterface{
     // Current piece information: [shapeType, rotationState]
     private int[] currentShapeState;
 
@@ -33,7 +36,16 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     private int y;
 
     // The game board entity
-    private Entity entity;
+    private StagedMap stagedMap;
+
+    private final int MYOWN_IMAGE_COLOR_THRESHOLD = 200;
+
+    private int similarityLevelSpecification = 80;
+
+    private final int TOTAL_BLOCK = 200;
+
+    private final int HEIGHT = 20;
+    private final int WIDTH = 10;
 
     // Shapes definitions
     private final int[][][][] shapes = {
@@ -78,8 +90,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     // Constructor
     public InMemoryDataAccessObject() {
-        this.entity = new Entity();
-        setColorMapAndBinaryMap();
+        this.stagedMap = new StagedMap();
         generateNewPiece();
     }
 
@@ -109,13 +120,13 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
     }
 
     @Override
-    public Entity getEntity() {
-        return entity;
+    public StagedMap getStagedMap() {
+        return stagedMap;
     }
 
     @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
+    public void setEntity(StagedMap stagedMap) {
+        this.stagedMap = stagedMap;
     }
 
     @Override
@@ -167,7 +178,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
 
     public void updateMap(int[][] currentMap) {
-        entity.setGameBoard(currentMap);
+        stagedMap.setGameBoard(currentMap);
     }
 
     public void setTargetMap(int[][] targetMap) {
@@ -195,15 +206,19 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
         this.endGameScreenShot = endGameScreenShot;
     }
 
+    @Override
+    public int getCurrentSimilarityLevelSpecification() {
+        return similarityLevelSpecification;
+    }
 
+    @Override
     public void setColorMapAndBinaryMap() {
         {
             try {
                 // Resize the image to 10x20 using Thumbnailator
-                currentLevel = 1;
                 setImageAddress();
                 BufferedImage resizedImage = Thumbnails.of(new File(imageAddress))
-                        .forceSize(10, 20)
+                        .forceSize(WIDTH, HEIGHT)
                         .asBufferedImage();
 
                 // Initialize a 2D array for binary representation
@@ -212,6 +227,8 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                 int[][] binaryArray = new int[height][width];
                 colorMap = new int[height][width][3];
                 System.out.println(height + " " + width);
+
+                int counter = 0;
 
                 // Process each pixel to determine binary value
                 for (int y = 0; y < height; y++) {
@@ -224,30 +241,14 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
                         colorMap[y][x][2] = color.getBlue();
                         // Convert to grayscale for thresholding
                         int gray = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
-
+                        counter += gray < MYOWN_IMAGE_COLOR_THRESHOLD ? 1 : 0;
                         // Threshold: convert to binary (1 for dark, 0 for light)
-                        binaryArray[y][x] = gray < 128 ? 1 : 0;
+                        binaryArray[y][x] = gray < MYOWN_IMAGE_COLOR_THRESHOLD ? 1 : 0;
                     }
                 }
 
+                setSimilarityLevelSpecification(counter);
                 // Print the binary array
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x++) {
-                        System.out.print(binaryArray[y][x] + " ");
-                    }
-                    System.out.println();
-                }
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x++) {
-                        System.out.print("[");
-                        for (int i = 0; i < 3; i++) {
-                            System.out.print(colorMap[y][x][i] + " ");
-                        }
-                        System.out.println("]");
-
-                    }
-                    System.out.println();
-                }
                 setTargetMap(binaryArray);
 
             } catch (IOException e) {
@@ -255,5 +256,36 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
             }
         }
     }
+    @Override
+    public void resetCurrentMap(){
+        int[][] currentMap = stagedMap.getGameBoard();
+        for(int i = 0; i < currentMap.length; i++){
+            for (int j = 0; j < currentMap[i].length; j++){
+                currentMap[i][j] = 0;
+            }
+        }
+    }
+    public void setBackgroundImageAddress(String backgroundImageAddress) {
+        this.imageAddress = backgroundImageAddress;
+    }
+
+    @Override
+    public void setColorMapAndBinaryMapMainMenu(){
+        currentLevel = 0;
+        setColorMapAndBinaryMap();
+    }
+    public void setSimilarityLevelSpecification(int numberOf1) {
+        // this is an empirical rule that we conclude after testing many input images.
+        // It ensures that the difficulty of passing a level is not too high nor too low.
+        // We use magic numbers here because those numbers are meaningless and are only use to
+        // approximate the empirical result we get.
+        int baseSimilarityLevelSpecification = 50 + (TOTAL_BLOCK - numberOf1)/4;
+        int adjustment = ((TOTAL_BLOCK - numberOf1) * numberOf1)/ 1000;
+        this.similarityLevelSpecification = baseSimilarityLevelSpecification + adjustment;
+
+        System.out.println("final range: "+ similarityLevelSpecification);
+        System.out.println("number of 1: "+ numberOf1);
+    }
 }
+
 

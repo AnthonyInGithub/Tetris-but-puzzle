@@ -1,6 +1,6 @@
 package interface_adapter.NormalGiven;
 
-import interface_adapter.NormalGiven.ViewModelMain;
+import interface_adapter.ViewModelMain;
 
 /**
  * NormalGivenViewModel manages the state for the Normal Given Use Case.

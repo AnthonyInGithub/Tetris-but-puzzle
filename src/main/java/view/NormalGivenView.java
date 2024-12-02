@@ -18,6 +18,9 @@ import interface_adapter.NormalGiven.NormalGivenController;
 import interface_adapter.NormalGiven.NormalGivenViewModel;
 import interface_adapter.NormalGiven.NormalGivenState;
 
+import javax.sound.sampled.*;
+
+
 public class NormalGivenView extends JPanel implements PropertyChangeListener {
 
     private JPanel gameArea;
@@ -73,7 +76,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             }
         };
 
-        ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
+        //((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
         gameArea.setBorder(redline);
         add(gameArea, BorderLayout.CENTER);
 
@@ -97,6 +100,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
                 // Action to perform when "B" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("W");
+                playSound("SoundEffect/rotate.wav");
                 normalGivenController.execute(true, false, false, false);
                 draw();
             }
@@ -109,9 +113,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
                 // Action to perform when "A" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("A");
-
                 normalGivenController.execute(false, true, false, false);
-
                 draw();
             }
         });
@@ -123,6 +125,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
                 // Action to perform when "S" is pressed
                 // NormalGivenController executes based on this key
                 System.out.println("S");
+                playSound("SoundEffect/fall.wav");
                 normalGivenController.execute(false, false, true, false);
                 draw();
             }
@@ -161,10 +164,12 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         int[][] solutionMap = normalGivenViewModel.getSolutionMap();
         int[][][] colorMap = normalGivenViewModel.getColorMap();
 
+
         for (int i = 0; i < currentMap.length; i++) {
 
             for (int j = 0; j < currentMap[0].length; j++) {
                 if (currentMap[i][j] == 1) {
+
                     int[] color = colorMap[i][j];
                     if (solutionMap[i][j] == 1) {
                         gameArea.add(squareFactory(margin + squareSize * j,
@@ -199,9 +204,7 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             public void run() {
                 normalGivenController.execute(false,false,true,false);
                 draw();
-                System.out.println("regular execution");
                 if (firstTime) {
-                    System.out.println("first time timer starts -- line 203");
                     String imagePath = normalGivenState.getImgAddress();
                     ((CustomBackgroundPanel) gameArea).setBackgroundImage(imagePath);
                     firstTime = false;
@@ -220,10 +223,9 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
         if (normalGivenState.getGamingState().equals("playing")) {
             this.timer = new Timer();
             timer.schedule(regularExecution(normalGivenState), timeDelay, timePeriod);
-            System.out.println("timer starts");
         } else if (normalGivenState.getGamingState().equals("end")) {
             timer.cancel();
-            System.out.println("timer ends");
+            firstTime = true;
         }
 
     }
@@ -248,6 +250,22 @@ public class NormalGivenView extends JPanel implements PropertyChangeListener {
             if (backgroundImage != null) {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
+        }
+    }
+    private static void playSound(String soundFile) {
+        try {
+            // Load the audio file
+            File file = new File(soundFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+
+            // Get a sound clip resource
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            // Play the sound
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
         }
     }
 }
