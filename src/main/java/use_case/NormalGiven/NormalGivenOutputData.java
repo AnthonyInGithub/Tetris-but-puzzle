@@ -15,10 +15,6 @@ public class NormalGivenOutputData {
      * @param map the updated game board
      */
     public NormalGivenOutputData(int[][] map, int[][] solutionMap, int[][][] colorMap, String ImgAddress) {
-
-        if (map == null || solutionMap == null || colorMap == null || ImgAddress == null){
-            throw new IllegalArgumentException("map/solutionMap cannot be null");
-        }
         this.map = map;
         this.solutionMap = solutionMap;
         this.colorMap = colorMap;
