@@ -36,8 +36,8 @@ This project was created as part of our course requirements to demonstrate clean
    git clone https://github.com/AnthonyInGithub/Tetris-but-puzzle.git
    ```
 2. Install required dependencies:
-    - Java JDK (version 17 or higher)
-    - Java Swing (bundled with JDK)
+   - Java JDK (version 17 or higher)
+   - Java Swing (bundled with JDK)
 3. Open the project in your favorite IDE (e.g., IntelliJ IDEA).
 4. Build and run the project using the `Main` class.
 
@@ -49,21 +49,36 @@ This project was created as part of our course requirements to demonstrate clean
 
 ## Usage Guide
 ### Main Menu
-<img src="/images/IMG_1A81CF7CE23C-1.jpeg" width="120">
+<img src="/images/New_Main_Scene.png" width="200">
 
 - **Start Button**: Opens the level selection page.
 
 <img src="/images/StartButton.png" width="120"/>
 
-- **Battle Button**: Initiates a multiplayer mode.
+- **Upload Button**: Lets you upload a custom image to create a puzzle.
 
-<img src="/images/BattleButton.png" width="120"/>
+<img src="/images/UploadButton.png" width="120"/>
 
 - **History Button**: Displays game history.
 
 <img src="/images/HistoryButton.png" width="120"/>
 
-- **My Own Upload Button**: Lets you upload a custom image to create a puzzle.
+New_Main_Scene.png
+
+### Levels Menu
+
+<img src="/images/Levels_Page.png" width="200"/>
+
+- **Level Buttons**: Opens the level of the game.
+
+**First Level and Second Level**
+
+
+<img src="/images/Level_Example_1.png/" width="100"/>    <img src="/images/Level_Example_2.png/" width="100"/>    
+
+
+
+
 
 
 ### Custom Upload Example
