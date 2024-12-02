@@ -8,6 +8,5 @@ public interface LevelSelectDataAccessInterface {
     String getImageAddressLevel();
     void setImageAddress();
     void setColorMapAndBinaryMap();
-    void resetCurrentMap();
 }
 

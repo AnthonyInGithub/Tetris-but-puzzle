@@ -298,6 +298,7 @@ public class NormalGivenInteractor implements NormalGivenInputBoundary{
     }
     private void gameOver(boolean success){
         getCurrentScreenShot();
+        normalGivenDataAccessObject.resetCurrentMap();
         normalGivenPresenter.gameOver(success);
     }
 }

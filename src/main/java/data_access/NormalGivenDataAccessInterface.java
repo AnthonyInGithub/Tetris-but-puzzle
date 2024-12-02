@@ -41,4 +41,6 @@ public interface NormalGivenDataAccessInterface {
     void setEndGameScreenShot(BufferedImage endgameScreenShot);
 
     int getCurrentSimilarityLevelSpecification();
+
+    void resetCurrentMap();
 }

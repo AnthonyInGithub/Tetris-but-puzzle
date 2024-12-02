@@ -256,7 +256,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
             }
         }
     }
-
+    @Override
     public void resetCurrentMap(){
         int[][] currentMap = stagedMap.getGameBoard();
         for(int i = 0; i < currentMap.length; i++){
@@ -271,6 +271,7 @@ public class InMemoryDataAccessObject implements NormalGivenDataAccessInterface,
 
     @Override
     public void setColorMapAndBinaryMapMainMenu(){
+        currentLevel = 0;
         setColorMapAndBinaryMap();
     }
     public void setSimilarityLevelSpecification(int numberOf1) {
