@@ -1,6 +1,6 @@
 package app;
 
-import java.awt.CardLayout;
+import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -17,6 +17,7 @@ import interface_adapter.LevelSelect.LevelSelectPresenter;
 import interface_adapter.LevelSelect.LevelSelectViewModel;
 import interface_adapter.MainMenu.MainMenuController;
 import interface_adapter.MainMenu.MainMenuPresenter;
+import interface_adapter.MainMenu.MainMenuState;
 import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.NormalGiven.NormalGivenController;
 import data_access.InMemoryDataAccessObject;
@@ -186,6 +187,9 @@ public class AppBuilder {
         cardLayout.show(cardPanel, mainMenuViewModel.getViewName());
         //this allows us to change the windows size later
         viewManager.setJFrame(application);
+
+        // Adjust the size dynamically if the current view is found
+        cardPanel.setPreferredSize(mainMenuView.getPreferredSize());
 
         return application;
     }
