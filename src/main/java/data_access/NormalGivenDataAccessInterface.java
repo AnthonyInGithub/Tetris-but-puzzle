@@ -42,5 +42,5 @@ public interface NormalGivenDataAccessInterface {
 
     int getCurrentSimilarityLevelSpecification();
 
-    void resetCurrentMap();
+    void reInitalizeGame();
 }
